@@ -1,0 +1,21 @@
+<!ENTITY zk.prefwindow.options "Beállítások">
+<!ENTITY zk.prefwindow.keyboardLayout "Billentyűzet kiosztás">
+<!ENTITY zk.prefwindow.layout.US "angol (Egyesült Államok-beli)">
+<!ENTITY zk.prefwindow.layout.UK "angol (brit)">
+<!ENTITY zk.prefwindow.layout.IRL "angol (a való életben)">
+<!ENTITY zk.prefwindow.layout.US_Dvorak "angol (Egyesült Államok-beli, Dvorak kiosztás)">
+<!ENTITY zk.prefwindow.layout.FR "francia (Franciaország)">
+<!ENTITY zk.prefwindow.layout.IT "olasz (Olaszország)">
+<!ENTITY zk.prefwindow.layout.DE "német(Németország)">
+<!ENTITY zk.prefwindow.layout.SV "svéd">
+<!ENTITY zk.prefwindow.layout.RU "orosz">
+<!ENTITY zk.prefwindow.keyboardLayout.instructions "Kérem válassza azt a kiosztást, mely legjobban hasonlít billentyűzetéhez:">
+<!ENTITY zk.prefwindow.Debug.label "Hibakeresés">
+<!ENTITY zk.prefwindow.Debug.shortcut "H">
+<!ENTITY zk.prefwindow.Debug.tooltip "Megjeleníti a hibaüzeneteket a Hibakonzolban - kattintson jobb gombbal a további opciókért.">
+<!ENTITY zk.prefwindow.mapping.label "Feltérképezés megjelenítése (Hibakonzolban) a billentyűkombináció leütése után">
+<!ENTITY zk.prefwindow.mapping.shortcut "m">
+<!ENTITY zk.prefwindow.mapping.tooltip "Megjeleníti az összes lehetséges karaktert (Hibakonzolban).">
+<!ENTITY zk.prefwindow.subComma.label "Comma below instead of Cedilla (Ș,Ț)">
+<!ENTITY zk.prefwindow.subComma.shortcut "C">
+<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Romanian languages to make characters like (Ș,Ț).">

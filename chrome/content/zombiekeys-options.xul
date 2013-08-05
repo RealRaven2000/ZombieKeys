@@ -1,0 +1,81 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<?xml-stylesheet href = "chrome://global/skin/" type = "text/css"?>
+<?xml-stylesheet href = "chrome://zombiekeys/content/zombiekeys.css" title = "zkOptionsStyles" type = "text/css"?>
+
+<!DOCTYPE prefwindow SYSTEM "chrome://zombiekeys/locale/options.dtd" >
+
+
+<prefwindow title = "&zk.prefwindow.options;"
+	id = "zk-options"
+	buttons = "accept,cancel"
+	xmlns = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	ondialogaccept = "ZombieKeys.acceptOptions();"
+	ondialogcancel = "ZombieKeys.closeOptions();"
+	onload = "ZombieKeys.loadOptions();"
+>
+
+<script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-overlay.js" />
+<script type = "application/x-javascript;Version = 1.7" src = "chrome://zombiekeys/content/zombiekeys-prefs.js"/>
+<script type = "application/x-javascript;Version = 1.7" src = "chrome://zombiekeys/content/zombiekeys-util.js"/>
+
+
+  <prefpane>
+	<preferences>
+		<preference id = "boolMapping" name = "extensions.zombiekeys.showMapping" type = "bool"/>
+		<preference id = "boolDebug" name = "extensions.zombiekeys.debug" type = "bool"/>
+		<preference id = "boolCedilla" name = "extensions.zombiekeys.subComma" type = "bool"/>
+	</preferences>
+
+
+		<groupbox style = "margin-top:.2em; padding: 0.3em;" id = "qf-pimpMyColors">
+			<caption label = "&zk.prefwindow.keyboardLayout;"/>
+
+			<vbox>
+				<label value = "&zk.prefwindow.keyboardLayout.instructions;" />
+				<listbox id = "Layouts" seltype = "single" onselect = "ZombieKeys.Options.selectLayout(this.selectedItem.value, window);" rows = "4">
+				  <listitem value = "us_int" label = "&zk.prefwindow.layout.US;" />
+				  <listitem value = "us_dvorak" label = "&zk.prefwindow.layout.US_Dvorak;"/>
+				  <listitem value = "uk" label = "&zk.prefwindow.layout.UK;"/>
+				  <listitem value = "irl" label = "&zk.prefwindow.layout.IRL;"/>
+				  <listitem value = "fr" label = "&zk.prefwindow.layout.FR;"/>
+				  <listitem value = "it" label = "&zk.prefwindow.layout.IT;"/>
+				  <listitem value = "de" label = "&zk.prefwindow.layout.DE;"/>
+				  <listitem value = "sv" label = "&zk.prefwindow.layout.SV;"/>
+				  <listitem value = "ru" label = "&zk.prefwindow.layout.RU;"/>
+				</listbox>
+
+				<div id = "layoutImage" class = "layout-us_int" >
+				</div>
+
+
+				<checkbox id = "checkMapping"
+					preference = "boolMapping"
+					label = "&zk.prefwindow.mapping.label;"
+					accesskey = "&zk.prefwindow.mapping.shortcut;"
+					tooltip = "&zk.prefwindow.mapping.tooltip;"
+					/>
+
+				<checkbox id = "checkCedilla"
+					preference = "boolCedilla"
+					label = "&zk.prefwindow.subComma.label;"
+					accesskey = "&zk.prefwindow.subComma.shortcut;"
+					tooltip = "&zk.prefwindow.subComma.tooltip;"
+					/>
+
+				<checkbox id = "checkDebug"
+					preference = "boolDebug"
+					label = "&zk.prefwindow.Debug.label;"
+					oncontextmenu = "ZombieKeys.Util.showAboutConfig('zombiekeys.debug');return false;"
+					accesskey = "&zk.prefwindow.Debug.shortcut;"
+					tooltip = "&zk.prefwindow.Debug.tooltip;"
+					/>
+
+
+			</vbox>
+
+
+
+		</groupbox>
+  </prefpane>
+</prefwindow>

@@ -1,0 +1,78 @@
+input {
+    -moz-binding: url("chrome://zombiekeys/content/inputzombie.xml#inputzombie");
+}
+
+#zombiekeys-toolbarbutton {
+	list-style-image: url("chrome://zombiekeys/content/zombie24.png");
+	-moz-image-region: rect(0px 24px 24px 0px);
+}
+
+toolbar:not([iconsize="small"]) #zombiekeys-toolbarbutton image
+{
+  width: 24px;
+  height: 24px;
+}
+
+[iconsize="small"] #zombiekeys-toolbarbutton
+{
+	list-style-image: url("chrome://zombiekeys/content/zombie16.png");
+	-moz-image-region: rect(0px 16px 16px 0px);
+}
+
+[iconsize="small"] #zombiekeys-toolbarbutton:hover { -moz-image-region: rect(16px 16px 32px 0px); }
+[iconsize="small"] #zombiekeys-toolbarbutton:active { -moz-image-region: rect(32px 16px 48px 0px); }
+
+
+
+
+#layoutImage {
+	border: 1px solid #AAA;
+	display: block;
+	height: 133px !important;
+	padding: 10px;
+	width: 420px !important;
+	background-repeat: no-repeat;
+	text-align:center;
+}
+
+/* keyboard layouts from  en.wikipedia.org/wiki/Keyboard_layout */
+/* reusable under GNU license */
+#layoutImage.layout-irl {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_ireland.png") !important;
+}
+
+#layoutImage.layout-uk {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_united_kingdom.png") !important;
+}
+
+#layoutImage.layout-us_int {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_us_international.png") !important;
+}
+
+#layoutImage.layout-us_dvorak {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_us_dvorak.png") !important;
+}
+
+#layoutImage.layout-fr {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_france.png") !important;
+}
+
+#layoutImage.layout-it {
+	background-image: url("chrome://zombiekeys/skin/layouts/tb_it_italy.png") !important;
+}
+
+#layoutImage.layout-de {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_de_germany.png") !important;
+}
+
+#layoutImage.layout-sv {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_sv_swedish.png") !important;
+}
+
+
+#layoutImage.layout-ru {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_russia.png") !important;
+}
+
+
+

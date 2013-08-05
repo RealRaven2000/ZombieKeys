@@ -1,0 +1,21 @@
+<!ENTITY zk.prefwindow.options "Opções do Zombie Keys">
+<!ENTITY zk.prefwindow.keyboardLayout "Layout do teclado">
+<!ENTITY zk.prefwindow.layout.US "Inglês (Estados Unidos)">
+<!ENTITY zk.prefwindow.layout.UK "Inglês (Reino Unido)">
+<!ENTITY zk.prefwindow.layout.IRL "Inglês (Irlanda)">
+<!ENTITY zk.prefwindow.layout.US_Dvorak "Inglês (Estados Unidos, layout Dvorak)">
+<!ENTITY zk.prefwindow.layout.FR "Francês (França)">
+<!ENTITY zk.prefwindow.layout.IT "Italiano (Itália)">
+<!ENTITY zk.prefwindow.layout.DE "Alemão (Alemanha)">
+<!ENTITY zk.prefwindow.layout.SV "Sueco">
+<!ENTITY zk.prefwindow.layout.RU "Russo">
+<!ENTITY zk.prefwindow.keyboardLayout.instructions "Por favor, selecione o layout mais parecido com o de seu teclado:">
+<!ENTITY zk.prefwindow.Debug.label "Habilitar modo de depuração">
+<!ENTITY zk.prefwindow.Debug.shortcut "d">
+<!ENTITY zk.prefwindow.Debug.tooltip "Ativa mensagens no console de erro (clique com botão direito para mais opções)">
+<!ENTITY zk.prefwindow.mapping.label "Exibir mapeamento de caracteres (no console de erros)">
+<!ENTITY zk.prefwindow.mapping.shortcut "m">
+<!ENTITY zk.prefwindow.mapping.tooltip "Exibe no console de erros todos os caracteres possíveis após pressionar uma combinação de teclas modificadora">
+<!ENTITY zk.prefwindow.subComma.label "Comma below instead of Cedilla (Ș,Ț)">
+<!ENTITY zk.prefwindow.subComma.shortcut "C">
+<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Romanian languages to make characters like (Ș,Ț).">
