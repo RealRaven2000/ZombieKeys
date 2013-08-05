@@ -1,0 +1,21 @@
+<!ENTITY zk.prefwindow.options "Настройки">
+<!ENTITY zk.prefwindow.keyboardLayout "Раскладка клавиатуры">
+<!ENTITY zk.prefwindow.layout.US "Английская (US / Америка)">
+<!ENTITY zk.prefwindow.layout.UK "Английская (UK / Англия)">
+<!ENTITY zk.prefwindow.layout.IRL "Английская (IRL / Ирландия)">
+<!ENTITY zk.prefwindow.layout.US_Dvorak "Английская (US Dvorak / Америка Дворак)">
+<!ENTITY zk.prefwindow.layout.FR "Французская (Франция)">
+<!ENTITY zk.prefwindow.layout.IT "Итальянская (Италия)">
+<!ENTITY zk.prefwindow.layout.DE "Немецкая (Германия)">
+<!ENTITY zk.prefwindow.layout.SV "Шведская">
+<!ENTITY zk.prefwindow.layout.RU "Русская">
+<!ENTITY zk.prefwindow.keyboardLayout.instructions "Выберите наиболее похожую на вашу раскладку клавиатуры:">
+<!ENTITY zk.prefwindow.Debug.label "Отладка">
+<!ENTITY zk.prefwindow.Debug.shortcut "О">
+<!ENTITY zk.prefwindow.Debug.tooltip "Показывать сообщения в консоли ошибок - нажмите правую кнопку мышки для дополнительных настроек.">
+<!ENTITY zk.prefwindow.mapping.label "Вывод (в консоль ошибок) списка символов для нажатой клавиши">
+<!ENTITY zk.prefwindow.mapping.shortcut "В">
+<!ENTITY zk.prefwindow.mapping.tooltip "Показывать все возможные символы (в консоли ошибок).">
+<!ENTITY zk.prefwindow.subComma.label "Запятая снизу вместо седили (Ș,Ț)">
+<!ENTITY zk.prefwindow.subComma.shortcut "З">
+<!ENTITY zk.prefwindow.subComma.tooltip "Использовать подзапятую в романских языках для создания таких букв как (Ș,Ț).">

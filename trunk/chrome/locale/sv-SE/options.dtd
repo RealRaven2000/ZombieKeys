@@ -1,0 +1,21 @@
+<!ENTITY zk.prefwindow.options "Inställningar">
+<!ENTITY zk.prefwindow.keyboardLayout "Tangentbordslayout">
+<!ENTITY zk.prefwindow.layout.US "Engelska (USA)">
+<!ENTITY zk.prefwindow.layout.UK "Engelska (Storbritannien)">
+<!ENTITY zk.prefwindow.layout.IRL "Engelska (Irland)">
+<!ENTITY zk.prefwindow.layout.US_Dvorak "Engelska (USA, Dvorak)">
+<!ENTITY zk.prefwindow.layout.FR "Franska (Frankrike)">
+<!ENTITY zk.prefwindow.layout.IT "Italienska (Italien)">
+<!ENTITY zk.prefwindow.layout.DE "Tyska (Tyskland)">
+<!ENTITY zk.prefwindow.layout.SV "Svenska (Sverige)">
+<!ENTITY zk.prefwindow.layout.RU "Ryska (Ryssland)">
+<!ENTITY zk.prefwindow.keyboardLayout.instructions "Välj den layout som mest liknar ditt eget tangentbord:">
+<!ENTITY zk.prefwindow.Debug.label "Felsökningsläge">
+<!ENTITY zk.prefwindow.Debug.shortcut "F">
+<!ENTITY zk.prefwindow.Debug.tooltip "Visar meddelanden i Felkonsolen. Högerklicka för fler alternativ.">
+<!ENTITY zk.prefwindow.mapping.label "Visa mappning (i Felkonsolen) när ett kortkommando trycks ned.">
+<!ENTITY zk.prefwindow.mapping.shortcut "m">
+<!ENTITY zk.prefwindow.mapping.tooltip "Visar alla tillgängliga tecken (i Felkonsolen).">
+<!ENTITY zk.prefwindow.subComma.label "Kommatecken istället för cedilj (Ș,Ț)">
+<!ENTITY zk.prefwindow.subComma.shortcut "K">
+<!ENTITY zk.prefwindow.subComma.tooltip "Aktiverar användning av underliggande komma i rumänska språk för tecken som S-komma och T-komma (Ș,Ț)">
