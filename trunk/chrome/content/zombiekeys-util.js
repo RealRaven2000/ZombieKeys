@@ -7,29 +7,29 @@ if (!ZombieKeys.Properties)
 
 
 
-var ZombieKeys_TabURIregexp = {
+ZombieKeys.TabURIregexp = {
 	get _thunderbirdRegExp() {
 		delete this._thunderbirdRegExp;
 		return this._thunderbirdRegExp = new RegExp("^http://zombiekeys.mozdev.org/");
 	}
 };
 
-var ZombieKeys_TabURIopener = {
+ZombieKeys.TabURIopener = {
 
 	openURLInTab: function (URL) {
 		try {
-			var sTabMode="";
+			let sTabMode="";
 
-			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+			let wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
 				   .getService(Components.interfaces.nsIWindowMediator);
-			var mainWindow = wm.getMostRecentWindow("navigator:browser");
+			let mainWindow = wm.getMostRecentWindow("navigator:browser");
 			if (mainWindow) {
-				var newTab = mainWindow.gBrowser.addTab(URL);
+				let newTab = mainWindow.gBrowser.addTab(URL);
 				mainWindow.gBrowser.selectedTab = newTab;
 				return true;
 			}
 
-			var tabmail;
+			let tabmail;
 			tabmail = document.getElementById("tabmail");
 			if (!tabmail) {
 				// Try opening new tabs in an existing 3pane window
@@ -42,16 +42,19 @@ var ZombieKeys_TabURIopener = {
 				}
 			}
 			if (tabmail) {
-				sTabMode = (ZombieKeys.Util.Application() == "Thunderbird" && ZombieKeys.Util.Appver()>=3) ? "contentTab" : "3pane";
+				sTabMode = (ZombieKeys.Util.Application == "Thunderbird" && ZombieKeys.Util.AppVersion>=3) ? "contentTab" : "3pane";
 				tabmail.openTab(sTabMode,
-				{contentPage: URL, clickHandler: "specialTabs.siteClickHandler(event, ZombieKeys_TabURIregexp._thunderbirdRegExp);"});
+				{contentPage: URL, clickHandler: "specialTabs.siteClickHandler(event, ZombieKeys.TabURIregexp._thunderbirdRegExp);"});
 			}
 			else
 				window.openDialog("chrome://messenger/content/", "_blank",
 								  "chrome,dialog=no,all", null,
-			  { tabType: "contentTab",
-				tabParams: {contentPage: URL,
-							clickHandler: "specialTabs.siteClickHandler(event, ZombieKeys_TabURIregexp._thunderbirdRegExp);", id:"ZombieKeys_Weblink"} } );
+			  {    tabType: "contentTab",
+				   tabParams: {  contentPage: URL,
+				                clickHandler: "specialTabs.siteClickHandler(event, ZombieKeys.TabURIregexp._thunderbirdRegExp);", 
+												          id:"ZombieKeys_Weblink"
+											} 
+				} );
 		}
 		catch(e) { 
 			return false; 
@@ -63,7 +66,7 @@ var ZombieKeys_TabURIopener = {
 
 if (!ZombieKeys.Util)
 	ZombieKeys.Util = {
-	ZombieKeys_CURRENTVERSION : '2.14',
+	ZombieKeys_CURRENTVERSION : '2.16',
 	ConsoleService: null,
 	mAppver: null,
 	mAppName: null,
@@ -105,7 +108,7 @@ if (!ZombieKeys.Util)
 	openLinkInBrowserForced: function(linkURI) {
 		try {
 			ZombieKeys.Util.logDebug("openLinkInBrowserForced (" + linkURI + ")");
-			if (ZombieKeys.Util.Application()=='SeaMonkey') {
+			if (ZombieKeys.Util.Application=='SeaMonkey') {
 				var windowManager = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator);
 				var browser = windowManager.getMostRecentWindow( "navigator:browser" );
 				if (browser) {
@@ -125,13 +128,12 @@ if (!ZombieKeys.Util)
 			service.loadURI(uri);
 		}
 		catch(e) { ZombieKeys.Util.logDebug("openLinkInBrowserForced (" + linkURI + ") " + e.toString()); }
-	},
-
+	} ,
 
 	// moved from options.js
 	// use this to follow a href that did not trigger the browser to open (from a XUL file)
 	openLinkInBrowser: function(evt,linkURI) {
-		if (ZombieKeys.Util.Appver()>=3 && ZombieKeys.Util.Application()=='Thunderbird') {
+		if (ZombieKeys.Util.AppVersion>=3 && ZombieKeys.Util.Application=='Thunderbird') {
 			var service = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"]
 				.getService(Components.interfaces.nsIExternalProtocolService);
 			var ioservice = Components.classes["@mozilla.org/network/io-service;1"].
@@ -142,24 +144,22 @@ if (!ZombieKeys.Util)
 		}
 		else
 			this.openLinkInBrowserForced(linkURI);
-	},
+	} ,
 
 	openURL: function(URL) { // workaround for a bug in TB3 that causes href's not be followed anymore.
 		var ioservice,iuri,eps;
 
-		if (ZombieKeys.Util.Appver()<3 && ZombieKeys.Util.Application()=='Thunderbird'
-			|| ZombieKeys.Util.Application()=='SeaMonkey'
-			|| ZombieKeys.Util.Application()=='Postbox')
+		if (ZombieKeys.Util.AppVersion<3 && ZombieKeys.Util.Application=='Thunderbird'
+			|| ZombieKeys.Util.Application=='SeaMonkey'
+			|| ZombieKeys.Util.Application=='Postbox')
 		{
 			this.openLinkInBrowserForced(URL);
 		}
 		else
 		{
-			ZombieKeys_TabURIopener.openURLInTab(URL);
+			ZombieKeys.TabURIopener.openURLInTab(URL);
 		}
-	},
-
-
+	} ,
 
 	checkFirstRun: function() {
 		ZombieKeys.Util.logDebug("checkFirstRun");
@@ -170,7 +170,7 @@ if (!ZombieKeys.Util)
 			.getService(Components.interfaces.nsIPrefService);
 		var ssPrefs = svc.getBranch("extensions.ZombieKeys.");
 
-		var current = ZombieKeys.Util.Version;
+		let current = ZombieKeys.Util.Version;
 		ZombieKeys.Util.logDebug("Current ZombieKeys Version: " + current);
 		try {
 			ZombieKeys.Util.logDebugOptional ("firstRun","try to get setting: getCharPref(version)");
@@ -193,7 +193,6 @@ if (!ZombieKeys.Util)
 
 		}
 		catch(e) {
-
 			alert("Exception in ZombieKeys_util.js: " + e.message
 				+ "\n\ncurrent: " + current
 				+ "\nprev: " + prev
@@ -206,16 +205,16 @@ if (!ZombieKeys.Util)
 			ZombieKeys.Util.logDebugOptional ("firstRun","finally - firstrun=" + firstrun);
 
 			// AG if this is a pre-release, cut off everything from "pre" on... e.g. 1.9pre11 => 1.9
-			var pureVersion = ZombieKeys.Util.VersionSanitized;
+			let pureVersion = ZombieKeys.Util.VersionSanitized;
 			ZombieKeys.Util.logDebugOptional ("firstRun","finally - pureVersion=" + pureVersion);
 			// change this depending on the branch
-			var versionPage = "http://zombiekeys.mozdev.org/version.html#" + pureVersion;
+			let versionPage = "http://zombiekeys.mozdev.org/version.html#" + pureVersion;
 			ZombieKeys.Util.logDebugOptional ("firstRun","finally - versionPage=" + versionPage);
 
 
-			if (ZombieKeys.Preferences.getBoolPref("extensions.zombiekeys.buttonAutoInstall")) {
+			if (ZombieKeys.Preferences.getBoolPref("buttonAutoInstall")) {
 				var toolbarName;
-				switch(ZombieKeys.Util.Application()) {
+				switch(ZombieKeys.Util.Application) {
 					case 'Firefox':
 						toolbarName = "nav-bar";
 						break;
@@ -240,17 +239,16 @@ if (!ZombieKeys.Util)
 
 				if (toolbarName) {
 					ZombieKeys.Util.installButton(toolbarName, "zombiekeys-toolbarbutton");
-					ZombieKeys.Preferences.setBoolPref("extensions.zombiekeys.buttonAutoInstall", false);
+					ssPrefs.setBoolPref("buttonAutoInstall", false);
 					if (this.extraToolbar) { // set a timer for the other window(s) to add button on load
 					}
 				}
-
 			}
 
 			if (firstrun){
 				ZombieKeys.Util.logDebugOptional ("firstRun","set firstRun=false and store version " + current);
 				ssPrefs.setBoolPref("firstRun",false);
-				ssPrefs.setCharPref("version",current); // store current (simplified) version!
+				ssPrefs.setCharPref("version", pureVersion); // store current (simplified) version!
 
 				if (showFirsts) {
 					// Insert code for first run here
@@ -259,15 +257,13 @@ if (!ZombieKeys.Util)
 					window.setTimeout(function() {
 						ZombieKeys.Util.openURL("http://ZombieKeys.mozdev.org/index.html");
 					}, 1500); //Firefox 2 fix - or else tab will get closed (leave it in....)
-
 				}
-
 			}
 			else { // this section does not get loaded if its a fresh install.
-				if (prev!=current) { // VERSION UPDATE!
+				if (prev!=pureVersion) { // VERSION UPDATE!
 					ZombieKeys.Util.logDebugOptional ("firstRun","prev!=current -> upgrade case.");
 					// upgrade case!!
-					ssPrefs.setCharPref("version",current);
+					ssPrefs.setCharPref("version", pureVersion);
 
 					if (showFirsts) {
 						// version is different => upgrade (or conceivably downgrade)http://ZombieKeys.mozdev.org/version.html#version
@@ -287,16 +283,14 @@ if (!ZombieKeys.Util)
 						}, 1500);
 					}
 				}
-				else
+				else {
 					ZombieKeys.Util.logDebugOptional ("firstRun","prev!=current -> just a reload of same version - prev=" + prev + ", current = " + current);
-
-
+				}
 			}
 
 		}
 
 	} ,
-
 
 	checkVersionFirstRun: function() {
 		var aId = "zombiekeys@bolay.de";
@@ -319,25 +313,23 @@ if (!ZombieKeys.Util)
 			ZombieKeys.Util.logDebug("Retrieved Version number from nsIExtensionManager (legacy): " + ZombieKeys.Util.myVersion);
 			ZombieKeys.Util.checkFirstRun();
 		}
-	},
+	} ,
 
-
-
-	AppverFull: function() {
+	get AppVersionFull() {
 		var appInfo = Components.classes["@mozilla.org/xre/app-info;1"]
 						.getService(Components.interfaces.nsIXULAppInfo);
 		return appInfo.version;
-	},
+	} ,
 
-	Appver: function() {
+	get AppVersion() {
 		if (null == this.mAppver) {
-		var appVer=this.AppverFull().substr(0,3); // only use 1st three letters - that's all we need for compatibility checking!
+		var appVer=this.AppVersionFull.substr(0,3); // only use 1st three letters - that's all we need for compatibility checking!
 			this.mAppver = parseFloat(appVer); // quick n dirty!
 		}
 		return this.mAppver;
-	},
+	} ,
 
-	Application: function() {
+	get Application() {
 		if (null==this.mAppName) {
 		var appInfo = Components.classes["@mozilla.org/xre/app-info;1"]
 						.getService(Components.interfaces.nsIXULAppInfo);
@@ -361,19 +353,19 @@ if (!ZombieKeys.Util)
 			}
 		}
 		return this.mAppName;
-	},
+	} ,
 
-	HostSystem: function() {
+	get HostSystem() {
 		if (null==this.mHost) {
 			var osString = Components.classes["@mozilla.org/xre/app-info;1"]
 						.getService(Components.interfaces.nsIXULRuntime).OS;
 			this.mHost = osString.toLowerCase();
 		}
 		return this.mHost; // linux - winnt - darwin
-	},
+	} ,
 
-	isPrivateBrowsing: function() {
-		if (ZombieKeys.Util.Application() == "Thunderbird" || ZombieKeys.Util.Application() == "Postbox")
+	get isPrivateBrowsing() {
+		if (ZombieKeys.Util.Application == "Thunderbird" || ZombieKeys.Util.Application == "Postbox")
 			return false;
 		let isPrivate = false;
 		try {
@@ -394,8 +386,7 @@ if (!ZombieKeys.Util)
 			}
 		}
 		return isPrivate;
-	},
-
+	} ,
 
 	logTime: function() {
 		var timePassed = '';
@@ -408,7 +399,7 @@ if (!ZombieKeys.Util)
 		}
 		catch(e) {;}
 		return end.getHours() + ':' + end.getMinutes() + ':' + end.getSeconds() + '.' + end.getMilliseconds() + '  ' + timePassed;
-	},
+	} ,
 
 	logToConsole: function (msg, xml) {
 	  if (this.ConsoleService == null)
@@ -417,19 +408,45 @@ if (!ZombieKeys.Util)
 	  var title = xml ? "[ZombieKeys XML]" : "[ZombieKeys]";
 	  if (xml) title = title + "{xml}"; // test
 	  this.ConsoleService.logStringMessage(title + " " + this.logTime() + "\n"+ msg);
-	},
+	} ,
 
+		// flags
+	// errorFlag 		0x0 	Error messages. A pseudo-flag for the default, error case.
+	// warningFlag 		0x1 	Warning messages.
+	// exceptionFlag 	0x2 	An exception was thrown for this case - exception-aware hosts can ignore this.
+	// strictFlag 		0x4
+	logError: function (aMessage, aSourceName, aSourceLine, aLineNumber, aColumnNumber, aFlags) {
+	  var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
+	                                 .getService(Components.interfaces.nsIConsoleService);
+	  var aCategory = '';
+
+	  var scriptError = Components.classes["@mozilla.org/scripterror;1"].createInstance(Components.interfaces.nsIScriptError);
+	  scriptError.init(aMessage, aSourceName, aSourceLine, aLineNumber, aColumnNumber, aFlags, aCategory);
+	  consoleService.logMessage(scriptError);
+	} ,
+
+  logException: function (aMessage, ex) {
+		var stack = ''
+		if (typeof ex.stack!='undefined')
+			stack= ex.stack.replace("@","\n  ");
+		// let's display a caught exception as a warning.
+		let fn = ex.fileName ? ex.fileName : "?";
+		this.logError(aMessage + "\n" + ex.message, fn, stack, ex.lineNumber, 0, 0x1);
+	} ,
+	
 	// disable debug log output in private browsing mode to prevent key snooping
 	logDebug: function (msg) {
-	  if (ZombieKeys.Preferences.isDebug() && !this.isPrivateBrowsing())
+	  if (!ZombieKeys.Preferences.isDebug) return;
+		if (this.isPrivateBrowsing) return;
+		if (!ZombieKeys.Preferences.isDebugOption('default')) return;
 		this.logToConsole(msg);
-	},
+	} ,
 
 	// disable debug log output in private browsing mode to prevent key snooping
 	logDebugOptional: function (option, msg) {
-	  if (ZombieKeys.Preferences.isDebugOption(option) && !this.isPrivateBrowsing())
+	  if (ZombieKeys.Preferences.isDebugOption(option) && !this.isPrivateBrowsing)
 		this.logToConsole(msg);
-	},
+	} ,
 
 	showAboutConfig: function(filter) {
 
@@ -456,7 +473,7 @@ if (!ZombieKeys.Util)
 					flt.setAttribute('readonly',true);
 				}
 			}, 300);
-	},
+	} ,
 
 	showVersionHistory: function(label, ask) {
 		let current=label.value.toString();  // retrieve version number from label
@@ -466,7 +483,7 @@ if (!ZombieKeys.Util)
 		if (!ask || confirm(sPrompt + " " + pureVersion + "?")) {
 			ZombieKeys.Util.openURL("http://zombiekeys.mozdev.org/version.html" + "#" + pureVersion);
 		}
-	},
+	} ,
 
 /**
  * Installs the toolbar button with the given ID into the given
@@ -477,10 +494,13 @@ if (!ZombieKeys.Util)
  */
 	installButton: function (toolbarId, id) {
 		if (!document.getElementById(id)) {
-			var toolbar = document.getElementById(toolbarId);
+			let toolbar = document.getElementById(toolbarId);
+			if (!toolbar) {
+			  this.logDebug("installButton: toolbar not found {" + toolbarId + "}");
+				return;
+			}
 
 			// append the item to the toolbar
-
 			toolbar.insertItem(id, null);
 			toolbar.setAttribute("currentset", toolbar.currentSet);
 			document.persist(toolbar.id, "currentset");
