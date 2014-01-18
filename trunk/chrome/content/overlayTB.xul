@@ -29,7 +29,7 @@
 			<menupopup id="zombiekeys-toolbarbutton-menu" >
 				<menuitem id="zombiekeys-donate"
 					label="Donations ..."
-					oncommand="ZombieKeys_TabURIopener.openURLInTab('http://zombiekeys.mozdev.org/donate.html');" />
+					oncommand="ZombieKeys.TabURIopener.openURLInTab('http://zombiekeys.mozdev.org/donate.html');" />
 				<menuseparator />
 				<menuitem id="zombiekeys-deadkey-1"
 					label="&zk.menuitem.grave;"
