@@ -143,13 +143,26 @@
 	AG fixed [Bug 25202]  Some keyboard shortcuts broken in UK layout
 	AG added support for our SmartTemplate4 extension
 
-  Version 2.14 - 31/01/2012
+  Version 2.14 - 31/01/2013
 	AG [Bug 25202] Reopened - Fixed Acute for IRL / UK keyboards.
 	AG Fx 20+: support per-tab private browsing mode 
 	AG icon size fix for large icon mode (forces 24px)
 	AG bumped up compatibility to Seamonkey 2.21, TB+Fx 24.0
 	
-
+	Version 2.15 - 13/11/2013
+	AG added support for folder rename dialog
+	AG addons: enigmail, extension list dumper, get selected mail, quickpasswords (sso change),
+	
+	Version 2.16 - WIP
+  AG fixed buttonAutoInstall function
+	AG WIP: remove conflicting global key shortcuts in Composer such as CTRL+< for font size
+	
+	
+	 /mail/components/compose/content/messengercompose.xul overlays editorOverlay.xul
+   mxr.mozilla.org/comm-central/source/editor/ui/composer/content/editorOverlay.xul#99
+	 editorKeys has some bad key definitions for increasing / decreasing fonts that get in the way of the ZK shortcuts
+	 mxr.mozilla.org/comm-central/source/editor/ui/composer/content/editorOverlay.xul#103
+	
 ========
 	TO DO: Add toolbarbutton by default. See : https://developer.mozilla.org/en/Code_snippets/Toolbar
 
@@ -159,6 +172,7 @@
 var ZombieKeys = new function() {
 	var debugLevel = 0, mAppver = null, mAppName = null;
 	var lastAliveKeyDown = null;
+	var disableListeners = false;
 
 	// modifiers: [ctrl, shift, alt]
 	// make deadKeys accessible from outside (this. instead of var)
@@ -264,7 +278,6 @@ var ZombieKeys = new function() {
 								},
 					"menuFake": false},
 
-
 				{	"modifiers":   {"ctrlKey": true, "shiftKey": false, "altKey": false},
 					"defaultmods": {"ctrlKey": true, "shiftKey": false, "altKey": false},
 					"id": 8,
@@ -303,7 +316,7 @@ var ZombieKeys = new function() {
 								},
 					"menuFake": false},
 
-					{"modifiers":   {"ctrlKey": true, "shiftKey": false, "altKey": false},
+				{"modifiers":   {"ctrlKey": true, "shiftKey": false, "altKey": false},
 					"defaultmods": {"ctrlKey": true, "shiftKey": false, "altKey": false},
 					"id": 10,
 					"keyCode": 188, // Comma below / Cedilla ","
@@ -432,7 +445,7 @@ var ZombieKeys = new function() {
 				{	"modifiers":   {"ctrlKey": true, "shiftKey": true, "altKey": false},
 					"defaultmods": {"ctrlKey": true, "shiftKey": true, "altKey": false},
 					"id": 17,
-					"keyCode": 67, // c "c" circled letters!
+					"keyCode": 79, // o "o" circled letters!
 					"mapping": {
 								 "A": "\u24b6","a": "\u24d0"
 								,"B": "\u24b7","b": "\u24d1"
@@ -466,7 +479,7 @@ var ZombieKeys = new function() {
 				{	"modifiers":   {"ctrlKey": true, "shiftKey": false, "altKey": true},
 					"defaultmods": {"ctrlKey": true, "shiftKey": false, "altKey": true},
 					"id": 18,
-					"keyCode": 71, // g greek letters!
+					"keyCode": 71, // G greek letters!
 					"mapping": {
 								 "A": "\u0391","a": "\u03b1"  // alpha
 								,"B": "\u0392","b": "\u03b2"  // beta
@@ -504,103 +517,102 @@ var ZombieKeys = new function() {
 					{ "id": 1,
 					  "modifiers":   {"ctrlKey": true, "shiftKey":  true, "altKey":  true},
 					  "defaultmods": {"ctrlKey": true, "shiftKey":  true, "altKey":  true},
-					  "charCode": 0,
-					  "keyCode": 191, // "?"
+					  "charCode": 0,    // "?"
+					  "keyCode": 191,
 					  "target": "\u00bf"},
 
 					{ "id": 2,
 					  "modifiers":   {"ctrlKey": true, "shiftKey":  true, "altKey":  true},
 					  "defaultmods": {"ctrlKey": true, "shiftKey":  true, "altKey":  true},
-					  "charCode": 33,
-					  "keyCode": 49, // "!"
+					  "charCode": 33,  // "!"
+					  "keyCode": 49, 
 					  "target": "\u00a1"},
 
 					{ "id": 3,
 					  "modifiers":   {"ctrlKey": true, "shiftKey": false, "altKey":  true},
 					  "defaultmods": {"ctrlKey": true, "shiftKey": false, "altKey":  true},
-					  "charCode": 36,
-					  "keyCode": 52, // "@" us=charCode101 "e" - not necessary on Irish keyboard - it has Euro symbol on ALT-GR + 4
-					                 // on UK lets put it on the $ key (36)
-					  "target": "\u20ac"}];
+					  "charCode": 101,  // "E"
+					  "keyCode": 52,    // us=charCode 101 "e" - not necessary on Irish keyboard - it has Euro symbol on ALT-GR + 4
+					  "target": "\u20ac"}];  //Euro
 
 	// Locale Specific Layouts
 	// we can add optional shiftKey overrides to cater for the locale!
 	var layouts = [{ "locale" : "us_int",
 					 "map_deadKeys" : [
-						 {"id" : 1, "keyCode": 192, "key": "`"} /* grave */
+						 {"id" : 1, "keyCode": 192, "key": "`", "otherKey":"~"} /* grave */
 						,{"id" : 2, "keyCode": 222, "key": "'"} /* acute */
-						,{"id" : 3, "keyCode":  54, "key": "^"} /* circumflex */
-						,{"id" : 4, "keyCode": 192, "key": "~"} /* tilde */
-						,{"id" : 5, "keyCode":  59, "key": ":"} /* umlaut */
-						,{"id" : 6, "keyCode":  50, "key": "@", "charCode":  0}  /* ring */
-						,{"id" : 7, "keyCode":  55, "key": "&"} /* sharp s */
-						,{"id" : 8, "keyCode": 191, "key": "/"} /* stroke */
-						,{"id" : 9, "keyCode": 190, "key": ">"} /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma"}  /* cedilla */
-						,{"id" :11, "keyCode":  57, "key": "("} /* breve */
-						,{"id" :12, "keyCode":  56, "key": "*"} /* ogonec */
-						,{"id" :13, "keyCode": 109, "key": "_"} /* macron */
-						,{"id" :14, "keyCode": 190, "key": "."} /* overdot */
-						,{"id" :15, "keyCode":  59, "key": ";"} /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\""} /* double accute */
-						,{"id" :17, "keyCode":  79, "key": "o"} /* circle */
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						,{"id" : 3, "keyCode":  54, "key": "^", "otherKey":"6"} /* circumflex */
+						,{"id" : 4, "keyCode": 192, "key": "~", "otherKey":"`"} /* tilde */
+						,{"id" : 5, "keyCode":  59, "key": ":", "otherKey":";"} /* umlaut */
+						,{"id" : 6, "keyCode":  50, "key": "@", "otherKey":"2", "charCode":  0}  /* ring */
+						,{"id" : 7, "keyCode":  55, "key": "&", "otherKey":"7"} /* sharp s */
+						,{"id" : 8, "keyCode": 191, "key": "/", "otherKey":"?"} /* stroke */
+						,{"id" : 9, "keyCode": 190, "key": ">", "otherKey":"."} /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":"<"}  /* cedilla */
+						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9"} /* breve */
+						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8"} /* ogonec */
+						,{"id" :13, "keyCode": 109, "key": "_", "otherKey":"-"} /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">"} /* overdot */
+						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":"} /* underdot */
+						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"|"} /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"} /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					 ],
 					 "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode": 191, "key": "?"}
 						 ,{"id": 2, "charCode":  33, "keyCode":  49, "key": "!"}
-						 ,{"id": 3, "charCode": 101, "keyCode":  52, "key": "@"}
+						 ,{"id": 3, "charCode": 101, "keyCode": 101, "key": "e"}
 					  ]
 					}
 ,
 					{ "locale" : "us_dvorak",
     				  "map_deadKeys" : [
-						 {"id" : 1, "keyCode": 192, "key": "`"} /* grave */
-						,{"id" : 2, "keyCode": 222, "key": "'"} /* acute */
-						,{"id" : 3, "keyCode":  54, "key": "^"} /* circumflex */
-						,{"id" : 4, "keyCode": 192, "key": "~"} /* tilde */
-						,{"id" : 5, "keyCode":  59, "key": ":"} /* umlaut */
-						,{"id" : 6, "keyCode":  50, "key": "@", "charCode":  0}  /* ring */
-						,{"id" : 7, "keyCode":  55, "key": "&"} /* sharp s */
-						,{"id" : 8, "keyCode": 191, "key": "/"} /* stroke */
-						,{"id" : 9, "keyCode": 190, "key": "."} /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma"}  /* cedilla */
-						,{"id" :11, "keyCode":  57, "key": "("} /* breve */
-						,{"id" :12, "keyCode":  56, "key": "*"} /* ogonec */
-						,{"id" :13, "keyCode": 109, "key": "_"} /* macron */
-						,{"id" :14, "keyCode": 190, "key": "."} /* overdot */
-						,{"id" :15, "keyCode":  59, "key": ";"} /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\""} /* double accute */
-						,{"id" :17, "keyCode":  79, "key": "o"} /* circle */
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						 {"id" : 1, "keyCode": 192, "key": "`", "otherKey":"~"} /* grave */
+						,{"id" : 2, "keyCode": 222, "key": "'", "otherKey":"\""} /* acute */
+						,{"id" : 3, "keyCode":  54, "key": "^", "otherKey":"6"} /* circumflex */
+						,{"id" : 4, "keyCode": 192, "key": "~", "otherKey":"`"} /* tilde */
+						,{"id" : 5, "keyCode":  59, "key": ":", "otherKey":";"} /* umlaut */
+						,{"id" : 6, "keyCode":  50, "key": "@", "otherKey":"2", "charCode":  0}  /* ring */
+						,{"id" : 7, "keyCode":  55, "key": "&", "otherKey":"7"} /* sharp s */
+						,{"id" : 8, "keyCode": 191, "key": "/", "otherKey":"?"} /* stroke */
+						,{"id" : 9, "keyCode": 190, "key": ".", "otherKey":">"} /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":"<"}  /* cedilla */
+						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9"} /* breve */
+						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8"} /* ogonec */
+						,{"id" :13, "keyCode": 109, "key": "_", "otherKey":"-"} /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">"} /* overdot */
+						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":"} /* underdot */
+						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"|"} /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"} /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
 					  "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode": 191, "key": "?"}
 						 ,{"id": 2, "charCode":  33, "keyCode":  49, "key": "!"}
-						 ,{"id": 3, "charCode": 101, "keyCode":  52, "key": "@"}
+						 ,{"id": 3, "charCode": 101, "keyCode": 101, "key": "e"}
 					  ]
 					}
 ,
 					{ "locale" : "irl",
 					  "map_deadKeys" : [
 						 {"id" : 1, "keyCode": 192, "key": "`"} /* grave */
-						,{"id" : 2, "keyCode": 222, "key": "'"} /* acute */
-						,{"id" : 3, "keyCode":  54, "key": "^"} /* circumflex */
-						,{"id" : 4, "keyCode": 163, "key": "~", "shiftKey":false, "altKey": true} /* tilde */
-						,{"id" : 5, "keyCode":  59, "key": ":"} /* umlaut */
-						,{"id" : 6, "keyCode": 222, "key": "@", "shiftKey":true} /* ring */
-						,{"id" : 7, "keyCode":  55, "key": "&"} /* sharp s */
-						,{"id" : 8, "keyCode": 191, "key": "/"} /* stroke */
-						,{"id" : 9, "keyCode": 190, "key": "."} /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma"}  /* cedilla */
-						,{"id" :11, "keyCode":  57, "key": "("} /* breve */
-						,{"id" :12, "keyCode":  56, "key": "*"} /* ogonec */
-						,{"id" :13, "keyCode": 173, "key": "_"} /* macron */
-						,{"id" :14, "keyCode": 190, "key": "."} /* overdot */
-						,{"id" :15, "keyCode":  59, "key": ";"} /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\""} /* double accute */
-						,{"id" :17, "keyCode":  79, "key": "o"} /* circle */
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						,{"id" : 2, "keyCode": 222, "key": "'", "otherKey":"@"} /* acute */
+						,{"id" : 3, "keyCode":  54, "key": "^", "otherKey":"6"} /* circumflex */
+						,{"id" : 4, "keyCode": 163, "key": "~", "otherKey":"#", "shiftKey":false, "altKey": true} /* tilde */
+						,{"id" : 5, "keyCode":  59, "key": ":", "otherKey":";"} /* umlaut */
+						,{"id" : 6, "keyCode": 222, "key": "@", "otherKey":"'", "shiftKey":true} /* ring */
+						,{"id" : 7, "keyCode":  55, "key": "&", "otherKey":"7"} /* sharp s */
+						,{"id" : 8, "keyCode": 191, "key": "/", "otherKey":"?"} /* stroke */
+						,{"id" : 9, "keyCode": 190, "key": ".", "otherKey":">", "shiftKey":true} /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":"<"}  /* cedilla */
+						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9"} /* breve */
+						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8"} /* ogonec */
+						,{"id" :13, "keyCode": 173, "key": "_", "otherKey":"-"} /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">"} /* overdot */
+						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":"} /* underdot */
+						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"|"} /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"} /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
 					  "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode": 191, "key": "?"}
@@ -611,24 +623,24 @@ var ZombieKeys = new function() {
 ,
 					{ "locale" : "uk",
     				  "map_deadKeys" : [
-						 {"id" : 1, "keyCode": 192, "key": "`"} /* grave */
-						,{"id" : 2, "keyCode": 222, "key": "'"} /* acute */
-						,{"id" : 3, "keyCode":  54, "key": "^"} /* circumflex */
-						,{"id" : 4, "keyCode": 163, "key": "~", "shiftKey":false, "altKey": true} /* tilde */
-						,{"id" : 5, "keyCode":  59, "key": ":"} /* umlaut */
-						,{"id" : 6, "keyCode": 222, "key": "@", "shiftKey":true} /* ring */
-						,{"id" : 7, "keyCode":  55, "key": "&"} /* sharp s */
-						,{"id" : 8, "keyCode": 191, "key": "/"} /* stroke */
-						,{"id" : 9, "keyCode": 190, "key": "."} /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma"}  /* cedilla */
-						,{"id" :11, "keyCode":  57, "key": "("} /* breve */
-						,{"id" :12, "keyCode":  56, "key": "*"} /* ogonec */
-						,{"id" :13, "keyCode": 173, "key": "_"} /* macron */
-						,{"id" :14, "keyCode": 190, "key": "."} /* overdot */
-						,{"id" :15, "keyCode":  59, "key": ";"} /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\""} /* double accute */
-						,{"id" :17, "keyCode":  79, "key": "o"} /* o - circle (ctrlshift c is taken by lightning)*/
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						 {"id" : 1, "keyCode": 223, "key": "`"} /* grave */
+						,{"id" : 2, "keyCode": 192, "key": "'", "otherKey":"@"} /* acute */
+						,{"id" : 3, "keyCode":  54, "key": "^", "otherKey":"6"} /* circumflex */
+						,{"id" : 4, "keyCode": 222, "key": "~", "otherKey":"#", "shiftKey":false, "altKey": true} /* #~ tilde */
+						,{"id" : 5, "keyCode":  59, "key": ":", "otherKey":";"} /* umlaut */
+						,{"id" : 6, "keyCode": 192, "key": "@", "otherKey":"'", "shiftKey":true} /* @' ring */
+						,{"id" : 7, "keyCode":  55, "key": "&", "otherKey":"7"} /* sharp s */
+						,{"id" : 8, "keyCode": 191, "key": "/", "otherKey":"?"} /* stroke */
+						,{"id" : 9, "keyCode": 190, "key": ".", "otherKey":">", "shiftKey":true} /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":"<"}   /* cedilla */
+						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9"} /* breve */
+						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8"} /* ogonec */
+						,{"id" :13, "keyCode": 173, "key": "_", "otherKey":"-"} /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">"} /* overdot */
+						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":"} /* underdot */
+						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"|"} /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"} /* o - circle (ctrlshift c is taken by lightning)*/
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
 					  "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode": 191, "key": "?"}
@@ -639,24 +651,24 @@ var ZombieKeys = new function() {
 ,
 					{ "locale" : "fr",
     				  "map_deadKeys" : [
-						 {"id" : 1, "keyCode":  55, "key": "7", "ctrlKey":true, "shiftKey":false}                  /* grave */
-						,{"id" : 2, "keyCode":  52, "key": "4", "ctrlKey":true, "shiftKey":true}                   /* acute */
-						,{"id" : 3, "keyCode": 221, "key": "^", "ctrlKey":false, "shiftKey":false, "altKey":false} /* circumflex */
-						,{"id" : 4, "keyCode":  50, "key": "~", "altKey": true}                                    /* tilde */
-						,{"id" : 5, "keyCode": 221, "key": "..", "ctrlKey":false, "shiftKey":true}                 /* umlaut */
-						,{"id" : 6, "keyCode":  48, "key": "0", "ctrlKey":true, "shiftKey":true}                   /* ring */
-						,{"id" : 7, "keyCode":  49, "key": "&", "ctrlKey":true, "shiftKey":true}                   /* sharp s */
-						,{"id" : 8, "keyCode": 191, "key": "/", "ctrlKey":true}                                    /* stroke */
-						,{"id" : 9, "keyCode": 226, "key": "<", "ctrlKey":true, "shiftKey":false}                  /* caron */
-						,{"id" :10, "keyCode": 188, "key": ",", "ctrlKey":true, "shiftKey":false}                  /* cedilla */
-						,{"id" :11, "keyCode":  53, "key": "(", "ctrlKey":true, "shiftKey":true}                   /* breve */
+						 {"id" : 1, "keyCode":  55, "key": "7", "otherKey":"`", "ctrlKey":true, "shiftKey":false}                  /* grave */
+						,{"id" : 2, "keyCode":  52, "key": "4", "otherKey":"'", "ctrlKey":true, "shiftKey":true}                   /* acute */
+						,{"id" : 3, "keyCode": 221, "key": "^", "otherKey":"9", "ctrlKey":false, "shiftKey":false, "altKey":false} /* circumflex */
+						,{"id" : 4, "keyCode":  50, "key": "~", "otherKey":"2", "altKey": true}                                    /* tilde */
+						,{"id" : 5, "keyCode": 221, "key": "..", "otherKey":"^", "ctrlKey":false, "shiftKey":true}                 /* umlaut */
+						,{"id" : 6, "keyCode":  48, "key": "0", "otherKey":"@", "ctrlKey":true, "shiftKey":true}                   /* ring */
+						,{"id" : 7, "keyCode":  49, "key": "&", "otherKey":"1", "ctrlKey":true, "shiftKey":true}                   /* sharp s */
+						,{"id" : 8, "keyCode": 191, "key": "/", "otherKey":":", "ctrlKey":true}                                    /* stroke */
+						,{"id" : 9, "keyCode": 226, "key": "<", "otherKey":">", "ctrlKey":true, "shiftKey":false}                  /* caron */
+						,{"id" :10, "keyCode": 188, "key": ",", "otherKey":"?", "ctrlKey":true, "shiftKey":false}                  /* cedilla */
+						,{"id" :11, "keyCode":  53, "key": "(", "otherKey":"5", "ctrlKey":true, "shiftKey":true}                   /* breve */
 						,{"id" :12, "keyCode": 220, "key": "*", "ctrlKey":true, "shiftKey":false}                  /* ogonec */
-						,{"id" :13, "keyCode":  56, "key": "_", "ctrlKey":true, "shiftKey":true}                   /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "ctrlKey":true, "shiftKey":true}                   /* overdot */
-						,{"id" :15, "keyCode": 190, "key": ";", "ctrlKey":true, "shiftKey":false}                  /* underdot */
-						,{"id" :16, "keyCode":  51, "key": "\"", "ctrlKey":true, "shiftKey":false}                 /* double acute */
-						,{"id" :17, "keyCode":  79, "key": "o"}                                                    /* circle */
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						,{"id" :13, "keyCode":  56, "key": "_", "otherKey":"8", "ctrlKey":true, "shiftKey":true}                   /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":";", "ctrlKey":true, "shiftKey":true}                   /* overdot */
+						,{"id" :15, "keyCode": 190, "key": ";", "otherKey":".", "ctrlKey":true, "shiftKey":false}                  /* underdot */
+						,{"id" :16, "keyCode":  51, "key": "\"", "otherKey":"8", "ctrlKey":true, "shiftKey":false}                 /* double acute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"}                                                    /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
 					  "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode": 188, "key": "?"}
@@ -670,21 +682,21 @@ var ZombieKeys = new function() {
 						 {"id" : 1, "keyCode":  59, "key": "&#232;", "shiftKey": false} /* grave */
 						,{"id" : 2, "keyCode":  59, "key": "&#233;", "shiftKey": true } /* acute */
 						,{"id" : 3, "keyCode": 221, "key": "^",      "shiftKey": true } /* circumflex */
-						,{"id" : 4, "keyCode": 220, "key": "|",      "shiftKey": true } /* tilde */
-						,{"id" : 5, "keyCode": 190, "key": ":",      "shiftKey": true } /* umlaut */
-						,{"id" : 6, "keyCode": 222, "key": "&#778;", "shiftKey": true } /* ring */
-						,{"id" : 7, "keyCode":  54, "key": "&",      "shiftKey": true } /* sharp s */
-						,{"id" : 8, "keyCode":  55, "key": "/",      "shiftKey": true } /* stroke */
-						,{"id" : 9, "keyCode": 226, "key": ">",      "shiftKey": true } /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma",  "shiftKey": false} /* cedilla */
-						,{"id" :11, "keyCode":  56, "key": "(",      "shiftKey": true } /* breve */
-						,{"id" :12, "keyCode": 107, "key": "*",      "shiftKey": true } /* ogonec */
-						,{"id" :13, "keyCode": 109, "key": "_",      "shiftKey": true } /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".",      "shiftKey": false} /* overdot */
-						,{"id" :15, "keyCode": 188, "key": ";",      "shiftKey": true } /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\"",     "shiftKey": true } /* double accute */
-						,{"id" :17, "keyCode":  79, "key": "o",      "shiftKey": true } /* circle */
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						,{"id" : 4, "keyCode": 220, "key": "|", "otherKey":"\\",      "shiftKey": true } /* tilde */
+						,{"id" : 5, "keyCode": 190, "key": ":", "otherKey":".",      "shiftKey": true } /* umlaut */
+						,{"id" : 6, "keyCode": 222, "key": "&#778;", "otherKey":"#", "shiftKey": true } /* ring */
+						,{"id" : 7, "keyCode":  54, "key": "&", "otherKey":"6",      "shiftKey": true } /* sharp s */
+						,{"id" : 8, "keyCode":  55, "key": "/", "otherKey":"7",      "shiftKey": true } /* stroke */
+						,{"id" : 9, "keyCode": 226, "key": ">", "otherKey":"\\",      "shiftKey": true } /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":";",  "shiftKey": false} /* cedilla */
+						,{"id" :11, "keyCode":  56, "key": "(", "otherKey":"8",      "shiftKey": true } /* breve */
+						,{"id" :12, "keyCode": 107, "key": "*", "otherKey":"+",      "shiftKey": true } /* ogonec */
+						,{"id" :13, "keyCode": 109, "key": "_", "otherKey":"-",      "shiftKey": true } /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
+						,{"id" :15, "keyCode": 188, "key": ";", "otherKey":",",      "shiftKey": true } /* underdot */
+						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"2",     "shiftKey": true } /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
 					  "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode": 219, "key": "?"}
@@ -698,21 +710,21 @@ var ZombieKeys = new function() {
 						 {"id" : 1, "keyCode": 221, "key": "&#96;",  "shiftKey": true } /* grave */
 						,{"id" : 2, "keyCode": 221, "key": "&#180;", "shiftKey": false} /* acute */
 						,{"id" : 3, "keyCode": 220, "key": "^",      "shiftKey": false } /* circumflex */
-						,{"id" : 4, "keyCode": 107, "key": "*",      "shiftKey": true } /* tilde */
-						,{"id" : 5, "keyCode": 190, "key": ":",      "shiftKey": true } /* umlaut */
-						,{"id" : 6, "keyCode": 220, "key": "&#778;", "shiftKey": true } /* ring above */
-						,{"id" : 7, "keyCode":  54, "key": "&",      "shiftKey": true } /* sharp s */
-						,{"id" : 8, "keyCode":  55, "key": "/",      "shiftKey": true } /* stroke */
-						,{"id" : 9, "keyCode": 226, "key": ">",      "shiftKey": true } /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma",  "shiftKey": false} /* cedilla */
-						,{"id" :11, "keyCode":  56, "key": "(",      "shiftKey": true } /* breve */
-						,{"id" :12, "keyCode": 191, "key": "'",      "shiftKey": true } /* ogonec */
-						,{"id" :13, "keyCode": 109, "key": "_",      "shiftKey": true } /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".",      "shiftKey": false} /* overdot */
-						,{"id" :15, "keyCode": 188, "key": ";",      "shiftKey": true } /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\"",     "shiftKey": true } /* double accute */
-						,{"id" :17, "keyCode":  79, "key": "o",      "shiftKey": true } /* circle */
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						,{"id" : 4, "keyCode": 107, "key": "*", "otherKey":"+",      "shiftKey": true } /* tilde */
+						,{"id" : 5, "keyCode": 190, "key": ":", "otherKey":".",      "shiftKey": true } /* umlaut */
+						,{"id" : 6, "keyCode": 220, "key": "&#778;", "otherKey":"^", "shiftKey": true } /* ring above */
+						,{"id" : 7, "keyCode":  54, "key": "&", "otherKey":"6",      "shiftKey": true } /* sharp s */
+						,{"id" : 8, "keyCode":  55, "key": "/", "otherKey":"7",      "shiftKey": true } /* stroke */
+						,{"id" : 9, "keyCode": 226, "key": ">", "otherKey":"<",      "shiftKey": true } /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":";",  "shiftKey": false} /* cedilla */
+						,{"id" :11, "keyCode":  56, "key": "(", "otherKey":"8",      "shiftKey": true } /* breve */
+						,{"id" :12, "keyCode": 191, "key": "'", "otherKey":"#",      "shiftKey": true } /* ogonec */
+						,{"id" :13, "keyCode": 109, "key": "_", "otherKey":"-",      "shiftKey": true } /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
+						,{"id" :15, "keyCode": 188, "key": ";", "otherKey":",",      "shiftKey": true } /* underdot */
+						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"?",     "shiftKey": true } /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
 					  "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode": 219, "key": "?"}
@@ -725,22 +737,22 @@ var ZombieKeys = new function() {
 					  "map_deadKeys" : [
 						 {"id" : 1, "keyCode": 219, "key": "&#96;", "shiftKey": true } /* grave */
 						,{"id" : 2, "keyCode": 219, "key": "&#180;", "shiftKey": false} /* acute */
-						,{"id" : 3, "keyCode":  59, "key": "^",      "shiftKey": true } /* circumflex */
-						,{"id" : 4, "keyCode":  59, "key": "~",      "shiftKey": false} /* tilde */
-						,{"id" : 5, "keyCode": 190, "key": ":",      "shiftKey": true } /* umlaut */
+						,{"id" : 3, "keyCode":  59, "key": "^", "otherKey":"\"",      "shiftKey": true } /* circumflex */
+						,{"id" : 4, "keyCode":  59, "key": "~", "otherKey":"^",      "shiftKey": false} /* tilde */
+						,{"id" : 5, "keyCode": 190, "key": ":", "otherKey":".",      "shiftKey": true } /* umlaut */
 						,{"id" : 6, "keyCode":  52, "key": "&#164;", "shiftKey": true } /* ring */
-						,{"id" : 7, "keyCode":  54, "key": "&",      "shiftKey": true } /* sharp s */
-						,{"id" : 8, "keyCode":  55, "key": "/",      "shiftKey": true } /* stroke */
-						,{"id" : 9, "keyCode": 226, "key": ">",      "shiftKey": true } /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma",  "shiftKey": false} /* cedilla */
-						,{"id" :11, "keyCode":  56, "key": "(",      "shiftKey": true } /* breve */
-						,{"id" :12, "keyCode": 191, "key": "'",      "shiftKey": false} /* ogonec */
-						,{"id" :13, "keyCode":  48, "key": "=",      "shiftKey": true } /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".",      "shiftKey": false} /* overdot */
-						,{"id" :15, "keyCode": 188, "key": ";",      "shiftKey": true } /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\"",     "shiftKey": true } /* double accute */
-						,{"id" :17, "keyCode":  79, "key": "o",      "shiftKey": true } /* circle */
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						,{"id" : 7, "keyCode":  54, "key": "&", "otherKey":"6",      "shiftKey": true } /* sharp s */
+						,{"id" : 8, "keyCode":  55, "key": "/", "otherKey":"7",      "shiftKey": true } /* stroke */
+						,{"id" : 9, "keyCode": 226, "key": ">", "otherKey":"<",      "shiftKey": true } /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":";",  "shiftKey": false} /* cedilla */
+						,{"id" :11, "keyCode":  56, "key": "(", "otherKey":"8",      "shiftKey": true } /* breve */
+						,{"id" :12, "keyCode": 191, "key": "'", "otherKey":"*",      "shiftKey": false} /* ogonec */
+						,{"id" :13, "keyCode":  48, "key": "=", "otherKey":"0",      "shiftKey": true } /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
+						,{"id" :15, "keyCode": 188, "key": ";", "otherKey":",",      "shiftKey": true } /* underdot */
+						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"?",     "shiftKey": true } /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
 					  "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode":  107, "key": "?"}
@@ -752,23 +764,23 @@ var ZombieKeys = new function() {
 					{ "locale" : "ru",
 					  "map_deadKeys" : [
 						 {"id" : 1, "keyCode": 226, "key": "\\",     "shiftKey": false} /* grave */
-						,{"id" : 2, "keyCode": 220, "key": "/",      "shiftKey": true } /* acute */
-						,{"id" : 3, "keyCode":  54, "key": "^",      "shiftKey": true } /* circumflex */
+						,{"id" : 2, "keyCode": 220, "key": "/", "otherKey":"?",      "shiftKey": true } /* acute */
+						,{"id" : 3, "keyCode":  54, "key": "^", "otherKey":"6",      "shiftKey": true } /* circumflex */
 						,{"id" : 4, "keyCode": 192, "key": "~",      "shiftKey": true } /* tilde */
-						,{"id" : 5, "keyCode":  59, "key": ":",      "shiftKey": true } /* umlaut */
-						,{"id" : 6, "keyCode":  51, "key": "3",      "shiftKey": true } /* ring */
-						,{"id" : 7, "keyCode":  52, "key": "$",      "shiftKey": true } /* sharp s */
-						,{"id" : 8, "keyCode":  53, "key": "%",      "shiftKey": true } /* stroke */
-						,{"id" : 9, "keyCode": 190, "key": ">",      "shiftKey": true } /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma",  "shiftKey": false} /* cedilla */
-						,{"id" :11, "keyCode":  57, "key": "(",      "shiftKey": true } /* breve */
-						,{"id" :12, "keyCode":  56, "key": "*",      "shiftKey": true } /* ogonec */
-						,{"id" :13, "keyCode": 226, "key": "|",      "shiftKey": true } /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".",      "shiftKey": false} /* overdot */
-						,{"id" :15, "keyCode":  59, "key": ";",      "shiftKey": false} /* underdot */
-						,{"id" :16, "keyCode": 222, "key": "\"",     "shiftKey": true } /* double accute */
-						,{"id" :17, "keyCode":  79, "key": "o",      "shiftKey": true } /* circle */
-						,{"id" :18, "keyCode":  71, "key": "g"} /* greek */
+						,{"id" : 5, "keyCode":  59, "key": ":", "otherKey":";",      "shiftKey": true } /* umlaut */
+						,{"id" : 6, "keyCode":  51, "key": "3", "otherKey":"#",      "shiftKey": true } /* ring */
+						,{"id" : 7, "keyCode":  52, "key": "$", "otherKey":"4",      "shiftKey": true } /* sharp s */
+						,{"id" : 8, "keyCode":  53, "key": "%", "otherKey":"5",      "shiftKey": true } /* stroke */
+						,{"id" : 9, "keyCode": 190, "key": ">", "otherKey":".",      "shiftKey": true } /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":"<",  "shiftKey": false} /* cedilla */
+						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9",      "shiftKey": true } /* breve */
+						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8",      "shiftKey": true } /* ogonec */
+						,{"id" :13, "keyCode": 226, "key": "|", "otherKey":"\\",      "shiftKey": true } /* macron */
+						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">",      "shiftKey": false} /* overdot */
+						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":",      "shiftKey": false} /* underdot */
+						,{"id" :16, "keyCode": 222, "key": "\"", "otherKey":"'",     "shiftKey": true } /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
 					  "map_liveKeys" : [
 						  {"id": 1, "charCode":   0, "keyCode": 219, "key": "?"}
@@ -791,9 +803,6 @@ var ZombieKeys = new function() {
 
 	var decUnicode = "";
 
-	var keyEventProps = ['keyCode', 'charCode', 'shiftKey',
-						 'altKey', 'ctrlKey'];
-
 // 	function log(message) {
 // 		var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 // 			.getService(Components.interfaces.nsIConsoleService);
@@ -801,8 +810,10 @@ var ZombieKeys = new function() {
 // 	};
 //
 	function logKey(why, event) {
-	  if (ZombieKeys.Util.isPrivateBrowsing())
+	  if (ZombieKeys.Util.isPrivateBrowsing)
 			return;
+		let keyEventProps = ['keyCode', 'charCode', 'shiftKey', 'altKey', 'ctrlKey'];
+
 		let message=why;
 		let key_Pressed='';
 		for (let k=0; k<keyEventProps.length; k++) {
@@ -831,7 +842,7 @@ var ZombieKeys = new function() {
 
 	this.displayMapping = function (k) {
 		let map = deadKeys[k].mapping;
-		if (ZombieKeys.Preferences.isPreference('showMapping') && !ZombieKeys.Util.isPrivateBrowsing()) {
+		if (ZombieKeys.Preferences.isPreference('showMapping') && !ZombieKeys.Util.isPrivateBrowsing) {
 			ZombieKeys.Util.logToConsole("created zombie # "+k+" you can now press: \n" + ZombieKeys.logMappingString(map));
 		}
 	};
@@ -850,19 +861,19 @@ var ZombieKeys = new function() {
 		try {
 			var isDebug = ZombieKeys.Preferences.isDebugOption('fakeKey');
 			if (isDebug) {
-				logKey("fakeKey: ('" +chr + "' " + event.type + ")", event);
+				ZombieKeys.logKey("fakeKey: ('" +chr + "' " + event.type + ")", event);
 				if (event.type=='keypress')
-					lastAliveKeyDown = chr; // remember keyPress
+					ZombieKeys.LastAliveKeyDown = chr; // remember keyPress
 				else {
-					if (chr==lastAliveKeyDown) { // avoid duplication on keyup!
-						lastAliveKeyDown = null;
+					if (chr==ZombieKeys.LastAliveKeyDown) { // avoid duplication on keyup!
+						ZombieKeys.LastAliveKeyDown = null;
 						return;
 					}
-					lastAliveKeyDown = null;
+					ZombieKeys.LastAliveKeyDown = null;
 				}
 
 			}
-			var view = window; // event.view;
+			// var view = window; // event.view;
 			var target = event.originalTarget ? event.originalTarget : (event.target ? event.target : document.commandDispatcher.focusedElement);
 
 			if (ZombieKeys.Preferences.isPreference('subComma')) {
@@ -893,7 +904,8 @@ var ZombieKeys = new function() {
 
 				// PRESS
 				var keypress_event = document.createEvent("KeyboardEvent"); // KeyEvents
-				keypress_event.initKeyEvent("keypress", true, true, null,
+				let eventView = (event.view) ? event.view : null; // make xbl compatible (?)
+				keypress_event.initKeyEvent("keypress", true, true, eventView ,
 							   false, false, false, false,
 							   0, chr.charCodeAt(0));
 
@@ -901,7 +913,7 @@ var ZombieKeys = new function() {
 				target.dispatchEvent(keypress_event);
 			}
 			else {
-				insertAtCaret(target, chr);
+				ZombieKeys.insertAtCaret(target, chr);
 			}
 			// "keypress" or "keyup"
 			event.preventDefault();
@@ -946,16 +958,14 @@ var ZombieKeys = new function() {
 	// modify the key mappings according to the selected locale
 	this.initLocale = function(locale) {
 		ZombieKeys.Util.logDebug("Initialize key locale: " + locale + " ...");
-		var theLayout; // determine locale
+		let theLayout; // determine locale
 		Array.forEach(layouts, function(layout) {
 			if (layout.locale==locale) {
 				theLayout = layout;
 			}
 		});
-		this.currentLayout = theLayout;
 
-
-		for (var k=0; k<deadKeys.length; k++) {
+		for (let k=0; k<deadKeys.length; k++) {
 			Array.forEach(theLayout.map_deadKeys, function(Map) {
 				if(Map.id == deadKeys[k].id) {
 					deadKeys[k].keyCode = theLayout.map_deadKeys[k].keyCode;
@@ -979,7 +989,7 @@ var ZombieKeys = new function() {
 			});
 		}
 
-		for (var k=0; k<aliveKeys.length; k++) {
+		for (let k=0; k<aliveKeys.length; k++) {
 			Array.forEach(theLayout.map_liveKeys, function(Map) {
 				if(Map.id == aliveKeys[k].id) {
 					aliveKeys[k].keyCode = Map.keyCode;
@@ -1002,12 +1012,16 @@ var ZombieKeys = new function() {
 				}
 			});
 		}
+		
+		// publish current Layout
+		this.currentLayout = theLayout;	
 	}
 
 
 	function keyPressHandler(event) {
+	  if (ZombieKeys.DisableListeners) return;
 		var isDebug = ZombieKeys.Preferences.isDebugOption('keyPressHandler');
-		if (isDebug) {logKey("press: ", event);}
+		if (isDebug) { ZombieKeys.logKey("press: ", event); }
 
 		// check "alive" keys which fire during "keypress"
 		for (var k=0; k<aliveKeys.length; k++) {
@@ -1048,10 +1062,10 @@ var ZombieKeys = new function() {
 	};
 
 	function keyUpHandler(event) {
-		if (event.keyCode<20)
+		if (ZombieKeys.DisableListeners || event.keyCode<20)
 			return; // ignore CTRL,SHIFT and ALT
 		var isDebug = ZombieKeys.Preferences.isDebugOption('keyUpHandler');
-		if (isDebug) {logKey("up: ", event);}
+		if (isDebug) {ZombieKeys.logKey("up: ", event);}
 
 		// check "alive" keys which only fire on "keyup"
 		for (var k=0; k<aliveKeys.length; k++) {
@@ -1060,7 +1074,7 @@ var ZombieKeys = new function() {
 				    (event.charCode && event.charCode == aliveKeys[k].charCode)    )
 				&&
 				checkModifiers(event, aliveKeys[k].modifiers)) {
-				fakeKey(event, aliveKeys[k].target);
+				ZombieKeys.fakeKey(event, aliveKeys[k].target);
 				return;
 			}
 		}
@@ -1086,16 +1100,16 @@ var ZombieKeys = new function() {
 
 		// process ALT+X (treat preceeding 4 chars as hex unicode string
 		// and replace with corresponding char)
-		if ((event.keyCode == hexUnicodeKey.keyCode) &&
-			checkModifiers(event, hexUnicodeKey.modifiers)) {
-			var hexUnicode = getPreceedingString(event.target, 4);
-			var code = parseInt(hexUnicode, 16);
+		if ((event.keyCode == ZombieKeys.HexUnicodeKey.keyCode) &&
+			checkModifiers(event, ZombieKeys.HexUnicodeKey.modifiers)) {
+			let hexUnicode = getPreceedingString(event.target, 4);
+			let code = parseInt(hexUnicode, 16);
 			replacePreceedingString(event.target, 4, String.fromCharCode(code));
 			return;
 		}
 
 		// process ALT+<numeric keypad>
-		if (checkModifiers(event, decUnicodeModifiers)) {
+		if (checkModifiers(event, ZombieKeys.DecUnicodeModifiers)) {
 			if ((event.keyCode >= 96) && (event.keyCode <= 105)) {
 				decUnicode += (event.keyCode-96).toString(); // add digit
 				event.preventDefault();
@@ -1105,7 +1119,7 @@ var ZombieKeys = new function() {
 				// released ALT - let's insert
 				if (decUnicode != "") {
 					var code = parseInt(decUnicode, 10);
-					fakeKey(event, String.fromCharCode(code));
+					ZombieKeys.fakeKey(event, String.fromCharCode(code));
 					decUnicode = "";
 				}
 				event.preventDefault();
@@ -1114,7 +1128,6 @@ var ZombieKeys = new function() {
 			}
 		}
 	};
-
 
 	function insertAtCaret(element, chr) {
 		if (!element) {
@@ -1156,30 +1169,6 @@ var ZombieKeys = new function() {
 	}
 
 
-
-	this.Options = {
-		selectItem: function(layout) {
-			var lst = document.getElementById('Layouts');
-			if (lst) {
-				for (var i=0; i<lst.itemCount; i++) {
-					var item = lst.getItemAtIndex(i);
-					if (item && item.value == layout) {
-						lst.selectItem (item);
-						break;
-					}
-				}
-			}
-		},
-
-		selectLayout: function(layout, win) {
-			var img = document.getElementById('layoutImage');
-			if (img)
-				img.className = "layout-" + layout;
-
-
-		}
-	}
-
 	this.viewOptions = function () {
 		var oldLocale = this.getCurrentLocale();
 		window.openDialog('chrome://zombiekeys/content/zombiekeys-options.xul',
@@ -1219,25 +1208,6 @@ var ZombieKeys = new function() {
 		ZombieKeys.Util.openURL('http://zombiekeys.mozdev.org/index.html');
 	}
 
-	this.loadOptions = function () {
-		ZombieKeys.Options.selectItem(this.getCurrentLocale());
-	}
-
-	this.acceptOptions = function () {
-		var lst = document.getElementById('Layouts');
-		if (lst) {
-			var locale = lst.selectedItem.value;
-			Components.classes["@mozilla.org/preferences-service;1"]
-				.getService(Components.interfaces.nsIPrefBranch)
-				.setCharPref('extensions.zombiekeys.currentLayout', locale);
-		}
-
-	}
-
-	this.closeOptions = function () {
-		ZombieKeys.Util.logDebug("Current locale remains=" + this.getCurrentLocale());
-	}
-
 	this.getCurrentLocale = function () {
 		return Components.classes["@mozilla.org/preferences-service;1"]
  					.getService(Components.interfaces.nsIPrefBranch)
@@ -1250,8 +1220,6 @@ var ZombieKeys = new function() {
 				.getService(Components.interfaces.nsIPrefBranch)
 				.setIntPref('extensions.zombiekeys.debugLevel', level);
 	}
-
-
 
 	this.init = function(that) {
 		var locale = that.getCurrentLocale();
@@ -1291,8 +1259,7 @@ var ZombieKeys = new function() {
 		}
 	}
 
-	this.fakeAliveKey = function(id)
-	{
+	this.fakeAliveKey = function(id) {
 		var target = document.commandDispatcher.focusedElement;
 		// initKeyEvent(type, canBubble, cancelable, view, ctrlKey, altKey, shiftKey, metaKey, keyCode, charCode);
 		// DOWN
@@ -1314,7 +1281,7 @@ var ZombieKeys = new function() {
 
 		if(theKey)
 		{
-			insertAtCaret(target, theKey.target);
+			this.insertAtCaret(target, theKey.target);
 			return;
 		}
 
@@ -1332,7 +1299,6 @@ var ZombieKeys = new function() {
 
 
     }
-
 
 	this.showContentTab = function(URL) {
 		ZombieKeys.Util.openURL(URL);
@@ -1457,6 +1423,19 @@ var ZombieKeys = new function() {
 
 	}
 
+  // expose all data structures for xbl
+  this.DeadKeys = deadKeys;
+	this.AliveKeys = aliveKeys;
+	this.Layouts = layouts;
+  this.LastAliveKeyDown =	lastAliveKeyDown;
+	this.HexUnicodeKey = hexUnicodeKey;
+	this.DecUnicodeModifiers = decUnicodeModifiers;
+	this.DisableListeners = disableListeners; // this is a kludge to disable processing in the options window.
+  // expose some functions:
+	this.insertAtCaret = insertAtCaret;
+	this.fakeKey = fakeKey;
+	this.logKey = logKey;
+	this.checkModifiers = checkModifiers;
 };
 
 
