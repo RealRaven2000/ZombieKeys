@@ -7,7 +7,12 @@ pref("extensions.zombiekeys.showMapping", false);
 pref("extensions.zombiekeys.cedilla", false);
 pref("extensions.zombiekeys.debug",false);
 pref("extensions.zombiekeys.buttonAutoInstall", true);
+pref("extensions.zombiekeys.accelerators.recreateKeys", true);
 // Debugging Options
+pref("extensions.zombiekeys.debug.defaults", true);
+pref("extensions.zombiekeys.debug.accelerators", false);
+pref("extensions.zombiekeys.debug.accelerators.detail", false);
+pref("extensions.zombiekeys.debug.accelerators.addModified.disable", false);
 pref("extensions.zombiekeys.debug.firstRun", false);
 pref("extensions.zombiekeys.debug.fakeKey", false);
 pref("extensions.zombiekeys.debug.zombieCreation", false);
