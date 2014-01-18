@@ -7,8 +7,8 @@
 <!ENTITY zk.prefwindow.layout.FR "Fransizca (Fransa)">
 <!ENTITY zk.prefwindow.layout.IT "İtalyanca(İtalya)">
 <!ENTITY zk.prefwindow.layout.DE "Almanca (Almanya)">
-<!ENTITY zk.prefwindow.layout.SV "Swedish">
-<!ENTITY zk.prefwindow.layout.RU "Russian">
+<!ENTITY zk.prefwindow.layout.SV "İsveççe">
+<!ENTITY zk.prefwindow.layout.RU "Rusça">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "Lütfen, kendi klavyenize en yakin düzeni seçin:">
 <!ENTITY zk.prefwindow.Debug.label "Hata Ayıklama">
 <!ENTITY zk.prefwindow.Debug.shortcut "D">
@@ -19,3 +19,21 @@
 <!ENTITY zk.prefwindow.subComma.label "(Ș,Ț) yerine virgül">
 <!ENTITY zk.prefwindow.subComma.shortcut "C">
 <!ENTITY zk.prefwindow.subComma.tooltip "Romence dillerindeki alt virgül kullanımını etkinleştirir.">
+<!ENTITY zk.prefwindow.customizeLayoutGroup "Düzeni Özelleştir">
+<!ENTITY zk.prefwindow.customizeButton "Özelleştirme">
+<!ENTITY zk.prefwindow.customizeEndButton "Geri">
+<!ENTITY zk.prefwindow.editDeadKeyGroup "Deadkey Özelleştir">
+<!ENTITY zk.prefwindow.keyCode "kod">
+<!ENTITY zk.prefwindow.keyCode.tooltip "Tuş kombinasyonları uygulayarak bir kod belirleyin">
+<!ENTITY zk.prefwindow.modifier.CTRL "CTRL">
+<!ENTITY zk.prefwindow.modifier.Alt "Alt">
+<!ENTITY zk.prefwindow.modifier.Shift "Shift">
+<!ENTITY zk.prefwindow.Key "Tuş">
+<!ENTITY zk.prefwindow.Alternative "Alternatif Sembol">
+<!ENTITY zk.prefwindow.Alternative.tooltip "SHIFT tuşu ile birlikte basıldığında tuşun üzerindeki alternatif sembolü yaz">
+<!ENTITY zk.prefwindow.ResetBtn "Sıfırla">
+<!ENTITY zk.prefwindow.ResetBtn.tooltip "Geçerli tuşu varsayılana sıfırla">
+<!ENTITY zk.prefwindow.DefineBtn "Tanımla">
+<!ENTITY zk.prefwindow.DefineBtn.tooltip "Bu ayarlar için seçilen tuş yeniden tanımlanıyor">
+<!ENTITY zk.prefwindow.pressKeyInstructions "Bir tuşa basın">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Aynı tuşa tekrar basın (Alt/CTRL tuşu olmadan!)">

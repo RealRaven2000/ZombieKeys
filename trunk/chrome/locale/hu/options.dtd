@@ -16,6 +16,3 @@
 <!ENTITY zk.prefwindow.mapping.label "Feltérképezés megjelenítése (Hibakonzolban) a billentyűkombináció leütése után">
 <!ENTITY zk.prefwindow.mapping.shortcut "m">
 <!ENTITY zk.prefwindow.mapping.tooltip "Megjeleníti az összes lehetséges karaktert (Hibakonzolban).">
-<!ENTITY zk.prefwindow.subComma.label "Comma below instead of Cedilla (Ș,Ț)">
-<!ENTITY zk.prefwindow.subComma.shortcut "C">
-<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Romanian languages to make characters like (Ș,Ț).">

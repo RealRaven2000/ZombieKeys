@@ -19,3 +19,21 @@
 <!ENTITY zk.prefwindow.subComma.label "Unter-Komma anstatt Cedilla (Ș,Ț)">
 <!ENTITY zk.prefwindow.subComma.shortcut "C">
 <!ENTITY zk.prefwindow.subComma.tooltip "Ermöglicht den Einsatz von Unterkomma in rumänischen Sprachen (Ș,Ț).">
+<!ENTITY zk.prefwindow.customizeLayoutGroup "Layout Anpassen">
+<!ENTITY zk.prefwindow.customizeButton "Anpassen">
+<!ENTITY zk.prefwindow.customizeEndButton "Zurück">
+<!ENTITY zk.prefwindow.editDeadKeyGroup "Deadkey Definition">
+<!ENTITY zk.prefwindow.keyCode "Tastaturcode">
+<!ENTITY zk.prefwindow.keyCode.tooltip "Ermitteln Sie den Tastaturcode des hotkeys indem Sie die Tastenkombination betätigen">
+<!ENTITY zk.prefwindow.modifier.CTRL "STRG">
+<!ENTITY zk.prefwindow.modifier.Alt "Alt">
+<!ENTITY zk.prefwindow.modifier.Shift "Umschalt">
+<!ENTITY zk.prefwindow.Key "Symbol">
+<!ENTITY zk.prefwindow.Alternative "Alternativsymbol">
+<!ENTITY zk.prefwindow.Alternative.tooltip "Geben Sie das alternative Symbol der Taste mit umgekehrtem Umschalt-Status ein">
+<!ENTITY zk.prefwindow.ResetBtn "Zurücksetzen">
+<!ENTITY zk.prefwindow.ResetBtn.tooltip "Die aktive Tastenkombination zurücksetzen">
+<!ENTITY zk.prefwindow.DefineBtn "Definieren">
+<!ENTITY zk.prefwindow.DefineBtn.tooltip "Definiert die ausgewählte Kombination neu mit den angezeigten Einstellungen">
+<!ENTITY zk.prefwindow.pressKeyInstructions "Tastenkombination drücken">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Die select Taste erneut drücken (ohne Alt/STRG!)">

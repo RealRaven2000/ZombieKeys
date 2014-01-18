@@ -19,3 +19,21 @@
 <!ENTITY zk.prefwindow.subComma.label "Placer une virgule en-dessous à la place d'une cédille (Ș,Ț)">
 <!ENTITY zk.prefwindow.subComma.shortcut "V">
 <!ENTITY zk.prefwindow.subComma.tooltip "Permettre l'utilisation d'une virgule en-dessous dans les langues roumaines pour écrire les caractères comme (Ș,Ț)">
+<!ENTITY zk.prefwindow.customizeLayoutGroup "Personnaliser l'apparence">
+<!ENTITY zk.prefwindow.customizeButton "Personnaliser">
+<!ENTITY zk.prefwindow.customizeEndButton "Retour">
+<!ENTITY zk.prefwindow.editDeadKeyGroup "Personnaliser les touches mortes">
+<!ENTITY zk.prefwindow.keyCode "Code caractère">
+<!ENTITY zk.prefwindow.keyCode.tooltip "Déterminer le code caractère de votre raccourci en pressant la combinaison de touche">
+<!ENTITY zk.prefwindow.modifier.CTRL "CTRL">
+<!ENTITY zk.prefwindow.modifier.Alt "Alt">
+<!ENTITY zk.prefwindow.modifier.Shift "MAJ">
+<!ENTITY zk.prefwindow.Key "Caractère de la touche">
+<!ENTITY zk.prefwindow.Alternative "Caractère alternatif">
+<!ENTITY zk.prefwindow.Alternative.tooltip "Saisir le caractère alternatif de la touche quand l'état MAJ est inversé">
+<!ENTITY zk.prefwindow.ResetBtn "Réinitialiser">
+<!ENTITY zk.prefwindow.ResetBtn.tooltip "Réinitialiser la touche actuelle à sa valeur par défaut">
+<!ENTITY zk.prefwindow.DefineBtn "Définir">
+<!ENTITY zk.prefwindow.DefineBtn.tooltip "Redéfini la touche sélectionnée avec ces paramètres">
+<!ENTITY zk.prefwindow.pressKeyInstructions "Entrer la combinaison de touche">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Appuyer sur la même touche (sans Alt/CTRL !)">
