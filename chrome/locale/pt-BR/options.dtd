@@ -16,6 +16,3 @@
 <!ENTITY zk.prefwindow.mapping.label "Exibir mapeamento de caracteres (no console de erros)">
 <!ENTITY zk.prefwindow.mapping.shortcut "m">
 <!ENTITY zk.prefwindow.mapping.tooltip "Exibe no console de erros todos os caracteres possíveis após pressionar uma combinação de teclas modificadora">
-<!ENTITY zk.prefwindow.subComma.label "Comma below instead of Cedilla (Ș,Ț)">
-<!ENTITY zk.prefwindow.subComma.shortcut "C">
-<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Romanian languages to make characters like (Ș,Ț).">
