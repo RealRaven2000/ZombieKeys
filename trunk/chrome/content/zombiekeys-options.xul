@@ -86,15 +86,9 @@
 		<listbox id="deadKeyList" 
 				 rows="5"
 				 onselect="ZombieKeys.Options.selectDeadKey(this);">
-			<listitem value="1" label="1 - grave - `" />
-			<listitem value="2" label="2 - acute - '" />
-			<listitem value="3" label="3 - circumflex - ^" />
-			<listitem value="4" label="4 - tilde - ~" />
-			<listitem value="5" label="5 - umlaut - :" />
-			<listitem value="6" label="6 - ring - @" />
-			<listitem value="7" label="7 - ss - &amp;" />
-			<listitem value="8" label="8 - stroke - /" />
-			<listitem value="9" label="9 - caron - >" />
+			<listitem value="1" label="1 - This is just example data..." />
+			<listitem value="2" label="2 - if you see this, you have to select" />
+			<listitem value="3" label="3 - a keyboard layout from the previous page" />
 		</listbox>
 		<groupbox id = "editDeadkeyPanel">
 		    <caption label = "&zk.prefwindow.editDeadKeyGroup;"/>
