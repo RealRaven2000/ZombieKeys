@@ -24,6 +24,7 @@ overlay chrome://browser/content/places/bookmarkProperties.xul			chrome://zombie
 overlay chrome://browser/content/places/places.xul						chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://browser/content/preferences/preferences.xul			chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://browser/content/scratchpad.xul							chrome://zombiekeys/content/overlayFX.xul
+overlay chrome://navigator/content/navigator.xul						chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://communicator/content/bookmarks/addBookmark.xul			chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://communicator/content/bookmarks/bm-props.xul			chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://communicator/content/bookmarks/bookmarksManager.xul	chrome://zombiekeys/content/overlayFX.xul
@@ -31,10 +32,6 @@ overlay chrome://global/content/commonDialog.xul						chrome://zombiekeys/conten
 overlay chrome://global/content/config.xul                              chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/AccountManager.xul					chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/AccountWizard.xul					chrome://zombiekeys/content/overlayTB.xul
-overlay chrome://messenger/content/FilterEditor.xul						chrome://zombiekeys/content/overlayTB.xul
-overlay chrome://messenger/content/FilterListDialog.xul					chrome://zombiekeys/content/overlayTB.xul
-overlay chrome://messenger/content/SearchDialog.xul						chrome://zombiekeys/content/overlayTB.xul
-overlay chrome://messenger/content/SmtpServerEdit.xul					chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/accountcreation/emailWizard.xul		chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/addressbook/abEditCardDialog.xul		chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/addressbook/abMailListDialog.xul		chrome://zombiekeys/content/overlayTB.xul
@@ -42,15 +39,19 @@ overlay chrome://messenger/content/addressbook/abNewCardDialog.xul		chrome://zom
 overlay chrome://messenger/content/addressbook/addressbook.xul			chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/am-identity-edit.xul					chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/am-serverwithnoidentities.xul		chrome://zombiekeys/content/overlayTB.xul
+overlay chrome://messenger/content/FilterEditor.xul						chrome://zombiekeys/content/overlayTB.xul
+overlay chrome://messenger/content/FilterListDialog.xul					chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/folderProps.xul						chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/inspector.xul						chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/messageWindow.xul					chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/messenger.xul						chrome://zombiekeys/content/overlayTB.xul
+overlay chrome://messenger/content/newFolderDialog.xul		chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/pbValidate.xul						chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/preferences/preferences.xul			chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/renameFolderDialog.xul               chrome://zombiekeys/content/overlayTB.xul
+overlay chrome://messenger/content/SearchDialog.xul						chrome://zombiekeys/content/overlayTB.xul
+overlay chrome://messenger/content/SmtpServerEdit.xul					chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/subscribe.xul						chrome://zombiekeys/content/overlayTB.xul
-overlay chrome://navigator/content/navigator.xul						chrome://zombiekeys/content/overlayFX.xul
 
 #composer overlay (to deal with keyboard shortcuts)
 overlay chrome://messenger/content/messengercompose/messengercompose.xul	chrome://zombiekeys/content/overlayComposerTB.xul
