@@ -19,3 +19,21 @@
 <!ENTITY zk.prefwindow.subComma.label "Запятая снизу вместо седили (Ș,Ț)">
 <!ENTITY zk.prefwindow.subComma.shortcut "З">
 <!ENTITY zk.prefwindow.subComma.tooltip "Использовать подзапятую в романских языках для создания таких букв как (Ș,Ț).">
+<!ENTITY zk.prefwindow.customizeLayoutGroup "Настроить раскладку">
+<!ENTITY zk.prefwindow.customizeButton "Настроить">
+<!ENTITY zk.prefwindow.customizeEndButton "Назад">
+<!ENTITY zk.prefwindow.editDeadKeyGroup "Настроить символ">
+<!ENTITY zk.prefwindow.keyCode "код">
+<!ENTITY zk.prefwindow.keyCode.tooltip "Определить код нажав модифицирующую комбинацию">
+<!ENTITY zk.prefwindow.modifier.CTRL "Ctrl">
+<!ENTITY zk.prefwindow.modifier.Alt "Alt">
+<!ENTITY zk.prefwindow.modifier.Shift "Shift">
+<!ENTITY zk.prefwindow.Key "Символ клавиши">
+<!ENTITY zk.prefwindow.Alternative "Альтернативный символ">
+<!ENTITY zk.prefwindow.Alternative.tooltip "Введите альтернативный символ клавиши для ситуации когда Shift инвертирован">
+<!ENTITY zk.prefwindow.ResetBtn "Сбросить">
+<!ENTITY zk.prefwindow.ResetBtn.tooltip "Сбросить настройки выбранного символа на стандарт">
+<!ENTITY zk.prefwindow.DefineBtn "Изменить">
+<!ENTITY zk.prefwindow.DefineBtn.tooltip "Изменить настройки выбранного символа на текущие">
+<!ENTITY zk.prefwindow.pressKeyInstructions "Нажмите комбинацию клавиш">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Нажмите те же клавиши снова (без Alt/Ctrl!)">

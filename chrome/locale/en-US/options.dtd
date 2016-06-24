@@ -36,5 +36,5 @@
 <!ENTITY zk.prefwindow.DefineBtn "Define">
 <!ENTITY zk.prefwindow.DefineBtn.tooltip "Redefines the selected key to these settings">
 <!ENTITY zk.prefwindow.pressKeyInstructions "Press a key combo">
-<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Press same key again (without Alt/CTRL!)">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Press same key again (without Alt/CTRL!), but keep SHIFT state.">
 

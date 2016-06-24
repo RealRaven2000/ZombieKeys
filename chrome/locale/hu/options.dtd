@@ -16,3 +16,24 @@
 <!ENTITY zk.prefwindow.mapping.label "Feltérképezés megjelenítése (Hibakonzolban) a billentyűkombináció leütése után">
 <!ENTITY zk.prefwindow.mapping.shortcut "m">
 <!ENTITY zk.prefwindow.mapping.tooltip "Megjeleníti az összes lehetséges karaktert (Hibakonzolban).">
+<!ENTITY zk.prefwindow.subComma.label "Comma below instead of Cedilla (Ș,Ț)">
+<!ENTITY zk.prefwindow.subComma.shortcut "C">
+<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Romanian languages to make characters like (Ș,Ț).">
+<!ENTITY zk.prefwindow.customizeLayoutGroup "Customize Layout">
+<!ENTITY zk.prefwindow.customizeButton "Customize">
+<!ENTITY zk.prefwindow.customizeEndButton "Back">
+<!ENTITY zk.prefwindow.editDeadKeyGroup "Customize Deadkey">
+<!ENTITY zk.prefwindow.keyCode "keyCode">
+<!ENTITY zk.prefwindow.keyCode.tooltip "Determine the keyCode of your accelerator by pressing the key combination">
+<!ENTITY zk.prefwindow.modifier.CTRL "CTRL">
+<!ENTITY zk.prefwindow.modifier.Alt "Alt">
+<!ENTITY zk.prefwindow.modifier.Shift "Shift">
+<!ENTITY zk.prefwindow.Key "Key Symbol">
+<!ENTITY zk.prefwindow.Alternative "Alternative Symbol">
+<!ENTITY zk.prefwindow.Alternative.tooltip "Type in the alternative symbol on the key when SHIFT state is inverted">
+<!ENTITY zk.prefwindow.ResetBtn "Reset">
+<!ENTITY zk.prefwindow.ResetBtn.tooltip "Reset the current key to its default">
+<!ENTITY zk.prefwindow.DefineBtn "Define">
+<!ENTITY zk.prefwindow.DefineBtn.tooltip "Redefines the selected key to these settings">
+<!ENTITY zk.prefwindow.pressKeyInstructions "Press a key combo">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Press same key again (without Alt/CTRL!)">

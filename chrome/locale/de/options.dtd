@@ -36,4 +36,4 @@
 <!ENTITY zk.prefwindow.DefineBtn "Definieren">
 <!ENTITY zk.prefwindow.DefineBtn.tooltip "Definiert die ausgewählte Kombination neu mit den angezeigten Einstellungen">
 <!ENTITY zk.prefwindow.pressKeyInstructions "Tastenkombination drücken">
-<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Die select Taste erneut drücken (ohne Alt/STRG!)">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Die Taste erneut drücken (ohne ALT/STRG!) aber ohne UMSCHALT zu ändern">

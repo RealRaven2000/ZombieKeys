@@ -19,3 +19,21 @@
 <!ENTITY zk.prefwindow.subComma.label "使用底部逗号代替变音符号 (Ș,Ț)">
 <!ENTITY zk.prefwindow.subComma.shortcut "C">
 <!ENTITY zk.prefwindow.subComma.tooltip "在罗马尼亚语中启用下标逗号从而可以使用如(Ș,Ț)的字符.">
+<!ENTITY zk.prefwindow.customizeLayoutGroup "定制布局">
+<!ENTITY zk.prefwindow.customizeButton "定制">
+<!ENTITY zk.prefwindow.customizeEndButton "返回">
+<!ENTITY zk.prefwindow.editDeadKeyGroup "定制无效键">
+<!ENTITY zk.prefwindow.keyCode "keyCode">
+<!ENTITY zk.prefwindow.keyCode.tooltip "通过按键组合确定keyCode">
+<!ENTITY zk.prefwindow.modifier.CTRL "CTRL">
+<!ENTITY zk.prefwindow.modifier.Alt "Alt">
+<!ENTITY zk.prefwindow.modifier.Shift "Shift">
+<!ENTITY zk.prefwindow.Key "按键符号">
+<!ENTITY zk.prefwindow.Alternative "备选符号">
+<!ENTITY zk.prefwindow.Alternative.tooltip "SHIFT状态反转时输入键面上的备选符号">
+<!ENTITY zk.prefwindow.ResetBtn "重置">
+<!ENTITY zk.prefwindow.ResetBtn.tooltip "重置当前键为默认值">
+<!ENTITY zk.prefwindow.DefineBtn "定义">
+<!ENTITY zk.prefwindow.DefineBtn.tooltip "重定义所选键为这些设定">
+<!ENTITY zk.prefwindow.pressKeyInstructions "按下组合键">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "再次按同一键(不含Alt/CTRL!)">

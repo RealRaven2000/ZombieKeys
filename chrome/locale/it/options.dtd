@@ -19,3 +19,21 @@
 <!ENTITY zk.prefwindow.subComma.label "Virgola sottoscritta al posto della cediglia (Ș,Ț)">
 <!ENTITY zk.prefwindow.subComma.shortcut "C">
 <!ENTITY zk.prefwindow.subComma.tooltip "Abilita l'uso della virgola sottoscritta in rumeno per formare caratteri come (Ș,Ț).">
+<!ENTITY zk.prefwindow.customizeLayoutGroup "Personalizza il layout">
+<!ENTITY zk.prefwindow.customizeButton "Personalizza">
+<!ENTITY zk.prefwindow.customizeEndButton "Indietro">
+<!ENTITY zk.prefwindow.editDeadKeyGroup "Personalizza il tasto morto">
+<!ENTITY zk.prefwindow.keyCode "Codice del tasto">
+<!ENTITY zk.prefwindow.keyCode.tooltip "Trova il codice del tasto dell'acceleratore premendo la combinazione di tasti">
+<!ENTITY zk.prefwindow.modifier.CTRL "CTRL">
+<!ENTITY zk.prefwindow.modifier.Alt "Alt">
+<!ENTITY zk.prefwindow.modifier.Shift "Maiusc">
+<!ENTITY zk.prefwindow.Key "Simbolo del tasto">
+<!ENTITY zk.prefwindow.Alternative "Simbolo alternativo">
+<!ENTITY zk.prefwindow.Alternative.tooltip "Inserisci il simbolo alternativo sul tasto quando lo stato di MAIUSC è invertito">
+<!ENTITY zk.prefwindow.ResetBtn "Reimposta">
+<!ENTITY zk.prefwindow.ResetBtn.tooltip "Ripristina l'impostazione di default del tasto corrente">
+<!ENTITY zk.prefwindow.DefineBtn "Definisci">
+<!ENTITY zk.prefwindow.DefineBtn.tooltip "Ridefinisci il tasto selezionato con queste impostazioni">
+<!ENTITY zk.prefwindow.pressKeyInstructions "Premi una combinazione di tasti">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Premi di nuovo lo stesso tasto (senza Alt/CTRL!)">
