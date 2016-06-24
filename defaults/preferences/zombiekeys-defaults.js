@@ -8,6 +8,7 @@ pref("extensions.zombiekeys.cedilla", false);
 pref("extensions.zombiekeys.debug",false);
 pref("extensions.zombiekeys.buttonAutoInstall", true);
 pref("extensions.zombiekeys.accelerators.recreateKeys", true);
+// pref("extensions.zombiekeys.accelerators.removeMatchedAccelerators", false);
 // Debugging Options
 pref("extensions.zombiekeys.debug.defaults", true);
 pref("extensions.zombiekeys.debug.accelerators", false);
