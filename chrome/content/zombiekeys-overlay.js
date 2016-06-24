@@ -153,8 +153,26 @@
 	AG added support for folder rename dialog
 	AG addons: enigmail, extension list dumper, get selected mail, quickpasswords (sso change),
 	
-	Version 2.16 - WIP
+	Version 2.16 - 23/02/2015
+	AG Added c with acute for croatian languages 
+	AG Use "o" as shortcut for circled letters
+  AG Minor fixes in UK locale 
+	AG exposed all data structures for xbl binding, thus avoiding duplication of all Javascript code.
   AG fixed buttonAutoInstall function
+	AG Added support for Thunderbird's new Folder Dialog
+	
+	Version 2.17 - 13/06/2016
+	AG [Bug 25979] Toolbar Icon returns after being removed.
+	AG [Bug 26199] Add support for ŵ and ŷ
+	AG [Bug 25648] CTRL+> and CTRL+< modify font sizes
+	AG Norwegian on German keyboard: use CTRL+0 for å
+	AG German layout: fixed accelerator key for Grave `
+	AG Fixed Zombiekey button in composer for brighttext themes
+	
+	Version 2.18 - WIP
+	AG Double Accute not working on American keyboards
+
+  === 
 	AG WIP: remove conflicting global key shortcuts in Composer such as CTRL+< for font size
 	
 	
@@ -170,9 +188,9 @@
   */
 
 var ZombieKeys = new function() {
-	var debugLevel = 0, mAppver = null, mAppName = null;
-	var lastAliveKeyDown = null;
-	var disableListeners = false;
+	let debugLevel = 0, mAppver = null, mAppName = null,
+	    lastAliveKeyDown = null,
+	    disableListeners = false;
 
 	// modifiers: [ctrl, shift, alt]
 	// make deadKeys accessible from outside (this. instead of var)
@@ -200,6 +218,7 @@ var ZombieKeys = new function() {
 					"mapping": {
 								 "A": "\u00c1", "a": "\u00e1", "\u0424": "\u00c0", "\u0444": "\u00e0"
 								,"D": "\u00d0", "d": "\u00f0"
+                ,"C": "\u0106", "c": "\u0107"   // croatian
 								,"E": "\u00c9", "e": "\u00e9", "\u0423": "\u00c8", "\u0443": "\u00e8"
 								,"I": "\u00cd", "i": "\u00ed", "\u0428": "\u00cc", "\u0448": "\u00ec"
 								,"O": "\u00d3", "o": "\u00f3", "\u0429": "\u00d2", "\u0449": "\u00f2"
@@ -219,6 +238,8 @@ var ZombieKeys = new function() {
 								,"I": "\u00ce", "i": "\u00ee", "\u0428": "\u00ce", "\u0448": "\u00ee"
 								,"O": "\u00d4", "o": "\u00f4", "\u0429": "\u00d4", "\u0449": "\u00f4"
 								,"U": "\u00db", "u": "\u00fb", "\u0413": "\u00db", "\u0433": "\u00fb"
+								,"W": "\u0174", "w": "\u0175"
+								,"Y": "\u0176", "y": "\u0177"
 								},
 					"menuFake": false},
 
@@ -319,7 +340,7 @@ var ZombieKeys = new function() {
 				{"modifiers":   {"ctrlKey": true, "shiftKey": false, "altKey": false},
 					"defaultmods": {"ctrlKey": true, "shiftKey": false, "altKey": false},
 					"id": 10,
-					"keyCode": 188, // Comma below / Cedilla ","
+					"keyCode": 188, // "<" Comma below / Cedilla ","
 					"mapping": {
 								 "C": "\u00c7", "c": "\u00e7"
 								,"D": "\u1e10", "d": "\u1e11"
@@ -537,6 +558,7 @@ var ZombieKeys = new function() {
 
 	// Locale Specific Layouts
 	// we can add optional shiftKey overrides to cater for the locale!
+	// add charCode for overriding accelerators during keypress
 	var layouts = [{ "locale" : "us_int",
 					 "map_deadKeys" : [
 						 {"id" : 1, "keyCode": 192, "key": "`", "otherKey":"~"} /* grave */
@@ -547,14 +569,14 @@ var ZombieKeys = new function() {
 						,{"id" : 6, "keyCode":  50, "key": "@", "otherKey":"2", "charCode":  0}  /* ring */
 						,{"id" : 7, "keyCode":  55, "key": "&", "otherKey":"7"} /* sharp s */
 						,{"id" : 8, "keyCode": 191, "key": "/", "otherKey":"?"} /* stroke */
-						,{"id" : 9, "keyCode": 190, "key": ">", "otherKey":"."} /* caron */
-						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":"<"}  /* cedilla */
+						,{"id" : 9, "keyCode": 190, "charCode": 62, "key": ">", "otherKey":"."} /* caron */
+						,{"id" :10, "keyCode": 188, "charCode": 44, "key": "comma", "otherKey":"<"}  /* cedilla */
 						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9"} /* breve */
 						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8"} /* ogonec */
 						,{"id" :13, "keyCode": 109, "key": "_", "otherKey":"-"} /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">"} /* overdot */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":">"} /* overdot */
 						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":"} /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"|"} /* double accute */
+						,{"id" :16, "keyCode": 222, "key": "\"", "otherKey":"'"} /* double accute */
 						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"} /* circle */
 						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					 ],
@@ -580,9 +602,9 @@ var ZombieKeys = new function() {
 						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9"} /* breve */
 						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8"} /* ogonec */
 						,{"id" :13, "keyCode": 109, "key": "_", "otherKey":"-"} /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">"} /* overdot */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":">"} /* overdot */
 						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":"} /* underdot */
-						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"|"} /* double accute */
+						,{"id" :16, "keyCode": 222, "key": "\"", "otherKey":"'"} /* double accute */
 						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"} /* circle */
 						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
 					  ],
@@ -593,9 +615,10 @@ var ZombieKeys = new function() {
 					  ]
 					}
 ,
+/* use charCode to override accelerators! */
 					{ "locale" : "irl",
 					  "map_deadKeys" : [
-						 {"id" : 1, "keyCode": 192, "key": "`"} /* grave */
+						 {"id" : 1, "keyCode": 192, "charCode": 96, "key": "`"} /* grave */
 						,{"id" : 2, "keyCode": 222, "key": "'", "otherKey":"@"} /* acute */
 						,{"id" : 3, "keyCode":  54, "key": "^", "otherKey":"6"} /* circumflex */
 						,{"id" : 4, "keyCode": 163, "key": "~", "otherKey":"#", "shiftKey":false, "altKey": true} /* tilde */
@@ -608,7 +631,7 @@ var ZombieKeys = new function() {
 						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9"} /* breve */
 						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8"} /* ogonec */
 						,{"id" :13, "keyCode": 173, "key": "_", "otherKey":"-"} /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">"} /* overdot */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":">"} /* overdot */
 						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":"} /* underdot */
 						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"|"} /* double accute */
 						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"} /* circle */
@@ -622,13 +645,13 @@ var ZombieKeys = new function() {
 					}
 ,
 					{ "locale" : "uk",
-    				  "map_deadKeys" : [
-						 {"id" : 1, "keyCode": 223, "key": "`"} /* grave */
-						,{"id" : 2, "keyCode": 192, "key": "'", "otherKey":"@"} /* acute */
+    				"map_deadKeys" : [
+						 {"id" : 1, "keyCode": 192, "key": "`"} /* grave */
+						,{"id" : 2, "keyCode": 222, "key": "'", "otherKey":"@"} /* acute */
 						,{"id" : 3, "keyCode":  54, "key": "^", "otherKey":"6"} /* circumflex */
-						,{"id" : 4, "keyCode": 222, "key": "~", "otherKey":"#", "shiftKey":false, "altKey": true} /* #~ tilde */
+						,{"id" : 4, "keyCode": 163, "key": "~", "otherKey":"#", "shiftKey":false, "altKey": true} /* #~ tilde */
 						,{"id" : 5, "keyCode":  59, "key": ":", "otherKey":";"} /* umlaut */
-						,{"id" : 6, "keyCode": 192, "key": "@", "otherKey":"'", "shiftKey":true} /* @' ring */
+						,{"id" : 6, "keyCode": 222, "key": "@", "otherKey":"'", "shiftKey":true} /* @' ring */
 						,{"id" : 7, "keyCode":  55, "key": "&", "otherKey":"7"} /* sharp s */
 						,{"id" : 8, "keyCode": 191, "key": "/", "otherKey":"?"} /* stroke */
 						,{"id" : 9, "keyCode": 190, "key": ".", "otherKey":">", "shiftKey":true} /* caron */
@@ -636,7 +659,7 @@ var ZombieKeys = new function() {
 						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9"} /* breve */
 						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8"} /* ogonec */
 						,{"id" :13, "keyCode": 173, "key": "_", "otherKey":"-"} /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">"} /* overdot */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":">"} /* overdot */
 						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":"} /* underdot */
 						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"|"} /* double accute */
 						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o"} /* o - circle (ctrlshift c is taken by lightning)*/
@@ -650,7 +673,7 @@ var ZombieKeys = new function() {
 					}
 ,
 					{ "locale" : "fr",
-    				  "map_deadKeys" : [
+    				"map_deadKeys" : [
 						 {"id" : 1, "keyCode":  55, "key": "7", "otherKey":"`", "ctrlKey":true, "shiftKey":false}                  /* grave */
 						,{"id" : 2, "keyCode":  52, "key": "4", "otherKey":"'", "ctrlKey":true, "shiftKey":true}                   /* acute */
 						,{"id" : 3, "keyCode": 221, "key": "^", "otherKey":"9", "ctrlKey":false, "shiftKey":false, "altKey":false} /* circumflex */
@@ -692,7 +715,7 @@ var ZombieKeys = new function() {
 						,{"id" :11, "keyCode":  56, "key": "(", "otherKey":"8",      "shiftKey": true } /* breve */
 						,{"id" :12, "keyCode": 107, "key": "*", "otherKey":"+",      "shiftKey": true } /* ogonec */
 						,{"id" :13, "keyCode": 109, "key": "_", "otherKey":"-",      "shiftKey": true } /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
 						,{"id" :15, "keyCode": 188, "key": ";", "otherKey":",",      "shiftKey": true } /* underdot */
 						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"2",     "shiftKey": true } /* double accute */
 						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
@@ -707,12 +730,12 @@ var ZombieKeys = new function() {
 ,
 					{ "locale" : "de",
 					  "map_deadKeys" : [
-						 {"id" : 1, "keyCode": 221, "key": "&#96;",  "shiftKey": true } /* grave */
-						,{"id" : 2, "keyCode": 221, "key": "&#180;", "shiftKey": false} /* acute */
+						 {"id" : 1, "keyCode": 192, "charCode": 96, "key": "&#96;",  "shiftKey": true } /* grave */
+						,{"id" : 2, "keyCode": 192, "charCode": 39, "key": "&#180;", "shiftKey": false} /* acute */
 						,{"id" : 3, "keyCode": 220, "key": "^",      "shiftKey": false } /* circumflex */
 						,{"id" : 4, "keyCode": 107, "key": "*", "otherKey":"+",      "shiftKey": true } /* tilde */
 						,{"id" : 5, "keyCode": 190, "key": ":", "otherKey":".",      "shiftKey": true } /* umlaut */
-						,{"id" : 6, "keyCode": 220, "key": "&#778;", "otherKey":"^", "shiftKey": true } /* ring above */
+						,{"id" : 6, "keyCode":  48, "key": "0", "otherKey":"-",      "shiftKey": false } /* ring above */
 						,{"id" : 7, "keyCode":  54, "key": "&", "otherKey":"6",      "shiftKey": true } /* sharp s */
 						,{"id" : 8, "keyCode":  55, "key": "/", "otherKey":"7",      "shiftKey": true } /* stroke */
 						,{"id" : 9, "keyCode": 226, "key": ">", "otherKey":"<",      "shiftKey": true } /* caron */
@@ -720,7 +743,7 @@ var ZombieKeys = new function() {
 						,{"id" :11, "keyCode":  56, "key": "(", "otherKey":"8",      "shiftKey": true } /* breve */
 						,{"id" :12, "keyCode": 191, "key": "'", "otherKey":"#",      "shiftKey": true } /* ogonec */
 						,{"id" :13, "keyCode": 109, "key": "_", "otherKey":"-",      "shiftKey": true } /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
 						,{"id" :15, "keyCode": 188, "key": ";", "otherKey":",",      "shiftKey": true } /* underdot */
 						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"?",     "shiftKey": true } /* double accute */
 						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
@@ -748,7 +771,7 @@ var ZombieKeys = new function() {
 						,{"id" :11, "keyCode":  56, "key": "(", "otherKey":"8",      "shiftKey": true } /* breve */
 						,{"id" :12, "keyCode": 191, "key": "'", "otherKey":"*",      "shiftKey": false} /* ogonec */
 						,{"id" :13, "keyCode":  48, "key": "=", "otherKey":"0",      "shiftKey": true } /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":":",      "shiftKey": false} /* overdot */
 						,{"id" :15, "keyCode": 188, "key": ";", "otherKey":",",      "shiftKey": true } /* underdot */
 						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"?",     "shiftKey": true } /* double accute */
 						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
@@ -776,7 +799,7 @@ var ZombieKeys = new function() {
 						,{"id" :11, "keyCode":  57, "key": "(", "otherKey":"9",      "shiftKey": true } /* breve */
 						,{"id" :12, "keyCode":  56, "key": "*", "otherKey":"8",      "shiftKey": true } /* ogonec */
 						,{"id" :13, "keyCode": 226, "key": "|", "otherKey":"\\",      "shiftKey": true } /* macron */
-						,{"id" :14, "keyCode": 190, "key": ".", "otherKey":">",      "shiftKey": false} /* overdot */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":">",      "shiftKey": false} /* overdot */
 						,{"id" :15, "keyCode":  59, "key": ";", "otherKey":":",      "shiftKey": false} /* underdot */
 						,{"id" :16, "keyCode": 222, "key": "\"", "otherKey":"'",     "shiftKey": true } /* double accute */
 						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
@@ -792,16 +815,13 @@ var ZombieKeys = new function() {
 
 				 ];
 
-	var currentLayout = null;
-
-	var hexUnicodeKey = {"modifiers": {"ctrlKey": false, "shiftKey": false,
+	let currentLayout = null,
+	    hexUnicodeKey = {"modifiers": {"ctrlKey": false, "shiftKey": false,
 									   "altKey":  true},
-						 "keyCode": 88}; // "x"
-
-	var decUnicodeModifiers = {"ctrlKey": false, "shiftKey": false,
-							   "altKey":  true};
-
-	var decUnicode = "";
+						 "keyCode": 88}, // "x"
+	    decUnicodeModifiers = {"ctrlKey": false, "shiftKey": false,
+							   "altKey":  true},
+	    decUnicode = "";
 
 // 	function log(message) {
 // 		var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
@@ -810,7 +830,8 @@ var ZombieKeys = new function() {
 // 	};
 //
 	function logKey(why, event) {
-	  if (ZombieKeys.Util.isPrivateBrowsing)
+		const util = ZombieKeys.Util;
+	  if (util.isPrivateBrowsing)
 			return;
 		let keyEventProps = ['keyCode', 'charCode', 'shiftKey', 'altKey', 'ctrlKey'];
 
@@ -826,8 +847,7 @@ var ZombieKeys = new function() {
 
 		}
 		message += key_Pressed;
-
-		ZombieKeys.Util.logToConsole(message+"\n");
+		util.logToConsole(message+"\n");
 	}
 
 	this.logMappingString = function (mapping) {
@@ -843,7 +863,7 @@ var ZombieKeys = new function() {
 	this.displayMapping = function (k) {
 		let map = deadKeys[k].mapping;
 		if (ZombieKeys.Preferences.isPreference('showMapping') && !ZombieKeys.Util.isPrivateBrowsing) {
-			ZombieKeys.Util.logToConsole("created zombie # "+k+" you can now press: \n" + ZombieKeys.logMappingString(map));
+			ZombieKeys.Util.logToConsole("created zombie id "+ (k+1) +" you can now press: \n" + ZombieKeys.logMappingString(map));
 		}
 	};
 
@@ -859,7 +879,7 @@ var ZombieKeys = new function() {
 	// THIS INSERTS THE ZOMBIEFIED CHARACTER
 	function fakeKey(event, chr, createKeyUp) {
 		try {
-			var isDebug = ZombieKeys.Preferences.isDebugOption('fakeKey');
+			let isDebug = ZombieKeys.Preferences.isDebugOption('fakeKey');
 			if (isDebug) {
 				ZombieKeys.logKey("fakeKey: ('" +chr + "' " + event.type + ")", event);
 				if (event.type=='keypress')
@@ -874,7 +894,7 @@ var ZombieKeys = new function() {
 
 			}
 			// var view = window; // event.view;
-			var target = event.originalTarget ? event.originalTarget : (event.target ? event.target : document.commandDispatcher.focusedElement);
+			let target = event.originalTarget ? event.originalTarget : (event.target ? event.target : document.commandDispatcher.focusedElement);
 
 			if (ZombieKeys.Preferences.isPreference('subComma')) {
 				switch (chr) {
@@ -903,8 +923,8 @@ var ZombieKeys = new function() {
 				) {
 
 				// PRESS
-				var keypress_event = document.createEvent("KeyboardEvent"); // KeyEvents
-				let eventView = (event.view) ? event.view : null; // make xbl compatible (?)
+				let keypress_event = document.createEvent("KeyboardEvent"), // KeyEvents
+				    eventView = (event.view) ? event.view : null; // make xbl compatible (?)
 				keypress_event.initKeyEvent("keypress", true, true, eventView ,
 							   false, false, false, false,
 							   0, chr.charCodeAt(0));
@@ -928,24 +948,24 @@ var ZombieKeys = new function() {
 
 	// get string preceeding cursor
 	function getPreceedingString(elt, numchars) {
-		var pos = elt.selectionStart;
+		let pos = elt.selectionStart;
 		if (pos < numchars) {numchars=pos;}
 		return elt.value.slice(pos-numchars,pos);
 	}
 
 	// replace string preceeding cursor
 	function replacePreceedingString(elt, numchars, newtext) {
-		var posStart = elt.selectionStart;
-		var posEnd = elt.selectionEnd;
-		var scrollTop = elt.scrollTop;
-		var scrollLeft = elt.scrollLeft;
+		let posStart = elt.selectionStart,
+		    posEnd = elt.selectionEnd,
+		    scrollTop = elt.scrollTop,
+		    scrollLeft = elt.scrollLeft;
 
 		if (posStart < numchars) {numchars=posStart;}
 
 		elt.value = elt.value.slice(0,posStart-numchars)+
 					newtext+
 					elt.value.slice(posEnd);
-		var newpos = posStart+newtext.length;
+		let newpos = posStart+newtext.length;
 		elt.selectionStart = newpos;
 		elt.selectionEnd = newpos;
 
@@ -957,7 +977,8 @@ var ZombieKeys = new function() {
 
 	// modify the key mappings according to the selected locale
 	this.initLocale = function(locale) {
-		ZombieKeys.Util.logDebug("Initialize key locale: " + locale + " ...");
+		const util = ZombieKeys.Util;
+		util.logDebug("Initialize key locale: " + locale + " ...");
 		let theLayout; // determine locale
 		Array.forEach(layouts, function(layout) {
 			if (layout.locale==locale) {
@@ -966,25 +987,28 @@ var ZombieKeys = new function() {
 		});
 
 		for (let k=0; k<deadKeys.length; k++) {
+			let deadKey = deadKeys[k];
 			Array.forEach(theLayout.map_deadKeys, function(Map) {
-				if(Map.id == deadKeys[k].id) {
-					deadKeys[k].keyCode = theLayout.map_deadKeys[k].keyCode;
+				if (Map.id == deadKey.id) {
+					deadKey.keyCode = theLayout.map_deadKeys[k].keyCode;
 					// Special mods
-					if (typeof theLayout.map_deadKeys[k].charCode)
-						deadKeys[k].charCode = theLayout.map_deadKeys[k].charCode;
+					if (typeof theLayout.map_deadKeys[k].charCode !== "undefined") {
+						deadKey.charCode = theLayout.map_deadKeys[k].charCode;
+						util.logDebug('Overwrite deadKey[' + (k+1) + '].charCode = ' + deadKey.charCode);
+					}
 					else
 						if (layouts[0].map_deadKeys[k].charCode)
-							deadKeys[k].charCode = layouts[0].map_deadKeys[k].charCode; // us_int as default
+							deadKey.charCode = layouts[0].map_deadKeys[k].charCode; // us_int as default
 
 					if (typeof theLayout.map_deadKeys[k].shiftKey !== "undefined")
-						deadKeys[k].modifiers.shiftKey = theLayout.map_deadKeys[k].shiftKey;
+						deadKey.modifiers.shiftKey = theLayout.map_deadKeys[k].shiftKey;
 					else
-						deadKeys[k].modifiers.shiftKey = deadKeys[k].defaultmods.shiftKey;
+						deadKey.modifiers.shiftKey = deadKey.defaultmods.shiftKey;
 
 					if (typeof theLayout.map_deadKeys[k].altKey !== "undefined")
-						deadKeys[k].modifiers.altKey = theLayout.map_deadKeys[k].altKey;
+						deadKey.modifiers.altKey = theLayout.map_deadKeys[k].altKey;
 					else
-						deadKeys[k].modifiers.altKey = deadKeys[k].defaultmods.altKey;
+						deadKey.modifiers.altKey = deadKeys[k].defaultmods.altKey;
 				}
 			});
 		}
@@ -1020,11 +1044,12 @@ var ZombieKeys = new function() {
 
 	function keyPressHandler(event) {
 	  if (ZombieKeys.DisableListeners) return;
-		var isDebug = ZombieKeys.Preferences.isDebugOption('keyPressHandler');
+		const util = ZombieKeys.Util;
+		let isDebug = ZombieKeys.Preferences.isDebugOption('keyPressHandler');
 		if (isDebug) { ZombieKeys.logKey("press: ", event); }
 
 		// check "alive" keys which fire during "keypress"
-		for (var k=0; k<aliveKeys.length; k++) {
+		for (let k=0; k<aliveKeys.length; k++) {
 			if (  ( (event.keyCode && event.keyCode  == aliveKeys[k].keyCode)
 					||
 				    (event.charCode && event.charCode == aliveKeys[k].charCode)    )
@@ -1036,39 +1061,60 @@ var ZombieKeys = new function() {
 		}
 
 		// check if/which "dead" key is active
-		for (var k=0; k<deadKeys.length; k++) {
-			if (deadKeys[k].alive) {
-				deadKeys[k].alive = false;
+		for (let k=0; k<deadKeys.length; k++) {
+			let deadKey = deadKeys[k];
+			if (deadKey.alive) {
+				deadKey.alive = false;
 				// check if there's a mapping for this character
 				// entered after "dead" key
-				ZombieKeys.Util.logDebugOptional("zombieCreation", "keyPressHandler( ) detected zombie # "+k+" for "+event.charCode+
-						" => " + ZombieKeys.logMappingString(deadKeys[k].mapping));
-				var code = String.fromCharCode(event.charCode);
-				if (deadKeys[k].mapping[code]) {
-					if (deadKeys[k].menuFake && event.type=='keypress') {
+				util.logDebugOptional("zombieCreation", "keyPressHandler( ) detected zombie id "+ (k+1) + " for " + event.charCode +
+						" => " + ZombieKeys.logMappingString(deadKey.mapping));
+				let code = String.fromCharCode(event.charCode);
+				if (deadKey.mapping[code]) {
+					if (deadKey.menuFake && event.type=='keypress') {
 						// make it a pair of events
-						deadKeys[k].menuFake = false;
-						fakeKey(event, deadKeys[k].mapping[code], true); // copy event with keyup!
+						deadKey.menuFake = false;
+						fakeKey(event, deadKey.mapping[code], true); // copy event with keyup!
 					}
 					else
-						fakeKey(event, deadKeys[k].mapping[code], false);
+						fakeKey(event, deadKey.mapping[code], false);
 					return;
 				}
 				else {
-					ZombieKeys.Util.logDebugOptional("zombieCreation", "no mapping found - sending deadkey[" + k + "] back to sleep");
+					util.logDebugOptional("zombieCreation", "no mapping found - sending deadkey[" + (k+1) + "] back to sleep");
 				}
 			}
+      // consume accelerators!
+      else {
+				util.logDebugOptional("accelerators", "[" + (k+1) + "] keyDown - check for accelerator:\n"
+					  + 'keyCode = ' + deadKey.keyCode + ' {' + (event.keyCode == deadKey.keyCode) + '}\n'
+					  + 'charCode = ' + deadKey.charCode + ' {' + (event.charCode == deadKey.charCode) + '}');
+        if (
+				((event.keyCode == deadKey.keyCode)
+				 ||
+				 (event.charCode && event.charCode == deadKey.charCode))
+				&&
+				 checkModifiers(event, deadKey.modifiers))  {
+					util.logDebug(' discarding keypress after match\n'
+					  + 'keyCode = ' + event.keyCode + '\n'
+					  + 'charCode = ' + event.charCode);
+          // throw awawy the keypress event.
+          event.preventDefault();
+          event.stopPropagation();
+					break;
+        }
+      }
 		}
 	};
 
 	function keyUpHandler(event) {
 		if (ZombieKeys.DisableListeners || event.keyCode<20)
 			return; // ignore CTRL,SHIFT and ALT
-		var isDebug = ZombieKeys.Preferences.isDebugOption('keyUpHandler');
+		let isDebug = ZombieKeys.Preferences.isDebugOption('keyUpHandler');
 		if (isDebug) {ZombieKeys.logKey("up: ", event);}
 
 		// check "alive" keys which only fire on "keyup"
-		for (var k=0; k<aliveKeys.length; k++) {
+		for (let k=0; k<aliveKeys.length; k++) {
 			if (( (event.keyCode && event.keyCode  == aliveKeys[k].keyCode)
 					||
 				    (event.charCode && event.charCode == aliveKeys[k].charCode)    )
@@ -1080,18 +1126,20 @@ var ZombieKeys = new function() {
 		}
 
 		// check if "dead" key is activated
-		for (var k=0; k<deadKeys.length; k++) {
+		// match on charCode of deadkeys?
+		for (let k=0; k<deadKeys.length; k++) {
+			let deadKey = deadKeys[k];
 			if (
 				(
-				 (event.keyCode == deadKeys[k].keyCode)
+				 (event.keyCode == deadKey.keyCode)
 				 ||
-				 (deadKeys[k].charCode && event.charCode == deadKeys[k].charCode)
+				 (!event.keyCode && deadKey.charCode && event.charCode == deadKey.charCode)
 				)
 				&&
-				checkModifiers(event, deadKeys[k].modifiers))
+				checkModifiers(event, deadKey.modifiers))
 			{
 				ZombieKeys.displayMapping(k);
-				deadKeys[k].alive = true;
+				deadKey.alive = true;
 				event.preventDefault();
 				event.stopPropagation();
 				return;
@@ -1102,8 +1150,8 @@ var ZombieKeys = new function() {
 		// and replace with corresponding char)
 		if ((event.keyCode == ZombieKeys.HexUnicodeKey.keyCode) &&
 			checkModifiers(event, ZombieKeys.HexUnicodeKey.modifiers)) {
-			let hexUnicode = getPreceedingString(event.target, 4);
-			let code = parseInt(hexUnicode, 16);
+			let hexUnicode = getPreceedingString(event.target, 4),
+			    code = parseInt(hexUnicode, 16);
 			replacePreceedingString(event.target, 4, String.fromCharCode(code));
 			return;
 		}
@@ -1118,7 +1166,7 @@ var ZombieKeys = new function() {
 			} else if (event.keyCode == 18) {
 				// released ALT - let's insert
 				if (decUnicode != "") {
-					var code = parseInt(decUnicode, 10);
+					let code = parseInt(decUnicode, 10);
 					ZombieKeys.fakeKey(event, String.fromCharCode(code));
 					decUnicode = "";
 				}
@@ -1130,18 +1178,19 @@ var ZombieKeys = new function() {
 	};
 
 	function insertAtCaret(element, chr) {
+		const util = ZombieKeys.Util;
 		if (!element) {
-			ZombieKeys.Util.logToConsole("insertAtCaret for chr '" + chr.toString() + "' cannot be done - no element passed!");
+			util.logToConsole("insertAtCaret for chr '" + chr.toString() + "' cannot be done - no element passed!");
 			return;
 		}
 
-		var el =  '';
+		let el = '', node;
 		el +=  element.id ? "  id=" + element.id : "";
 		el +=  element.nodeName ? "  nodeName=" + element.nodeName : "";
 		el +=  element.name ? "  name=" + element.name : "";
-		ZombieKeys.Util.logDebugOptional("insertAtCaret", "insertAtCaret(" + el + "): char = " + chr);
+		util.logDebugOptional("insertAtCaret", "insertAtCaret(" + el + "): char = " + chr);
 		try {
-			var node = element.nodeName;
+			node = element.nodeName;
 			element.focus();
 			if (node=="HTML") { // Composer Windows /
 			    if (window.getSelection && window.getSelection().getRangeAt) {
@@ -1153,8 +1202,8 @@ var ZombieKeys = new function() {
 			    }
 			}
 			else {
-				var startSel = element.selectionStart;
-				var endSel = element.selectionEnd;
+				let startSel = element.selectionStart,
+				    endSel = element.selectionEnd;
 				if (!element.value)
 					element.value = "" + chr;
 				else
@@ -1164,23 +1213,23 @@ var ZombieKeys = new function() {
 			}
 		}
 		catch(e) {
-			ZombieKeys.Util.logToConsole("Exception in insertAtCaret; (nodeName=" + node  +")\n" + e.toString());
+			util.logToConsole("Exception in insertAtCaret; (nodeName=" + node  +")\n" + e.toString());
 		}
 	}
 
 
 	this.viewOptions = function () {
-		var oldLocale = this.getCurrentLocale();
+		let oldLocale = this.getCurrentLocale();
 		window.openDialog('chrome://zombiekeys/content/zombiekeys-options.xul',
-			'zombiekeys-options','chrome,titlebar,centerscreen,modal,resizable,innerWidth=480,innerHeight=360',ZombieKeys).focus();
-		var newLocale = this.getCurrentLocale();
+			'zombiekeys-options','chrome,titlebar,centerscreen,modal,resizable,innerWidth=500,innerHeight=450',ZombieKeys).focus();
+		let newLocale = this.getCurrentLocale();
 		// for safety, force to initialize locale after options are closed
 		ZombieKeys.Util.logDebug("old locale=" + oldLocale + " - initialize new locale=" + newLocale + "...");
 		this.initLocale(newLocale);
 	}
 
 	this.getStringBundle = function() {
-		var zk_bundle =
+		let zk_bundle =
 			Components.classes["@mozilla.org/intl/stringbundle;1"]
 				.getService(Components.interfaces.nsIStringBundleService)
 				.createBundle("chrome://zombiekeys/locale/zombiekeys.properties");
@@ -1189,7 +1238,7 @@ var ZombieKeys = new function() {
 
 	this.getResourceString = function(id) {
 		try {
-			var txt = ZombieKeys.getStringBundle().GetStringFromName('extensions.zombiekeys.' + id);
+			let txt = ZombieKeys.getStringBundle().GetStringFromName('extensions.zombiekeys.' + id);
 			return txt;
 		}
 		catch (ex) {
@@ -1199,7 +1248,7 @@ var ZombieKeys = new function() {
 	}
 
 	this.showHowToUse = function() {
-		var text = ZombieKeys.getResourceString('howToUse');
+		let text = ZombieKeys.getResourceString('howToUse');
 		alert (text);
 	}
 
@@ -1222,20 +1271,20 @@ var ZombieKeys = new function() {
 	}
 
 	this.init = function(that) {
-		var locale = that.getCurrentLocale();
+		let locale = that.getCurrentLocale();
 		ZombieKeys.Util.logDebug("Call initLocale (" + locale + ") ...");
 
 		that.initLocale(locale);
 		if (window) {
-			window.addEventListener('keypress', keyPressHandler, false);
-			window.addEventListener('keyup',	keyUpHandler,	 false);
+			window.addEventListener('keypress', keyPressHandler, true);
+			window.addEventListener('keyup',	keyUpHandler,	 true);
 		}
 
 
 	}
 
 	this.showPopup = function(button, popupId) {
-		var p =  document.getElementById(popupId);
+		let p =  document.getElementById(popupId);
 		if (p) {
 				document.popupNode = button;
 				this.preparePopupMenuAccelerators(p);
@@ -1247,29 +1296,31 @@ var ZombieKeys = new function() {
 	}
 
 	this.awakeZombie = function (id) {
-		for (var k=0; k<deadKeys.length; k++) {
-			if (deadKeys[k].id === id)
+		const util = ZombieKeys.Util;
+		for (let k=0; k<deadKeys.length; k++) {
+			let aDeadKey = deadKeys[k];
+			if (aDeadKey.id === id)
 			{
-				ZombieKeys.Util.logDebugOptional("zombieCreation", "awakeZombie(" + id + ") matched keyCode: " + deadKeys[k].keyCode + "\n\nZombiefy the dead key...");
+				util.logDebugOptional("zombieCreation", "awakeZombie(" + id + ") matched keyCode: " + aDeadKey.keyCode + "\n\nZombiefy the dead key...");
 				ZombieKeys.displayMapping(k);
-				deadKeys[k].menuFake = true;
-				deadKeys[k].alive = true; // activate modifiers
+				aDeadKey.menuFake = true;
+				aDeadKey.alive = true; // activate modifiers
 				break;
 			}
 		}
 	}
 
 	this.fakeAliveKey = function(id) {
-		var target = document.commandDispatcher.focusedElement;
+		let target = document.commandDispatcher.focusedElement,
+        theKey;
 		// initKeyEvent(type, canBubble, cancelable, view, ctrlKey, altKey, shiftKey, metaKey, keyCode, charCode);
 		// DOWN
-		for (var k=0; k<aliveKeys.length; k++) {
+		for (let k=0; k<aliveKeys.length; k++) {
 			if (aliveKeys[k].id ===id)
-				var theKey=aliveKeys[k];
+				theKey=aliveKeys[k];
 		}
 
-
-		var keydown_event = document.createEvent("KeyboardEvent"); // KeyEvents
+		let keydown_event = document.createEvent("KeyboardEvent"); // KeyEvents
 		keydown_event.initKeyEvent("keydown", true, true, null,
 							 	theKey.modifiers.ctrlKey,
 							 	theKey.modifiers.altKey,
@@ -1278,8 +1329,7 @@ var ZombieKeys = new function() {
 							 	theKey.keyCode,
 							 	theKey.charCode);
 
-
-		if(theKey)
+		if (theKey)
 		{
 			this.insertAtCaret(target, theKey.target);
 			return;
@@ -1308,26 +1358,27 @@ var ZombieKeys = new function() {
 	}
 
 	this.preparePopupMenuAccelerators = function(popupMenu) {
+		const util = ZombieKeys.Util;
 		function html_entity_decode(str) {
 			try {
-				var s = str.toString();
-				ZombieKeys.Util.logDebugOptional("entities","html_entity_decode(" + s + ")");
-				var ss= s.substring(2,s.length-1);
-				ZombieKeys.Util.logDebugOptional("entities","substring = " + ss);
+				let s = str.toString();
+				util.logDebugOptional("entities","html_entity_decode(" + s + ")");
+				let ss= s.substring(2,s.length-1);
+				util.logDebugOptional("entities","substring = " + ss);
 
 				return String.fromCharCode(ss);
 			}
 			catch(ex) {
-				ZombieKeys.Util.logToConsole("exception during html_entity_decode (" + s + ")");
+				util.logToConsole("exception during html_entity_decode (" + s + ")");
 				return str;
 			}
 		}
 
 		// find owning button
-		var currentLocale = this.getCurrentLocale();
+		let currentLocale = this.getCurrentLocale();
 		try {
-			for (var b=0; b<popupMenu.children.length; b++) {
-				var menuItem = popupMenu.children[b];
+			for (let b=0; b<popupMenu.children.length; b++) {
+				let menuItem = popupMenu.children[b];
 				if ( menuItem.tagName && menuItem.tagName==='menuitem'
 					&&
 					 (!menuItem.getAttribute('zk_locale') || menuItem.getAttribute('zk_locale') !== currentLocale)
@@ -1339,27 +1390,26 @@ var ZombieKeys = new function() {
 				{
 					menuItem.setAttribute('zk_locale', currentLocale);
 					// change the content by finding the last occurence of triple spaces and truncating the string.
-					var i=menuItem.label.indexOf('  ');
-					if (i>0) {
+					let i = menuItem.label.indexOf('  ');
+					if (i > 0) {
 						// cut off any hard coded accelerators
 						menuItem.label = menuItem.label.substring(0, i);
 					}
 
-
-					var acceleratorText = "";
-					var cmd = menuItem.getAttribute('oncommand');
-					var j;
+					let acceleratorText = "",
+					    cmd = menuItem.getAttribute('oncommand'),
+					    j;
 
 					if (cmd) {
 						j = cmd.indexOf('awakeZombie(');
 						if (j>0) {
 							// add accelerator from locale
 							try {
-								var dZ = parseInt( cmd.substring(j+12), 10); // 12 = length ( 'awakeZombie(' )
+								let dZ = parseInt( cmd.substring(j+12), 10); // 12 = length ( 'awakeZombie(' )
 								if (!isNaN(dZ)) {
 									dZ--;
-									let dk = deadKeys[dZ];
-									let keyStringDisplay = ZombieKeys.currentLayout.map_deadKeys[dZ].key;
+									let dk = deadKeys[dZ],
+									    keyStringDisplay = ZombieKeys.currentLayout.map_deadKeys[dZ].key;
 									// convert entities to viewable characters:
 									if (keyStringDisplay.length>1
 									 && keyStringDisplay.substr(0,1)=='&'
@@ -1381,7 +1431,7 @@ var ZombieKeys = new function() {
 								}
 							}
 							catch(ex) {
-								ZombieKeys.Util.logToConsole("exception during preparePopupMenuAccelerators (deadKeys[" + dZ + "]): " + ex.toString());
+								util.logToConsole("exception during preparePopupMenuAccelerators (deadKeys[" + dZ + "]): " + ex.toString());
 							};
 						}
 						else {
@@ -1389,7 +1439,7 @@ var ZombieKeys = new function() {
 							if (j>0) {
 								// add accelerator from locale
 								try {
-									var aZ = parseInt( cmd.substring(j+13), 10); // 13 = length ( 'awakeZombie(' )
+									let aZ = parseInt( cmd.substring(j+13), 10); // 13 = length ( 'awakeZombie(' )
 									if (!isNaN(aZ)) {
 										aZ--;
 										let ak = aliveKeys[aZ];
@@ -1404,7 +1454,7 @@ var ZombieKeys = new function() {
 									}
 								}
 								catch(ex) {
-									ZombieKeys.Util.logToConsole("exception during preparePopupMenuAccelerators (aliveKeys[" + aZ + "]): " + ex.toString());
+									util.logToConsole("exception during preparePopupMenuAccelerators (aliveKeys[" + aZ + "]): " + ex.toString());
 								};
 
 							}

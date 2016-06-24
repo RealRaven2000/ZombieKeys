@@ -31,10 +31,9 @@
 
 	<groupbox style = "margin-top:.2em; padding: 0.3em;" id = "prefSelectLayout">
 		<caption label = "&zk.prefwindow.keyboardLayout;"/>
-
 		<vbox>
 			<label value = "&zk.prefwindow.keyboardLayout.instructions;" />
-			<listbox id = "Layouts" seltype = "single" onselect = "ZombieKeys.Options.selectLayout(this.selectedItem.value, window);" rows = "4">
+			<listbox id = "Layouts" seltype = "single" onselect = "ZombieKeys.Options.selectLayout(this.selectedItem.value, window);" rows = "6">
 			  <listitem value = "us_int" label = "&zk.prefwindow.layout.US;" />
 			  <listitem value = "us_dvorak" label = "&zk.prefwindow.layout.US_Dvorak;"/>
 			  <listitem value = "uk" label = "&zk.prefwindow.layout.UK;"/>
@@ -65,14 +64,18 @@
 						preference = "boolDebug"
 						label = "&zk.prefwindow.Debug.label;"
 						oncontextmenu = "ZombieKeys.Util.showAboutConfig('zombiekeys.debug');return false;"
+						oncommand = "ZombieKeys.Options.setDebug(this);"
 						accesskey = "&zk.prefwindow.Debug.shortcut;"
 						tooltiptext = "&zk.prefwindow.Debug.tooltip;"
 						/>
 				</vbox>
+				<spacer flex="1" />
 				<vbox>
-				    <spacer flex = "1"/>
-					<button label="&zk.prefwindow.customizeButton; &#9654;"
-							oncommand = "ZombieKeys.Options.startCustomize();"/>
+				    <spacer flex="1" />
+					<button id="btnCustomize"
+					        collapsed="true"
+ 					        label="&zk.prefwindow.customizeButton; &#9654;"
+							    oncommand = "ZombieKeys.Options.startCustomize();"/>
 				</vbox>
 			</hbox>
 		</vbox>
@@ -80,11 +83,13 @@
 	
 	<groupbox style = "margin-top:.2em; padding: 0.3em;" id = "prefEditLayout" collapsed="true">
 		<caption label = "&zk.prefwindow.customizeLayoutGroup;"/>
+		<label id="callForDevs"
+		       value="This is still Work in Progress! Programmers are welcome to help me with this!"/>
 		<hbox>
 		<label id="currentLayoutName">US keyboard</label>
 		</hbox>
 		<listbox id="deadKeyList" 
-				 rows="5"
+				 rows="8"
 				 onselect="ZombieKeys.Options.selectDeadKey(this);">
 			<listitem value="1" label="1 - This is just example data..." />
 			<listitem value="2" label="2 - if you see this, you have to select" />
@@ -132,7 +137,11 @@
 			</hbox>
 		</groupbox>
 		<hbox>
-			<spacer flex="1" />
+		    <label value="Test Field:"/>
+			<textbox id="testPanel"
+					 tooltiptext="Try shortcuts + Zombie Keys here"
+					 flex="1"/>
+			<spacer flex="3" />
 			<button label="&#9664; &zk.prefwindow.customizeEndButton;"
 					oncommand = "ZombieKeys.Options.endCustomize();"/>
 		</hbox>

@@ -3,10 +3,10 @@
  
 ZombieKeys.Options = {
 	selectItem: function(layout) {
-		var lst = document.getElementById('Layouts');
+		let lst = document.getElementById('Layouts');
 		if (lst) {
-			for (var i=0; i<lst.itemCount; i++) {
-				var item = lst.getItemAtIndex(i);
+			for (let i=0; i<lst.itemCount; i++) {
+				let item = lst.getItemAtIndex(i);
 				if (item && item.value == layout) {
 					lst.selectItem (item);
 					break;
@@ -16,16 +16,21 @@ ZombieKeys.Options = {
 	},
 
 	selectLayout: function(locale, win) {
-		var img = document.getElementById('layoutImage');
+		let img = document.getElementById('layoutImage');
 		if (img)
 			img.className = "layout-" + locale;
 		
 	} ,
 		
-	load : function () {
+	load : function() {
 		ZombieKeys.Options.selectItem(ZombieKeys.getCurrentLocale());
+    document.getElementById('btnCustomize').collapsed = !ZombieKeys.Preferences.isDebug;
 	} ,
 	
+  setDebug : function(cb) {
+    document.getElementById('btnCustomize').collapsed = !cb.checked;
+  } ,
+  
 	get selectedLocale() {
 		let lst = document.getElementById('Layouts');
 		if (lst) {
@@ -93,14 +98,13 @@ ZombieKeys.Options = {
 	},
 	
 	getDeadKeyLabel: function(dK, arrayIndex) {
-		let itemLabel = dK.id + " - " + this.deadKeyTitle(dK.id) + " (" + keyCode + ") " + theKey;
-		let keyCode = dK.keyCode;
-		let theKey = dK.key;
-		let theOtherKey = dK.otherKey ? dK.otherKey : '';
-		let itemLabel = dK.id + " - " + this.deadKeyTitle(dK.id) + " (" + keyCode + ") " + theKey;
+		let keyCode = dK.keyCode,
+		    theKey = dK.key,
+		    theOtherKey = dK.otherKey ? dK.otherKey : '',
+		    itemLabel = dK.id + " - " + this.deadKeyTitle(dK.id) + " (" + keyCode + ") " + theKey,
+		    modifiers = ZombieKeys.DeadKeys[arrayIndex].modifiers;
 		if (theOtherKey)
 			itemLabel += "[" + theOtherKey + "]";
-		let modifiers = ZombieKeys.DeadKeys[arrayIndex].modifiers;
 		if (modifiers.ctrlKey) itemLabel += '  + CTRL';
 		if (modifiers.altKey) itemLabel += '  + Alt';
 		if (modifiers.shiftKey) itemLabel += '  + Shift';
@@ -109,8 +113,8 @@ ZombieKeys.Options = {
 	
 	fillDeadkeysList: function() {
 		// refill listbox
-		let locale = this.selectedLocale;
-		let list = document.getElementById('deadKeyList');
+		let locale = this.selectedLocale,
+		    list = document.getElementById('deadKeyList');
 		while (list.itemCount)
 		  list.removeItemAt(0);
 		// initialize the current instance (of options window)
@@ -158,21 +162,21 @@ ZombieKeys.Options = {
 	keyUpHandler : function(event) {
 		if (event.keyCode<20)
 			return; // ignore CTRL,SHIFT and ALT
-		var isDebug = ZombieKeys.Preferences.isDebugOption('keyUpHandler');
+		let alt = (event.altKey) ? true : false,
+		    ctrl = (event.ctrlKey) ? true : false,
+		    shift = (event.shiftKey) ? true : false,
+		    isDebug = ZombieKeys.Preferences.isDebugOption('keyUpHandler');
 		if (isDebug) {ZombieKeys.logKey("pushKey up: ", event);}
 		document.getElementById('txtKeyCode').value = event.keyCode;
 		event.target.removeEventListener('keyup', ZombieKeys.Options.keyUpHandler);
-		let alt = (event.altKey) ? true : false;
-		let ctrl = (event.ctrlKey) ? true : false;
-		let shift = (event.shiftKey) ? true : false;
 		// when pressing again, we ignore accelerators!
 		if (document.getElementById('pressKeyAgainInstructions').collapsed) {
 			document.getElementById('chkShift').checked = shift;
 			document.getElementById('chkAlt').checked = alt;
 			document.getElementById('chkCTRL').checked = ctrl;
 		}
-		let code = (event.charCode) ? event.charCode : event.keyCode;
-		let shiftCode = 0;
+		let code = (event.charCode) ? event.charCode : event.keyCode,
+		    shiftCode = 0;
 		// Simple ASCII shift calculations. a-A .. Z-z
 		if (code>64 && code<91)
 			shiftCode = code + 32;
@@ -200,12 +204,12 @@ ZombieKeys.Options = {
 	} ,
 	
 	selectDeadKey : function(lb) {
-	  let index = lb.selectedIndex;
-		let element = lb.selectedItem;
-		let idx = parseInt(element.value);  // the number
-		let dK = ZombieKeys.currentLayout.map_deadKeys[index]; // get deadKey
-		let theKey = dK.key;
-		let theOtherKey = dK.otherKey ? dK.otherKey : '';
+	  let index = lb.selectedIndex,
+		    element = lb.selectedItem,
+		    idx = parseInt(element.value),  // the number
+		    dK = ZombieKeys.currentLayout.map_deadKeys[index], // get deadKey
+		    theKey = dK.key,
+		    theOtherKey = dK.otherKey ? dK.otherKey : '';
 		document.getElementById('txtKeyCode').value = dK.keyCode;
 		document.getElementById('pushKey').value = theKey;
 		document.getElementById('otherKey').value = theOtherKey;

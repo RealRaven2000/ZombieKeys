@@ -2,7 +2,9 @@
     -moz-binding: url("chrome://zombiekeys/content/inputzombie.xml#inputzombie");
 }
 
-#zombiekeys-toolbarbutton {
+#zombiekeys-toolbarbutton,
+#compose-toolbox > toolbar[brighttext] #zombiekeys-toolbarbutton.toolbarbutton-1,
+#mail-toolbox > toolbar[brighttext] #zombiekeys-toolbarbutton.toolbarbutton-1 {
 	list-style-image: url("chrome://zombiekeys/content/zombie24.png");
 	-moz-image-region: rect(0px 24px 24px 0px);
 }
@@ -13,7 +15,9 @@ toolbar:not([iconsize="small"]) #zombiekeys-toolbarbutton image
   height: 24px;
 }
 
-[iconsize="small"] #zombiekeys-toolbarbutton
+[iconsize="small"] #zombiekeys-toolbarbutton,
+#compose-toolbox > toolbar[brighttext][iconsize="small"] #zombiekeys-toolbarbutton.toolbarbutton-1,
+#mail-toolbox > toolbar[brighttext][iconsize="small"] #zombiekeys-toolbarbutton.toolbarbutton-1
 {
 	list-style-image: url("chrome://zombiekeys/content/zombie16.png");
 	-moz-image-region: rect(0px 16px 16px 0px);

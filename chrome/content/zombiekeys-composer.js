@@ -8,7 +8,7 @@
 
 ZombieKeys.Composer = {
   initDone: false,
-  cleanKeySet: function(keySet) {
+  cleanKeySet: function cleanKeySet(keySet) {
 	  // see if ZombieKeys needs a modifier and the entered mods string doesn't contain it
 	  function checkModifiers(modifiers, modString) {
 			if (modifiers) {
@@ -22,21 +22,25 @@ ZombieKeys.Composer = {
 			return true;
 		}
 
-    let keysetName = keySet.id ? keySet.id : '(unnamed)';
-		let countRemoved = 0;
-	  ZombieKeys.Util.logDebugOptional('accelerators', 'cleanKeySet(' + keysetName + ') ..');
-		let isRecreateMethod = ZombieKeys.Preferences.getBoolPref("accelerators.recreateKeys");
+    let keysetName = keySet.id ? keySet.id : '(unnamed)',
+		    countRemoved = 0,
+        util = ZombieKeys.Util,
+        prefs = ZombieKeys.Preferences;
+        
+	  util.logDebugOptional('accelerators', 'cleanKeySet(' + keysetName + ') ..');
+		let isRecreateMethod = prefs.getBoolPref("accelerators.recreateKeys");
 		try {
 			let deadKeys = ZombieKeys.currentLayout.map_deadKeys; // localized deadKeys
 			let menuItems = document.getElementsByTagName('menuitem');
-			for (let i=0; i<keySet.childNodes.length; i++) {
-				let key = keySet.childNodes[i];
-				let kbKey = key.getAttribute('key');
-				let kbCharChode = (kbKey && kbKey.charCodeAt(0)) ? kbKey.charCodeAt(0) : "0";
-				let kbMods = key.getAttribute('modifiers'); 
-				let txt = 'key {' + kbKey + ',' + kbCharChode.toString() + '}   mods:' + kbMods.toString();
-				let keyName = key.id ? key.id : '(unnamed)';
-				ZombieKeys.Util.logDebugOptional('accelerators.detail', i.toString() + ' = ' + txt + ' - ' + keyName);
+			for (let i=keySet.childNodes.length-1; i>=0; i--) {
+				let key = keySet.childNodes[i],
+				    kbKey = key.getAttribute('key'),
+				    kbCharChode = (kbKey && kbKey.charCodeAt(0)) ? kbKey.charCodeAt(0) : "0",
+				    kbMods = key.getAttribute('modifiers'), 
+				    txt = 'key {' + kbKey + ',' + kbCharChode.toString() + '}   mods:' + kbMods.toString(),
+				    keyName = key.id ? key.id : '(unnamed)';
+            
+				util.logDebugOptional('accelerators.detail', i.toString() + ' = ' + txt + ' - ' + keyName);
 				if (!kbCharChode) continue;
 				
 				for (let k=0; k<deadKeys.length; k++) {
@@ -47,7 +51,7 @@ ZombieKeys.Composer = {
 							Zombie.otherKey &&  kbKey == Zombie.otherKey) 
 					{
 						// disable the accelerator if there is a full match on the modifiers
-						ZombieKeys.Util.logDebugOptional('accelerators', 'Matched ' + txt + '   (' + keyName + ')');
+						util.logDebugOptional('accelerators', 'Matched ' + txt + '   (' + keyName + ')');
 						let zombieMods = Zombie.modifiers ? Zombie.modifiers : null;
 						if (!checkModifiers(zombieMods, kbMods)) {
 							continue;
@@ -60,63 +64,72 @@ ZombieKeys.Composer = {
 						// if locale has no modifiers, check if the accelerator has some .. 
 						/******** to do *************/
 						/******** to do *************/
-						/******** to do *************/
 						// all modifiers were matched... full match
-						// key.setAttribute('disabled', true);  // doesn't help with tasksKeys as they are re-enabled via context!
-						
-						// keySet.remove(key); // remove the key element
+            
+            if (prefs.isPreference('accelerators.removeMatchedAccelerators')) {
+              // key.setAttribute('disabled', true);  // doesn't help with tasksKeys as they are re-enabled via context!
+              // keySet.remove(key); // remove the key element
+            }
 						let action = 'modify key ';
 						let id = key.id;
 						let observes = key.getAttribute('observes') ? key.getAttribute('observes') : '';
 						let cmd = key.getAttribute('oncommand') ? key.getAttribute('oncommand') : '';
-						let newKey;
+						let newKey =key;
+						
+            if (observes || cmd) {
+              keySet.removeChild(key);
+            } else continue;
 						
 						if (isRecreateMethod) {
+              newKey = document.createElement("key");
 							if (id) {
-								newKey = document.createElement("key");
 								newKey.id = id; // make sure it is not missed
 							}
 						}
-						else newKey=key;
-						
+            
 						if (cmd) {
 							newKey.command = '';
 							if (isRecreateMethod) {
 								newKey.setAttribute('oncommand','');
-								action += "- Overwrote oncommand attribute ";
+								action += "- Overwrote oncommand attribute (" + cmd + ")";
 							}
 							else {
 							  newKey.removeAttribute('oncommand');
-								action += "- removed oncommand attribute ";
+								action += "- Removed oncommand attribute (" + cmd + ")";
 							}
 						}
+            if (observes) {
+              newKey.setAttribute('observes','');
+							action += "- Overwrote observes attribute (" + observes + ")";
+            }
 						
-						if (observes) {
-							key.removeAttribute('observes'); // REMOVED OBSERVES
-							if (ZombieKeys.Preferences.isDebugOption('accelerators.addModified.disable')) {
-								ZombieKeys.Util.logDebugOptional('accelerators', 'removing observes ' + observes);
-							}
-							else {
-								// the node will copy the relevant attributes from the observed node as soon as you reinsert it into the DOM.
-								action += "- Removed and Readded key element";
-								keySet.removeChild(key);
-								keySet.appendChild(newKey);
-							}
-						}
+            // key.removeAttribute('observes'); // REMOVED OBSERVES
+            if (prefs.isDebugOption('accelerators.addModified.disable')) {
+              // if we don't update the keySet with the modified keys Composer does not load?
+              util.logDebugOptional('accelerators', 'removing observes ' + observes);
+            }
+            else {
+              // the node will copy the relevant attributes from the observed node as soon as you reinsert it into the DOM.
+              action += "- Removed and Readded key element";
+              keySet.appendChild(newKey);
+            }
 
 						countRemoved++;
 						
 						// remove key accelerator from menu items
-						if (id) {
+						if (id) try {
 							for(let j=0; j<menuItems.length; j++) {
 								if (menuItems[j].getAttribute('key') && menuItems[j].getAttribute('key') == id) {
 								  menuItems[j].removeAttribute('key');
-								  ZombieKeys.Util.logDebugOptional('accelerators', 'removed key from menu item:' + menuItems[j].getAttribute('label'));
+								  util.logDebugOptional('accelerators', 'removed key from menu item:' + menuItems[j].getAttribute('label'));
 								}
 							}
 						}
+            catch(ex) {
+              util.logException("ZombieKeys.Composer.cleanKeySet(" + keysetName + ")", ex);
+            }
 						
-						ZombieKeys.Util.logDebugOptional('accelerators',
+						util.logDebugOptional('accelerators',
 							action + ': '  + 
 							kbKey + '  '  + kbMods + '\n' +
 							' command:  ' + cmd + '\n' +
@@ -126,25 +139,26 @@ ZombieKeys.Composer = {
 			}
 		}
 		catch(ex) {
-		  ZombieKeys.Util.logException("ZombieKeys.Composer.cleanKeySet(" + keysetName + ")", ex);
+		  util.logException("ZombieKeys.Composer.cleanKeySet(" + keysetName + ")", ex);
 		}
-	  ZombieKeys.Util.logDebugOptional('accelerators', countRemoved.toString() + ' items modified from keyset ' + keysetName +'.\n=======================');
+	  util.logDebugOptional('accelerators', countRemoved.toString() + ' items modified from keyset ' + keysetName +'.\n=======================');
 		
 		return countRemoved;
 	} ,
 	
-	initKeysets: function() {
-		let keySets = document.getElementsByTagName("keyset");
-	  if (this.initDone) {
+	initKeysets: function initKeysets() {
+		let keySets = document.getElementsByTagName("keyset"),
+        util = ZombieKeys.Util;
+	  if (this.initDone && false) {  // force re-init every time for testing!
 			for (let i = 0; i < keySets.length; i++) {
-			  let keySet = keySets[i];
-				let keysetName = 	keySet.id ? keySet.id : '(unnamed)';
-				ZombieKeys.Util.logDebugOptional('accelerators', 'Keyset[' + i + '] ' + keysetName + ': ' + keySet.childNodes.length + ' child nodes');
+			  let keySet = keySets[i],
+				    keysetName = 	keySet.id ? keySet.id : '(unnamed)';
+				util.logDebugOptional('accelerators', 'Keyset[' + i + '] ' + keysetName + ': ' + keySet.childNodes.length + ' child nodes');
 			}		
-		  ZombieKeys.Util.logDebugOptional('accelerators', 'initKeysets - early exit, initDone=true');
+		  util.logDebugOptional('accelerators', 'initKeysets - early exit, initDone=true');
 		  return;
 		}
-		ZombieKeys.Util.logDebugOptional('accelerators', 'Waiting to clean keysets...');
+		util.logDebugOptional('accelerators', 'Waiting to clean keysets...');
 		// trying to take a shortcut here to get more instant deadkeys layout (from parent window)
 		if (!ZombieKeys.currentLayout) {
 			let mail3PaneWindow = Components.classes["@mozilla.org/appshell/window-mediator;1"]

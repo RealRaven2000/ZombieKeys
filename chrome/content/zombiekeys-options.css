@@ -29,3 +29,15 @@
 #prefSelectLayout, #prefEditLayout {
   margin-top: 1em;
 }
+#callForDevs {
+  color: rgb(120,0,0);
+	font-size: 11px;
+	font-weight: bold;
+	animation: color-change 5s infinite;
+}
+
+@keyframes color-change {
+    0% { color: rgb(120,0,30); }
+    50% { color: rgb(50,0,120); }
+    100% { color: rgb(120,0,30); }
+}

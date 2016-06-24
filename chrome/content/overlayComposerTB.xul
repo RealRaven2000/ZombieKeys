@@ -20,7 +20,9 @@
 
 	<!-- Toolbar -->
 	<toolbarpalette id="MsgComposeToolbarPalette">
-		<toolbarbutton id="zombiekeys-toolbarbutton" class="toolbarbutton-1 AG"
+		<toolbarbutton 
+		  id="zombiekeys-toolbarbutton" 
+			class="toolbarbutton-1 AG"
 			label="ZombieKeys"
 			tooltiptext="&zk.button.tooltip;"
 			context="zombiekeys-toolbarbutton-menu"
