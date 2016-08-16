@@ -9,6 +9,7 @@
 <!ENTITY zk.prefwindow.layout.DE "Deutsch (Deutschland)">
 <!ENTITY zk.prefwindow.layout.SV "Schwedisch">
 <!ENTITY zk.prefwindow.layout.RU "Russisch">
+<!ENTITY zk.prefwindow.layout.HU "Ungarisch">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "Bitte wählen Sie ein Layout das Ihrer Tastatur am besten entspricht">
 <!ENTITY zk.prefwindow.Debug.label "Debug">
 <!ENTITY zk.prefwindow.Debug.shortcut "D">

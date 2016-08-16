@@ -9,6 +9,7 @@
 <!ENTITY zk.prefwindow.layout.DE "Немецкая (Германия)">
 <!ENTITY zk.prefwindow.layout.SV "Шведская">
 <!ENTITY zk.prefwindow.layout.RU "Русская">
+<!ENTITY zk.prefwindow.layout.HU "Венгерская">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "Выберите наиболее похожую на вашу раскладку клавиатуры:">
 <!ENTITY zk.prefwindow.Debug.label "Отладка">
 <!ENTITY zk.prefwindow.Debug.shortcut "О">

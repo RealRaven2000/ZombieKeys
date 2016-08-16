@@ -9,6 +9,7 @@
 <!ENTITY zk.prefwindow.layout.DE "német(Németország)">
 <!ENTITY zk.prefwindow.layout.SV "svéd">
 <!ENTITY zk.prefwindow.layout.RU "orosz">
+<!ENTITY zk.prefwindow.layout.HU "magyar">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "Kérem válassza azt a kiosztást, mely legjobban hasonlít billentyűzetéhez:">
 <!ENTITY zk.prefwindow.Debug.label "Hibakeresés">
 <!ENTITY zk.prefwindow.Debug.shortcut "H">
@@ -16,24 +17,24 @@
 <!ENTITY zk.prefwindow.mapping.label "Feltérképezés megjelenítése (Hibakonzolban) a billentyűkombináció leütése után">
 <!ENTITY zk.prefwindow.mapping.shortcut "m">
 <!ENTITY zk.prefwindow.mapping.tooltip "Megjeleníti az összes lehetséges karaktert (Hibakonzolban).">
-<!ENTITY zk.prefwindow.subComma.label "Comma below instead of Cedilla (Ș,Ț)">
+<!ENTITY zk.prefwindow.subComma.label "Vessző az alábbi helyett cédille (Ș,Ț)">
 <!ENTITY zk.prefwindow.subComma.shortcut "C">
-<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Romanian languages to make characters like (Ș,Ț).">
-<!ENTITY zk.prefwindow.customizeLayoutGroup "Customize Layout">
-<!ENTITY zk.prefwindow.customizeButton "Customize">
-<!ENTITY zk.prefwindow.customizeEndButton "Back">
-<!ENTITY zk.prefwindow.editDeadKeyGroup "Customize Deadkey">
-<!ENTITY zk.prefwindow.keyCode "keyCode">
-<!ENTITY zk.prefwindow.keyCode.tooltip "Determine the keyCode of your accelerator by pressing the key combination">
+<!ENTITY zk.prefwindow.subComma.tooltip "Lehetővé teszi az al vesszőt román nyelven, mint (Ș,Ț).">
+<!ENTITY zk.prefwindow.customizeLayoutGroup "Testreszabás billentyűzetkiosztás">
+<!ENTITY zk.prefwindow.customizeButton "Testreszabás">
+<!ENTITY zk.prefwindow.customizeEndButton "Vissza">
+<!ENTITY zk.prefwindow.editDeadKeyGroup "Testreszabás felhasználatlan billentyűt">
+<!ENTITY zk.prefwindow.keyCode "billentyűtKód">
+<!ENTITY zk.prefwindow.keyCode.tooltip "Határozza meg a billentyűtKód a gyorsbillentyű gomb megnyomásával kombináció">
 <!ENTITY zk.prefwindow.modifier.CTRL "CTRL">
 <!ENTITY zk.prefwindow.modifier.Alt "Alt">
 <!ENTITY zk.prefwindow.modifier.Shift "Shift">
-<!ENTITY zk.prefwindow.Key "Key Symbol">
-<!ENTITY zk.prefwindow.Alternative "Alternative Symbol">
-<!ENTITY zk.prefwindow.Alternative.tooltip "Type in the alternative symbol on the key when SHIFT state is inverted">
-<!ENTITY zk.prefwindow.ResetBtn "Reset">
-<!ENTITY zk.prefwindow.ResetBtn.tooltip "Reset the current key to its default">
-<!ENTITY zk.prefwindow.DefineBtn "Define">
-<!ENTITY zk.prefwindow.DefineBtn.tooltip "Redefines the selected key to these settings">
-<!ENTITY zk.prefwindow.pressKeyInstructions "Press a key combo">
-<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Press same key again (without Alt/CTRL!)">
+<!ENTITY zk.prefwindow.Key "Billentyűt karakter">
+<!ENTITY zk.prefwindow.Alternative "Alternatív karakter">
+<!ENTITY zk.prefwindow.Alternative.tooltip "Gépelje be alternatív karakter amikor fordítva van bekapcsolva a SHIFT gomb">
+<!ENTITY zk.prefwindow.ResetBtn "Visszaállítás">
+<!ENTITY zk.prefwindow.ResetBtn.tooltip "Az aktuális billentyűzet visszaállítása alapértelmezettre">
+<!ENTITY zk.prefwindow.DefineBtn "Meghatároz">
+<!ENTITY zk.prefwindow.DefineBtn.tooltip "Újrafogalmazza az kiválasztott billentyűtot, hogy ezeket a beállításokat">
+<!ENTITY zk.prefwindow.pressKeyInstructions "Nyomjon meg egy billentyűkombinációt">
+<!ENTITY zk.prefwindow.pressKeyAgainInstructions "Ismét nyomda ugyanazt a billentyűtot (Alt/CTRL nélkül), de ne SHIFT állapot.">

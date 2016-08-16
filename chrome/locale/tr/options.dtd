@@ -9,6 +9,7 @@
 <!ENTITY zk.prefwindow.layout.DE "Almanca (Almanya)">
 <!ENTITY zk.prefwindow.layout.SV "İsveççe">
 <!ENTITY zk.prefwindow.layout.RU "Rusça">
+<!ENTITY zk.prefwindow.layout.HU "Macarca">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "Lütfen, kendi klavyenize en yakin düzeni seçin:">
 <!ENTITY zk.prefwindow.Debug.label "Hata Ayıklama">
 <!ENTITY zk.prefwindow.Debug.shortcut "D">
