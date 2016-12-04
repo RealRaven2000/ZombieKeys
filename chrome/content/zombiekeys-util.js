@@ -74,12 +74,6 @@ if (!ZombieKeys.Util)
 	myVersion: null,
 	extraToolbar: null,
 
-	getAddon: function getAddon(aId) {
-		let em = Components.classes["@mozilla.org/extensions/manager;1"]
-				  .getService(Components.interfaces.nsIExtensionManager);
-		return em.getItemForID(aId);
-	} ,
-
 	get Version() {
 		return this.myVersion
 			   ?
@@ -148,11 +142,12 @@ if (!ZombieKeys.Util)
 	} ,
 
 	openURL: function openURL(URL) { // workaround for a bug in TB3 that causes href's not be followed anymore.
+		const util = ZombieKeys.Util;
 		let ioservice, iuri, eps;
 
-		if (ZombieKeys.Util.AppVersion<3 && ZombieKeys.Util.Application=='Thunderbird'
-			|| ZombieKeys.Util.Application=='SeaMonkey'
-			|| ZombieKeys.Util.Application=='Postbox')
+		if (util.AppVersion<3 && util.Application=='Thunderbird'
+			|| util.Application=='SeaMonkey'
+			|| util.Application=='Postbox')
 		{
 			this.openLinkInBrowserForced(URL);
 		}
@@ -293,14 +288,15 @@ if (!ZombieKeys.Util)
 
 	checkVersionFirstRun: function checkVersionFirstRun() {
 		let aId = "zombiekeys@bolay.de",
-        util = ZombieKeys.Util;
-		if(!Components.classes["@mozilla.org/extensions/manager;1"])
+        util = ZombieKeys.Util,
+				obsoleteEManager = Components.classes["@mozilla.org/extensions/manager;1"]; // backward compatible code
+		if(!obsoleteEManager)
 		{
 			Components.utils.import("resource://gre/modules/AddonManager.jsm");
 			setTimeout (function () {
 					AddonManager.getAddonByID(aId,
 						function(addon) {
-							// This is an asynchronous callback function that might not be called immediately, ah well...
+							// Asynchronous callback function 
               const util1 = window.ZombieKeys.Util;
 							util1.myVersion = addon.version;
 							util1.logDebug("AddonManager retrieved Version number: " + addon.version);
@@ -310,7 +306,9 @@ if (!ZombieKeys.Util)
 				}, 0);
 		}
 		else {
-			util.myVersion = this.getAddon(aId).version;
+			// old code to remain backward compatible
+			let em = obsoleteEManager.getService(Components.interfaces.nsIExtensionManager);
+			util.myVersion = em.getItemForID(aId).version;
 			util.logDebug("Retrieved Version number from nsIExtensionManager (legacy): " + util.myVersion);
 			util.checkFirstRun();
 		}

@@ -19,7 +19,7 @@
 <!ENTITY zk.prefwindow.mapping.tooltip "Displays all possible characters (in Error Console).">
 <!ENTITY zk.prefwindow.subComma.label "Comma below instead of Cedilla (Ș,Ț)">
 <!ENTITY zk.prefwindow.subComma.shortcut "C">
-<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Romanian languages to make characters like (Ș,Ț).">
+<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Eastern Romance languages to create characters such as (Ș,Ț).">
 <!ENTITY zk.prefwindow.customizeLayoutGroup "Customize Layout">
 <!ENTITY zk.prefwindow.customizeButton "Customize">
 <!ENTITY zk.prefwindow.customizeEndButton "Back">
@@ -38,4 +38,3 @@
 <!ENTITY zk.prefwindow.DefineBtn.tooltip "Redefines the selected key to these settings">
 <!ENTITY zk.prefwindow.pressKeyInstructions "Press a key combo">
 <!ENTITY zk.prefwindow.pressKeyAgainInstructions "Press same key again (without Alt/CTRL!), but keep SHIFT state.">
-

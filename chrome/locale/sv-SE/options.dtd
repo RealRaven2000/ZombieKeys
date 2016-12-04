@@ -9,6 +9,7 @@
 <!ENTITY zk.prefwindow.layout.DE "Tyska (Tyskland)">
 <!ENTITY zk.prefwindow.layout.SV "Svenska (Sverige)">
 <!ENTITY zk.prefwindow.layout.RU "Ryska (Ryssland)">
+<!ENTITY zk.prefwindow.layout.HU "Hungarian">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "Välj den layout som mest liknar ditt eget tangentbord:">
 <!ENTITY zk.prefwindow.Debug.label "Felsökningsläge">
 <!ENTITY zk.prefwindow.Debug.shortcut "F">

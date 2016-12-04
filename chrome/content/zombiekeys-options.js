@@ -19,7 +19,8 @@ ZombieKeys.Options = {
 		let img = document.getElementById('layoutImage');
 		if (img)
 			img.className = "layout-" + locale;
-		
+		ZombieKeys.Options.accept();
+		ZombieKeys.Util.logDebug("Changed locale to " + ZombieKeys.getCurrentLocale());
 	} ,
 		
 	load : function() {

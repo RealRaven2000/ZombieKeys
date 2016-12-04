@@ -43,6 +43,7 @@
 			  <listitem value = "de" label = "&zk.prefwindow.layout.DE;"/>
 			  <listitem value = "sv" label = "&zk.prefwindow.layout.SV;"/>
 			  <listitem value = "ru" label = "&zk.prefwindow.layout.RU;"/>
+			  <listitem value = "hu" label = "&zk.prefwindow.layout.HU;"/>
 			</listbox>
 			<div id = "layoutImage" class = "layout-us_int" >
 			</div>

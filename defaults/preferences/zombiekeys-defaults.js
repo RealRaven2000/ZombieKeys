@@ -15,7 +15,7 @@ pref("extensions.zombiekeys.debug.accelerators", false);
 pref("extensions.zombiekeys.debug.accelerators.detail", false);
 pref("extensions.zombiekeys.debug.accelerators.addModified.disable", false);
 pref("extensions.zombiekeys.debug.firstRun", false);
-pref("extensions.zombiekeys.debug.fakeKey", false);
+pref("extensions.zombiekeys.debug.fakeKey", true);
 pref("extensions.zombiekeys.debug.zombieCreation", false);
 pref("extensions.zombiekeys.debug.keyPressHandler", false);
 pref("extensions.zombiekeys.debug.keyUpHandler", false);

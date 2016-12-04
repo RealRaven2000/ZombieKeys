@@ -9,6 +9,7 @@
 <!ENTITY zk.prefwindow.layout.DE "Allemand (Allemagne)">
 <!ENTITY zk.prefwindow.layout.SV "Suédois">
 <!ENTITY zk.prefwindow.layout.RU "Russe">
+<!ENTITY zk.prefwindow.layout.HU "Hungarian">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "Merci de préciser la méthode d'entrée la plus proche de votre clavier">
 <!ENTITY zk.prefwindow.Debug.label "Débogage">
 <!ENTITY zk.prefwindow.Debug.shortcut "D">

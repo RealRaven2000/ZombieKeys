@@ -78,5 +78,9 @@ toolbar:not([iconsize="small"]) #zombiekeys-toolbarbutton image
 	background-image: url("chrome://zombiekeys/skin/layouts/kb_russia.png") !important;
 }
 
+#layoutImage.layout-hu {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_hungary.png") !important;
+}
+
 
 

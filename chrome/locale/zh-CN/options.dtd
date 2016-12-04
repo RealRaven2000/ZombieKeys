@@ -9,6 +9,7 @@
 <!ENTITY zk.prefwindow.layout.DE "德语 (德国)">
 <!ENTITY zk.prefwindow.layout.SV "瑞典语">
 <!ENTITY zk.prefwindow.layout.RU "俄语">
+<!ENTITY zk.prefwindow.layout.HU "Hungarian">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "请选择与你的键盘最接近的布局">
 <!ENTITY zk.prefwindow.Debug.label "调试">
 <!ENTITY zk.prefwindow.Debug.shortcut "D">
