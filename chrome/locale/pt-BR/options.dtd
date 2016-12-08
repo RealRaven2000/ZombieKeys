@@ -4,6 +4,7 @@
 <!ENTITY zk.prefwindow.layout.UK "Inglês (Reino Unido)">
 <!ENTITY zk.prefwindow.layout.IRL "Inglês (Irlanda)">
 <!ENTITY zk.prefwindow.layout.US_Dvorak "Inglês (Estados Unidos, layout Dvorak)">
+<!ENTITY zk.prefwindow.layout.ES "Spanish">
 <!ENTITY zk.prefwindow.layout.FR "Francês (França)">
 <!ENTITY zk.prefwindow.layout.IT "Italiano (Itália)">
 <!ENTITY zk.prefwindow.layout.DE "Alemão (Alemanha)">
@@ -19,7 +20,7 @@
 <!ENTITY zk.prefwindow.mapping.tooltip "Exibe no console de erros todos os caracteres possíveis após pressionar uma combinação de teclas modificadora">
 <!ENTITY zk.prefwindow.subComma.label "Comma below instead of Cedilla (Ș,Ț)">
 <!ENTITY zk.prefwindow.subComma.shortcut "C">
-<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Romanian languages to make characters like (Ș,Ț).">
+<!ENTITY zk.prefwindow.subComma.tooltip "Enables the use of subcomma in Eastern Romance languages to create characters such as (Ș,Ț).">
 <!ENTITY zk.prefwindow.customizeLayoutGroup "Personalizar layout">
 <!ENTITY zk.prefwindow.customizeButton "Personalizar">
 <!ENTITY zk.prefwindow.customizeEndButton "Back">

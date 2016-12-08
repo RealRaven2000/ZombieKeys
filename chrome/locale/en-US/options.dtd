@@ -4,6 +4,7 @@
 <!ENTITY zk.prefwindow.layout.UK "UK English">
 <!ENTITY zk.prefwindow.layout.IRL "IRL English">
 <!ENTITY zk.prefwindow.layout.US_Dvorak "US English (Dvorak Layout)">
+<!ENTITY zk.prefwindow.layout.ES "Spanish">
 <!ENTITY zk.prefwindow.layout.FR "French (France)">
 <!ENTITY zk.prefwindow.layout.IT "Italian (Italy)">
 <!ENTITY zk.prefwindow.layout.DE "German (Germany)">
