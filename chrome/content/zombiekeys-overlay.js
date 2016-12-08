@@ -169,10 +169,15 @@
 	AG German layout: fixed accelerator key for Grave `
 	AG Fixed Zombiekey button in composer for brighttext themes
 	
-	Version 2.18 - WIP
+	Version 2.18 - 04/12/2016
 	AG Double Accute not working on American keyboards
 	AG [Bug 26263] Added Hungarian keyboard layout
 
+	
+	Version 2.19 - WIP
+	AG Added Spanish locale
+	AG Spanish keyboard layout
+	
   === 
 	AG WIP: remove conflicting global key shortcuts in Composer such as CTRL+< for font size
 	
@@ -840,7 +845,34 @@ var ZombieKeys = new function() {
 						 ,{"id": 3, "charCode": 101, "keyCode":  36, "key": "$"}
 					  ]
 					}
-
+,
+					{ "locale" : "es",
+					  "map_deadKeys" : [
+						 {"id" : 1, "keyCode": 192, "key": "&#96;", "shiftKey": false } /* grave */
+						,{"id" : 2, "keyCode":  0,  "charCode": 180, "key": "&#180;", "shiftKey": false} /* acute */
+						,{"id" : 3, "keyCode": 192, "key": "^", "otherKey":"&#96;", "shiftKey": true } /* circumflex */
+						,{"id" : 4, "keyCode":  52, "key": "4", "otherKey":"$",  "shiftKey":true} /* tilde */
+						,{"id" : 5, "keyCode":   0, "charCode": 168, "key": "&#776;", "otherKey":"&#776;"} /* umlaut */
+						,{"id" : 6, "keyCode":   0, "charCode": 186, "key": "&#176;", "shiftKey": true, "altKey": true } /* ring  */
+						,{"id" : 7, "keyCode":  54, "key": "&", "otherKey":"6",      "shiftKey": true } /* sharp s */
+						,{"id" : 8, "keyCode":  55, "key": "/", "otherKey":"7",      "shiftKey": true } /* stroke */
+						,{"id" : 9, "keyCode":  60, "key": ">", "otherKey":"<",      "shiftKey": true } /* caron */
+						,{"id" :10, "keyCode": 188, "key": "comma", "otherKey":";",  "shiftKey": false} /* cedilla */
+						,{"id" :11, "keyCode":  56, "key": "(", "otherKey":"8",      "shiftKey": true } /* breve */
+						,{"id" :12, "keyCode": 171, "key": "plus", "otherKey":"*",   "shiftKey": true} /* ogonek */
+						,{"id" :13, "keyCode": 173, "key": "-", "otherKey":"_",      "shiftKey": true } /* macron */
+						,{"id" :14, "keyCode": 190, "charCode": 46, "key": ".", "otherKey":":",  "shiftKey": false} /* overdot */
+						,{"id" :15, "keyCode": 188, "key": ";", "otherKey":",",      "shiftKey": true } /* underdot */
+						,{"id" :16, "keyCode":  50, "key": "\"", "otherKey":"2",     "shiftKey": true } /* double accute */
+						,{"id" :17, "keyCode":  79, "key": "O", "otherKey":"o",      "shiftKey": true } /* circle */
+						,{"id" :18, "keyCode":  71, "key": "G", "otherKey":"g"} /* greek */
+					  ],
+					  "map_liveKeys" : [
+						  {"id": 1, "charCode":   0, "keyCode":  222, "key": "?"}
+						 ,{"id": 2, "charCode":   0, "keyCode":   49, "key": "!"}
+						 ,{"id": 3, "charCode":   0, "keyCode": 9999, "key": "%"} /* not used */
+					  ]
+					}
 				 ];
 
 	let currentLayout = null,

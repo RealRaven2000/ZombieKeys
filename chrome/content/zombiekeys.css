@@ -73,7 +73,6 @@ toolbar:not([iconsize="small"]) #zombiekeys-toolbarbutton image
 	background-image: url("chrome://zombiekeys/skin/layouts/kb_sv_swedish.png") !important;
 }
 
-
 #layoutImage.layout-ru {
 	background-image: url("chrome://zombiekeys/skin/layouts/kb_russia.png") !important;
 }
@@ -82,5 +81,8 @@ toolbar:not([iconsize="small"]) #zombiekeys-toolbarbutton image
 	background-image: url("chrome://zombiekeys/skin/layouts/kb_hungary.png") !important;
 }
 
+#layoutImage.layout-es {
+	background-image: url("chrome://zombiekeys/skin/layouts/kb_es_querty.png") !important;
+}
 
 

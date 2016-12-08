@@ -38,6 +38,7 @@
 			  <listitem value = "us_dvorak" label = "&zk.prefwindow.layout.US_Dvorak;"/>
 			  <listitem value = "uk" label = "&zk.prefwindow.layout.UK;"/>
 			  <listitem value = "irl" label = "&zk.prefwindow.layout.IRL;"/>
+			  <listitem value = "es" label = "&zk.prefwindow.layout.ES;"/>
 			  <listitem value = "fr" label = "&zk.prefwindow.layout.FR;"/>
 			  <listitem value = "it" label = "&zk.prefwindow.layout.IT;"/>
 			  <listitem value = "de" label = "&zk.prefwindow.layout.DE;"/>
@@ -61,22 +62,21 @@
 						accesskey = "&zk.prefwindow.subComma.shortcut;"
 						tooltiptext = "&zk.prefwindow.subComma.tooltip;"
 						/>
-					<checkbox id = "checkDebug"
-						preference = "boolDebug"
-						label = "&zk.prefwindow.Debug.label;"
-						oncontextmenu = "ZombieKeys.Util.showAboutConfig('zombiekeys.debug');return false;"
-						oncommand = "ZombieKeys.Options.setDebug(this);"
-						accesskey = "&zk.prefwindow.Debug.shortcut;"
-						tooltiptext = "&zk.prefwindow.Debug.tooltip;"
-						/>
-				</vbox>
-				<spacer flex="1" />
-				<vbox>
+					<hbox style = "vertical-align:top;">
+						<checkbox id = "checkDebug"
+							preference = "boolDebug"
+							label = "&zk.prefwindow.Debug.label;"
+							oncontextmenu = "ZombieKeys.Util.showAboutConfig('zombiekeys.debug');return false;"
+							oncommand = "ZombieKeys.Options.setDebug(this);"
+							accesskey = "&zk.prefwindow.Debug.shortcut;"
+							tooltiptext = "&zk.prefwindow.Debug.tooltip;"
+							/>
 				    <spacer flex="1" />
-					<button id="btnCustomize"
-					        collapsed="true"
- 					        label="&zk.prefwindow.customizeButton; &#9654;"
-							    oncommand = "ZombieKeys.Options.startCustomize();"/>
+						<button id="btnCustomize"
+										collapsed="true"
+										label="&zk.prefwindow.customizeButton; &#9654;"
+										oncommand = "ZombieKeys.Options.startCustomize();"/>
+					</hbox>
 				</vbox>
 			</hbox>
 		</vbox>
