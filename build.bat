@@ -2,5 +2,5 @@
 set /P ZombieKeysRev=<revision.txt
 set /a ZombieKeysRev+=1
 echo %ZombieKeysRev% > revision.txt
-move *.xpi ..\..\_Test\2.18\
-rename ZombieKeys.zip zombie_keys_multilanguage_keyboard-2.18pre%ZombieKeysRev%.xpi
+move *.xpi ..\..\_Test\2.19\
+rename ZombieKeys.zip zombie_keys_multilanguage_keyboard-2.19pre%ZombieKeysRev%.xpi

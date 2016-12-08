@@ -1,6 +1,7 @@
 content	zombiekeys			chrome/content/
 locale	zombiekeys	en-US	chrome/locale/en-US/
 locale	zombiekeys	de   	chrome/locale/de/
+locale	zombiekeys	es   	chrome/locale/es/
 locale	zombiekeys	sv-SE	chrome/locale/sv-SE/
 locale	zombiekeys	tr   	chrome/locale/tr/
 locale	zombiekeys	fr   	chrome/locale/fr/
