@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="zombiekeys@bolay.de"
                    em:name="Zombie Keys"
-                   em:version="2.19pre19"
+                   em:version="2.19"
                    em:creator="Kai Bolay"
                    em:developer="Axel Grude"
                    em:description="Bring dead keys to life: accented letters made easy!"
@@ -13,6 +13,7 @@
                    em:iconURL="chrome://zombiekeys/content/zombiekeys.png"
                    em:icon64URL="chrome://zombiekeys/content/zombiekeys64.png"
                    em:optionsURL="chrome://zombiekeys/content/zombiekeys-options.xul"
+									 em:multiprocessCompatible = "false"
                    >
     <em:translator>Axel Grude (de)</em:translator>
     <em:translator>Mikael Hiort af Ornaes (sv-SE)</em:translator>
@@ -26,6 +27,7 @@
     <em:targetApplication RDF:resource="rdf:#$s7FHg2"/>
     <em:targetApplication RDF:resource="rdf:#$x7FHg2"/>
     <em:targetApplication RDF:resource="rdf:#$Vsomt2"/>
+		<em:targetApplication RDF:resource="rdf:#$p7FHg2"/>
     <em:type>2</em:type>
   </RDF:Description>
   <!-- Postbox -->
@@ -48,4 +50,9 @@
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="34.0"
                    em:maxVersion="50.*" />
+	<!-- Firefox Pale Moon -->								 
+  <RDF:Description RDF:about="rdf:#$p7FHg2"
+                   em:id="{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}"
+                   em:minVersion="22.0"
+                   em:maxVersion="45.*" />    
 </RDF:RDF>

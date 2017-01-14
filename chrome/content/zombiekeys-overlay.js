@@ -175,11 +175,13 @@
 
 	
 	Version 2.19 - WIP
-	AG Added Spanish locale
+	AG [Bug 26309] Added Spanish locale
 	AG Spanish keyboard layout
+	AG Added support for Firefox Pale Moon
+	AG Ensured Postbox 5.0 Compatibility
 	
   === 
-	AG WIP: remove conflicting global key shortcuts in Composer such as CTRL+< for font size
+	
 	
 	
 	 /mail/components/compose/content/messengercompose.xul overlays editorOverlay.xul
@@ -188,9 +190,7 @@
 	 mxr.mozilla.org/comm-central/source/editor/ui/composer/content/editorOverlay.xul#103
 	
 ========
-	TO DO: Add toolbarbutton by default. See : https://developer.mozilla.org/en/Code_snippets/Toolbar
-
-
+	TO DO: Make e10s compatible amd change em:multiprocessCompatible to true
   */
 
 var ZombieKeys = new function() {
@@ -1137,6 +1137,7 @@ var ZombieKeys = new function() {
 		for (let k=0; k<deadKeys.length; k++) {
 			let deadKey = deadKeys[k];
 			if (deadKey.alive) {
+				if (isDebug) debugger;
 				deadKey.alive = false;
 				// check if there's a mapping for this character
 				// entered after "dead" key

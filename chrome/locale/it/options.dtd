@@ -4,13 +4,13 @@
 <!ENTITY zk.prefwindow.layout.UK "Inglese (UK)">
 <!ENTITY zk.prefwindow.layout.IRL "Inglese (IRL)">
 <!ENTITY zk.prefwindow.layout.US_Dvorak "Inglese (USA) (layout Dvorak)">
-<!ENTITY zk.prefwindow.layout.ES "Spanish">
+<!ENTITY zk.prefwindow.layout.ES "Spagnolo">
 <!ENTITY zk.prefwindow.layout.FR "Francese (Francia)">
 <!ENTITY zk.prefwindow.layout.IT "Italiano (Italia)">
 <!ENTITY zk.prefwindow.layout.DE "Tedesco (Germania)">
 <!ENTITY zk.prefwindow.layout.SV "Svedese">
 <!ENTITY zk.prefwindow.layout.RU "Russo">
-<!ENTITY zk.prefwindow.layout.HU "Hungarian">
+<!ENTITY zk.prefwindow.layout.HU "Ungherese">
 <!ENTITY zk.prefwindow.keyboardLayout.instructions "Seleziona il layout più simile alla tua tastiera:">
 <!ENTITY zk.prefwindow.Debug.label "Debug">
 <!ENTITY zk.prefwindow.Debug.shortcut "D">

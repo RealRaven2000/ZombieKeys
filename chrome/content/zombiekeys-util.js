@@ -65,7 +65,7 @@ ZombieKeys.TabURIopener = {
 
 if (!ZombieKeys.Util)
 	ZombieKeys.Util = {
-	ZombieKeys_CURRENTVERSION : '2.18',
+	ZombieKeys_CURRENTVERSION : '2.19',
 	ConsoleService: null,
 	mAppver: null,
 	mAppName: null,
@@ -333,6 +333,7 @@ if (!ZombieKeys.Util)
 		let appInfo = Components.classes["@mozilla.org/xre/app-info;1"]
 						.getService(Components.interfaces.nsIXULAppInfo);
 			const FIREFOX_ID = "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+						PALEMOON_ID = "{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}",
 			      THUNDERBIRD_ID = "{3550f703-e582-4d05-9a08-453d09bdfdc6}",
 			      SEAMONKEY_ID = "{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}",
 			      POSTBOX_ID = "postbox@postbox-inc.com";
