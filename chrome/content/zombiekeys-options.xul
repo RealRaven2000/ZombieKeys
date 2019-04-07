@@ -1,6 +1,8 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 
 <?xml-stylesheet href = "chrome://global/skin/" type = "text/css"?>
+<!--  tb 59 -->
+<?xml-stylesheet href="chrome://messenger/skin/preferences/preferences.css" type="text/css" ?>
 <?xml-stylesheet href = "chrome://zombiekeys/content/zombiekeys.css" type = "text/css"?>
 <?xml-stylesheet href = "chrome://zombiekeys/content/zombiekeys-options.css" title = "zkOptionsStyles2" type = "text/css"?>
 
@@ -17,9 +19,9 @@
 >
 
 <script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-overlay.js" />
-<script type = "application/x-javascript;Version = 1.7" src = "chrome://zombiekeys/content/zombiekeys-prefs.js"/>
-<script type = "application/x-javascript;Version = 1.7" src = "chrome://zombiekeys/content/zombiekeys-util.js"/>
-<script type = "application/x-javascript;Version = 1.7" src = "chrome://zombiekeys/content/zombiekeys-options.js"/>
+<script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-prefs.js"/>
+<script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-util.js"/>
+<script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-options.js"/>
 
 
   <prefpane>

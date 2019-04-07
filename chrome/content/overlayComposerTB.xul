@@ -9,10 +9,10 @@
 <overlay id="zombiekeys-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-	<script type="application/x-javascript;Version=1.7" src="chrome://zombiekeys/content/zombiekeys-overlay.js"/>
-	<script type="application/x-javascript;Version=1.7" src="chrome://zombiekeys/content/zombiekeys-prefs.js"/>
-	<script type="application/x-javascript;Version=1.7" src="chrome://zombiekeys/content/zombiekeys-util.js"/>
-    <script type="application/x-javascript;version=1.7" src="chrome://zombiekeys/content/zombiekeys-composer.js"/>
+	<script type="application/x-javascript" src="chrome://zombiekeys/content/zombiekeys-overlay.js"/>
+	<script type="application/x-javascript" src="chrome://zombiekeys/content/zombiekeys-prefs.js"/>
+	<script type="application/x-javascript" src="chrome://zombiekeys/content/zombiekeys-util.js"/>
+    <script type="application/x-javascript" src="chrome://zombiekeys/content/zombiekeys-composer.js"/>
 	
 	<stringbundleset id="stringbundleset">
 		<stringbundle id="zombiekeys-strings" src="chrome://zombiekeys/locale/zombiekeys.properties"/>

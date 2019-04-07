@@ -12,7 +12,9 @@ locale	zombiekeys	pt-BR   	chrome/locale/pt-BR/
 locale	zombiekeys	zh-CN   	chrome/locale/zh-CN/
 
 skin zombiekeys classic/1.0  chrome/skin/
-style   chrome://global/content/customizeToolbar.xul     chrome://zombiekeys/content/zombiekeys.css
+style   chrome://global/content/customizeToolbar.xul    chrome://zombiekeys/content/zombiekeys.css appversion<59.0a1
+style   chrome://messenger/content/customizeToolbar.xul chrome://zombiekeys/content/zombiekeys.css appversion>=59.0a1
+
 
 # main overlays
 overlay about:addons													chrome://zombiekeys/content/overlayTB.xul

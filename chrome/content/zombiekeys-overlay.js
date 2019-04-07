@@ -174,11 +174,14 @@
 	AG [Bug 26263] Added Hungarian keyboard layout
 
 	
-	Version 2.19 - WIP
+	Version 2.19 - 13/01/2017
 	AG [Bug 26309] Added Spanish locale
 	AG Spanish keyboard layout
 	AG Added support for Firefox Pale Moon
 	AG Ensured Postbox 5.0 Compatibility
+	
+	Version 2.20 - WIP
+	AG [Bug 26442] Thunderbird 57 doesn't start up with Zombiekeys enabled
 	
   === 
 	
@@ -1135,7 +1138,9 @@ var ZombieKeys = new function() {
 
 		// check if/which "dead" key is active
 		for (let k=0; k<deadKeys.length; k++) {
-			let deadKey = deadKeys[k];
+			let deadKey = deadKeys[k],
+			    deadCharCode = deadKey.charCode || 0,
+					deadkeyCode = deadKey.keyCode || 0;
 			if (deadKey.alive) {
 				if (isDebug) debugger;
 				deadKey.alive = false;
@@ -1160,13 +1165,14 @@ var ZombieKeys = new function() {
 			}
       // consume accelerators!
       else {
+				
 				util.logDebugOptional("accelerators", "[" + (k+1) + "] keyDown - check for accelerator:\n"
-					  + 'keyCode = ' + deadKey.keyCode + ' {' + (event.keyCode == deadKey.keyCode) + '}\n'
-					  + 'charCode = ' + deadKey.charCode + ' {' + (event.charCode == deadKey.charCode) + '}');
+					  + 'keyCode = ' + deadkeyCode + ' {' + (event.keyCode == deadkeyCode) + '}\n'
+					  + 'charCode = ' + deadCharCode + ' {' + (event.charCode == deadCharCode) + '}');
         if (
-				((event.keyCode == deadKey.keyCode && deadKey.keyCode)
+				((event.keyCode == deadkeyCode && deadkeyCode)
 				 ||
-				 (event.charCode && event.charCode == deadKey.charCode))
+				 (event.charCode && event.charCode == deadCharCode))
 				&&
 				 checkModifiers(event, deadKey.modifiers))  {
 					util.logDebug(' discarding keypress after match\n'
@@ -1175,8 +1181,8 @@ var ZombieKeys = new function() {
 					let preventDefault = true;
 					
 					//exception: key without a key-up 
-					if (deadKey.keyCode==0) {
-						if (event.charCode == deadKey.charCode) {
+					if (deadkeyCode==0) {
+						if (event.charCode == deadCharCode) {
 							util.logDebugOptional("keyPressHandler","Special case: no keyCode - activating deadKey[" + k + "]");
 							ZombieKeys.displayMapping(k);
 							deadKey.alive = true;
