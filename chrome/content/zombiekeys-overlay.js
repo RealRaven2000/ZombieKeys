@@ -180,12 +180,19 @@
 	AG Added support for Firefox Pale Moon
 	AG Ensured Postbox 5.0 Compatibility
 	
-	Version 2.20 - WIP
+	Version 2.20 - 07/05/2018
 	AG [Bug 26442] Thunderbird 57 doesn't start up with Zombiekeys enabled
+
+	
+	Version 2.21 - interlink only - 12/02/2019
+	AG Made compatible with Pale Moon and released on https://addons.palemoon.org to make available to alternative XUL platforms
+	
+	Version 2.21.1 - 08/04/2019
+	AG Made install.rdf compatible with Thunderbird 60
+	AG Removed donation tab when updating ZombieKeys.
+	AG Removed obsolete Addon Manager interface.
 	
   === 
-	
-	
 	
 	 /mail/components/compose/content/messengercompose.xul overlays editorOverlay.xul
    mxr.mozilla.org/comm-central/source/editor/ui/composer/content/editorOverlay.xul#99

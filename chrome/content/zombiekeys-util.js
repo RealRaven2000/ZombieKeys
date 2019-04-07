@@ -17,6 +17,7 @@ ZombieKeys.TabURIregexp = {
 ZombieKeys.TabURIopener = {
 
 	openURLInTab: function openURLInTab(URL) {
+		const util = ZombieKeys.Util;
 		try {
 			let sTabMode="",
 			    wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
@@ -41,7 +42,7 @@ ZombieKeys.TabURIopener = {
 				}
 			}
 			if (tabmail) {
-				sTabMode = (ZombieKeys.Util.Application == "Thunderbird" && ZombieKeys.Util.AppVersion>=3) ? "contentTab" : "3pane";
+				sTabMode = (util.Application == "Thunderbird" && util.AppVersion>=3) ? "contentTab" : "3pane";
 				tabmail.openTab(sTabMode,
 				{contentPage: URL, clickHandler: "specialTabs.siteClickHandler(event, ZombieKeys.TabURIregexp._thunderbirdRegExp);"});
 			}
@@ -65,7 +66,7 @@ ZombieKeys.TabURIopener = {
 
 if (!ZombieKeys.Util)
 	ZombieKeys.Util = {
-	ZombieKeys_CURRENTVERSION : '2.19',
+	ZombieKeys_CURRENTVERSION : '2.21.1',
 	ConsoleService: null,
 	mAppver: null,
 	mAppName: null,
@@ -88,8 +89,8 @@ if (!ZombieKeys.Util)
 	
 	getVersionSimple: function getVersionSimple(ver) {
 	  let pureVersion = ver,  // default to returning unchanged
-		    // get first match of Num.Num 
-		    reg = new RegExp("([0-9]+)([.])([0-9]+)"),
+		    // only returns numbers and [.] (strips alphabetical stuff / betas etc.) 
+		    reg = new RegExp("[0-9.]*"),
 		    results = ver.match(reg); 
 		if (results) 
 			pureVersion = results[0];
@@ -267,14 +268,6 @@ if (!ZombieKeys.Util)
 							// display version history
 							util.openURL(versionPage);
 						}, 2000);
-
-						window.setTimeout(function(){
-//							// display donation page (can be disabled; I will send out method to all donators and anyone who asks me for it)
-//							if ((ZombieKeys.Preferences.getBoolPref("donateNoMore")))
-//								util.logDebugOptional ("firstRun","Jump to donations page disabled by user");
-//							else
-								util.openURL("http://zombiekeys.mozdev.org/donate.html"); // show donation page!
-						}, 1500);
 					}
 				}
 				else {
@@ -288,30 +281,19 @@ if (!ZombieKeys.Util)
 
 	checkVersionFirstRun: function checkVersionFirstRun() {
 		let aId = "zombiekeys@bolay.de",
-        util = ZombieKeys.Util,
-				obsoleteEManager = Components.classes["@mozilla.org/extensions/manager;1"]; // backward compatible code
-		if(!obsoleteEManager)
-		{
-			Components.utils.import("resource://gre/modules/AddonManager.jsm");
-			setTimeout (function () {
-					AddonManager.getAddonByID(aId,
-						function(addon) {
-							// Asynchronous callback function 
-              const util1 = window.ZombieKeys.Util;
-							util1.myVersion = addon.version;
-							util1.logDebug("AddonManager retrieved Version number: " + addon.version);
-							util1.checkFirstRun();
-						}
-					);
-				}, 0);
-		}
-		else {
-			// old code to remain backward compatible
-			let em = obsoleteEManager.getService(Components.interfaces.nsIExtensionManager);
-			util.myVersion = em.getItemForID(aId).version;
-			util.logDebug("Retrieved Version number from nsIExtensionManager (legacy): " + util.myVersion);
-			util.checkFirstRun();
-		}
+        util = ZombieKeys.Util;
+		Components.utils.import("resource://gre/modules/AddonManager.jsm");
+		setTimeout (function () {
+				AddonManager.getAddonByID(aId,
+					function(addon) {
+						// Asynchronous callback function 
+						const util1 = window.ZombieKeys.Util;
+						util1.myVersion = addon.version;
+						util1.logDebug("AddonManager retrieved Version number: " + addon.version);
+						util1.checkFirstRun();
+					}
+				);
+			}, 0);
 	} ,
 
 	get AppVersionFull() {
