@@ -1,0 +1,498 @@
+---
+layout: base.njk
+title: Version History
+permalink: version.html
+---
+
+<style type="text/css" >
+	td.navigation-list a[href$='version.html'],td.navigation-list a[href$='version.html']:visited {
+		background: rgb(194,220,26) !important;
+		background-image: linear-gradient(to bottom, rgb(194, 220, 26) 0%, rgb(142, 159, 15) 45%, rgb(123, 137, 17) 68%, rgb(158, 178, 10) 100%) !important;
+		border-bottom-color:  #7F8D10 !important;
+		color: #FFF !important;
+		height: 27px !important;
+		font-weight: bold;
+	}
+	.emphasizeNote {
+		background-color: white;
+		border: 2px solid rgb(128, 0, 0);
+		border-radius: 0.7em;
+		box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.5);
+		padding: 0.5em 1em 0em;
+		margin: 0.5em 2em 0.5em 0;
+	}
+	.emphasizeNote p {
+	  margin-top: 0em;
+		margin-bottom: 0.5em;
+	}
+</style>
+
+<link type="text/css" rel="stylesheet" href="/css/myProjects.css" >
+
+<p>Jump to <a href="#latest">Latest Version</a>.</p>
+
+<p><a href="#version-history-head">Full version details below</a> </p>
+<h4 class="mouse"><a name="Interface">Mouse Interface</a></h4>
+<p>ZombieKeys, although originally written to be keyboard only, now has finally got a nice interface which makes it easier to use, especially for those who work with it for the first time.
+<br/><img src="img/zombie-key.png" alt="A Zombie Key"/></p>
+
+
+<p>Originally I only wanted to display the existing keyboard shortcuts sort of as a reminder, but I then realised that for some it might still be difficult to use them or understand the concept behind Zombiekeys.
+Therefore I thought why not tie this in with an alternative interface that allows to access the shortcuts without pressing lots of modifier keys. And at the same time I would display the
+shortcuts for the advanced users so one could switch to keyboard only when to much mouse activity was starting to get on one's nerves. :)
+<br/><img class="screenshot" src="img/Popup-ZK.png" alt="Mouse Interface for Zombie Keyes"/></p>
+
+<h3><a name="Interface">Keyboard Layouts</a></h3>
+
+<p>Another problem I had with Zombie Keys is that it was originally created with an American Audience in mind (or at least with those who had American keyboard layouts) so I set out how to remedy this.
+This was a major undertaking as a lot of the hard coded hotkey combinations had to be reviewed for their usability due to the different location of dead keys such as ' or ~.
+To best visualize this I decided to use some keyboard layouts from WikiPedia, and set up 2 main flavors to get started: UK and US English.
+Once I get the code into a more generic state, other layouts may get added in the future</p>
+
+<p>To switch the layout for using different shortcuts, select the "Configuration..." item from the Zombiekey menu.</p>
+
+<p><img class="screenshot" src="img/Zombiekeys-config-menu.png" alt="Configuration Menu"/></p>
+
+<p>This will display the configuration screen, which is currently just a selection for the language layout with a screenshot.
+<br/><img class="screenshot" src="img/ZombieKeys-configuration.png" alt="Layout Selection"/>
+<br/>Just select a language and click Ok (Close).
+You might have to restart Thunderbird / Firefox / Mozilla to fully activate the layout, as some parts of the UI are configured via XML and I currently have no way of influencing them directly.
+</p>
+<p><em>Attribution:</em> the images for these layouts come from <a href="http://en.wikipedia.org/wiki/Keyboard_layout">http://en.wikipedia.org/wiki/Keyboard_layout</a>
+and are submitted to the licenses that are listed there. Please attribute them if you are going to use them in your own works / derivatives.</p>
+
+<p><a href="layouts.html">Click here</a> for some diagrams that show the actual country specific shortcuts.</p>
+
+
+<h3><a name="Interface">Additional Diacritics etc.</a></h3>
+
+<p>While working on the list of possible diacritics I found this very useful site, that displays the current shortcuts supported using a US keyboard with international layout under Linux:
+
+<a href="http://dry.sailingissues.com/us-international-keyboard-layout.html">http://dry.sailingissues.com/us-international-keyboard-layout.html</a>
+
+<p>With this, I started to realize that there was a vast amount of diacritics espciallyu in slavic languages that were not even addressed by the original shortcuts that
+currently supported by Microsoft Office (this is where the original Zombiekeys idea comes from). So I set out to make a more complete list; when you drop down the keyboard
+on the Zombie Head you will pretty much see the characters that are (or should be) now supported by Zombiekeys:</p>
+
+<br/><img class="screenshot" src="img/character-list.png" alt="List of Special Characters"/>
+
+<p>Most of these were "mined" from the totally awesome <a href="http://www.fileformat.info/info/unicode/char/search.htm">Unicode Search at Fileformat.info</a>.
+This is a very valuable resource if you ever have to do anything exhaustive with special characters within the Unicode character set.
+Be aware that a lot of cheap fonts do _not_ support displaying these characters correctly, it has to be a fully Unicode compliant font, such as Arial.</p>
+
+<p>The official list of supported diacritics is as follows:</p>
+
+<p>
+
+	<ul>
+		<li>Grave Accent <span class="diacritics">&#x0300;</span>
+		<li>Acute Accent <span class="diacritics">&#x0301;</span>
+		<li>Circumflex Accent <span class="diacritics">&#x0302;</span>
+		<li>Tilde <span class="diacritics">&#x0303;</span>
+		<li>Combining Diaresis (Umlaut) <span class="diacritics">&#x308;</span>
+		<li>Combining Ring Above <span class="diacritics">&#x30a;</span>
+		<li>AE,OE,Sharp S
+		<li>Long Stroke <span class="diacritics">/</span>
+		<li>Caron (Hácek) <span class="diacritics">&#x2c7;</span>
+		<li>Cedilla  <span class="diacritics">&cedil;</span>
+		<li>Double Acute Accent <span class="diacritics">&#x2dd;</span>
+		<li>Ogonek <span class="diacritics">&#x2db;</span>
+		<li>Macron <span class="diacritics">&macr;</span>
+		<li>Dot Above (Overdot) <span class="diacritics">&#x2d9;</span>
+		<li>Combining Dot Below (Underdot) <span class="diacritics">&#x323;</span>
+	</ul>
+
+	</p>
+
+	<hr />
+
+
+	<h3>Older Versions, Beta Versions</h3>
+	<br/>
+	<a href="http://downloads.mozdev.org/zombiekeys/" target="_blank">http://downloads.mozdev.org/zombiekeys/</a>
+
+	<p>Older versions can be downloaded here, although I do not recommend it; you can also download some of the pre-releases which fix ongoing problems and tryout new features
+	- no warranties that features will be the same in the release version.
+	Some of these might also be on bugzilla as patches.<br/>
+
+	I usually fix bugs fairly quickly but you might find some of these buggy - you have been warned.</p>
+
+	<hr />
+
+	<h2 class="page-header" id="version-history-head">Version Details</h2>
+
+	<p class="note">
+	All dates are displayed in UK format: dd/mm/yyyy - you can request any version that is marked as not released or any old version listed; just send me a personal email...
+	</p>
+
+	<!--
+	
+	<a name="2.*"></a>
+	<li><a href="#" onclick="alert('This is still Work in Progress!\nPlease mail me if you want a preview version for testing.')">version 2.*</a>
+		<ul>
+		<li>
+		<li>
+		<li>
+		</ul>
+	</li>-->
+	
+	<ul id="version-history">
+	<a name="latest"></a>
+	
+	<a name="2.22"></a>
+	<li>
+	  <a href="#" onclick="alert('This is still Work in Progress!\nPlease mail me if you want a preview version for testing.')">version 2.22</a>
+		<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+		<ul>
+			<li> Made compatible with Thundeerbird 68. Well I think so - that's all folks. </li>
+		</ul>
+	</li>
+	
+	
+	<a name="2.21.1"></a>
+	<li>
+			<a href="https://addons.palemoon.org/addon/zombiekeys/">version 2.21.1 - 8/4/2019</a>
+			<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+		<ul>
+			<li> Made compatible with Thunderbird 60</li>
+			<li> Does not show donation tab when updating anymore.</li>
+			<li> Removed obsolete Addon Manager interface.</li>
+		</ul>
+	</li>	
+	
+	
+	<a name="2.21"></a>
+	<li>
+			<a href="https://addons.palemoon.org/addon/zombiekeys/"
+			   onclick="alert('Released on Pale Moon!\nPlease mail me if you want a version for testing on other browsers.')">version 2.21 - 12/02/2019</a>
+			<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+		<ul>
+			<li> Made compatible with Pale Moon and released on https://addons.palemoon.org to make available to alternative XUL platforms</li>
+		</ul>
+	</li>	
+
+
+		<li>
+			<a name="2.20" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.20">version 2.20 - 07/05/2018</a>
+			<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate">
+			</a>
+			
+			<ul>
+				<li><a href="https://www.mozdev.org/bugs/show_bug.cgi?id=26309">[Bug 26442]</a>
+				 Thunderbird 57 hangs on start with Zombiekeys enabled<br>
+				   See also the <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1417209">Related Thunderbird bug </a>
+				</li>
+				<li><a href="https://www.mozdev.org/bugs/show_bug.cgi?id=26490">[Bug 26490]</a>
+				 	ESR 2018 readiness - Make Zombiekeys compatible with Thunderbird 60
+				</li>
+			</ul>
+		</li>	
+	
+		<li><a name="2.19" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.19">version 2.19 - 13/01/2017</a>
+		    <a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate">
+				</a>
+			<ul>
+				<li><a href="https://www.mozdev.org/bugs/show_bug.cgi?id=26309">[Bug 26309]</a> Added <a href="layouts.html#es" target="_blank">Spanish</a> keyboard layout</li>
+				<li>Added Spanish Locale - thanks to <a href="https://www.babelzilla.org/forum/index.php?showuser=17691">strel at Babelzilla.org</a>
+				<li>Added support for Firefox <a href="https://www.palemoon.org/" target="_blank">Pale Moon</a>:<br>
+					<div class="emphasizeNote">
+						<p>Mozilla is going to eventually terminate XUL based addons, so it is important that 
+						our functionality stays supported on this Firefox fork. Here is a 
+						<a href="https://blog.mozilla.org/addons/2016/11/23/add-ons-in-2017/" target="_blank">Mozilla blog post</a> 
+						explaining their plans.</p>
+						<p>There are also some changes planned around a new programming model called 
+						<a href="https://wiki.mozilla.org/Electrolysis" target="_blank">Electrolysis</a> (e10s) which may break functionality of addons that try to insert content into any browser tab. 
+						It may become the standard in a near future release of Firefox and would also affect Zombiekeys.</p>
+						<p>Please consider <a href="donate.html">donating</a> to help developing e10s compatibility 
+						for the future of Firefox.</p>
+					</div>
+				</li>
+				<li>Ensured Postbox 5.0 Compatibility</li>
+			</ul>
+		</li>
+
+		<li><a name="2.18" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.18">version 2.18 - 04/12/2016</a>
+				<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate">
+				</a>
+			<ul>
+				<li>Double Accute not working on American keyboards</li>
+				<li><a href="https://www.mozdev.org/bugs/show_bug.cgi?id=26263">[Bug 26263]</a> Added <a href="layouts.html#hu" target="_blank">Hungarian</a> keyboard layout</li>
+			</ul>
+		</li>
+
+		<li><a name="2.17"  href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.17">Version 2.17 - 13/06/2016</a>
+				<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate">
+				</a>
+			<ul>
+				<li>Release Video on Thunderbird Daily:<br>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/L6im2iWSTIM" frameborder="0" allowfullscreen></iframe>
+				</li>
+				<li><a href="https://www.mozdev.org/bugs/show_bug.cgi?id=25648">[Bug 25648]</a> 
+						CTRL+&gt; and CTRL+&lt; modify font sizes in Thunderbird Composer</li>
+				<li><a href="https://www.mozdev.org/bugs/show_bug.cgi?id=26199">[Bug 26199]</a> Add support for &#x175; and &#x177; -
+						apparently these characters are used in Welsh a lot.</li>
+				<li><a href="https://www.mozdev.org/bugs/show_bug.cgi?id=25979">[Bug 25979]</a> Toolbar Icon returns after being removed.</li>
+				<li>Fixed Zombiekey toolbar button in composer for brighttext themes</li>
+				<li>Firefox: CTRL + ` key close the current tab. Fixed in <a href="layouts.html#ie" target="_blank">Irish</a> keyboard layout.</li>
+				<li><a href="layouts.html#de" target="_blank">German</a> layout: fixed accelerator key for Grave `</li>
+				<li>Known issue: Apparently there is still a problem with Iceweasel 38.7 under Linux - when pressing CTRL+ the ` key, it sets charCode (39) instead of keyCode (190). 
+						Hopefully future support for custom layouts may fix the issue.</li>
+			</ul>
+		</li>
+
+		<li><a name="2.16" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.16" onclick="alert('This is still Work in Progress!\nPlease mail me if you want a preview version for testing.')">
+					version 2.16 - 23/02/1015</a>
+				<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate">
+				</a>
+			<ul>
+				<li>Added <a href="http://www.fileformat.info/info/unicode/char/0107/index.htm">c with acute</a> for croatian languages </li> 
+				<li>Use "o" as shortcut for circled letters</li> 
+				<li>Minor fixes in UK locale </li> 
+				<li>exposed all data structures for xbl binding, thus avoiding duplication of all Javascript code.</li>
+				<li>Added support for Thunderbird's new Folder Dialog</li>
+				<li>Added interface for defining new key bindings - WIP</li> 
+			</ul>
+		</li>
+
+		<li><a name="2.15" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.15">version 2.15 - 13/11/2013</a>
+			<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+			<ul>
+				<li> Thunderbird: added support for folder rename dialog </li>
+				<li> addons: enigmail, extension list dumper, get selected mail, quickpasswords (sso change) </li>
+				<li> bumped up compatibility to Seamonkey 2.25, TB+Fx 26.0 </li>
+			</ul>
+		</li>
+
+		<li><a name="2.14" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.14">version 2.14 - 05/05/2013</a>
+			<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+			<ul>
+				<li> <a href="https://www.mozdev.org/bugs/show_bug.cgi?id=25202">[Bug 25202]</a> Reopened - Fixed Acute for IRL / UK keyboards. </li>
+				<li> Fx 20+: support per-tab private browsing mode </li>
+				<li> icon size fix for large icon mode (forces 24px) </li>
+				<li> Private Browsing support </li>
+				<li> bumped up compatibility to Seamonkey 2.21, TB+Fx 24.0 </li>
+			</ul>
+		</li>
+
+		<li><a name="2.13" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.13">version 2.13 - 08/11/2012</a>
+			<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+			<ul>
+				<li>Added new option to create T and S characters with comma below (instead of cedilla) for Romanian languages</li>
+				<br>
+				<img src="img/Option-Romanian" alt="Romanian Option"/>
+				<li>fixed <a href="https://www.mozdev.org/bugs/show_bug.cgi?id=25202">[bug 25202]</a>: Some keyboard shortcuts broken in <a href="layouts.html#uk" target="_blank">UK</a> layout</li>
+				<li>added support for our <a href="https://addons.mozilla.org/de/thunderbird/addon/smarttemplate4/">SmartTemplate<sup>4</sup></a> extension</li>
+			</ul>
+		</li>
+
+		<li><a name="2.12" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.12" >version 2.12 - 18/07/2012</a>
+			<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+			<ul>
+				<li>fixed a problem with russian keyboard (sha key for o+overdot was double, lowercase be for was missing for m+overdot)</li>
+				<li>version bump to 15.*</li>
+				<li>removed some obsolete warnings</li>
+			</ul>
+		</li>
+
+		<li><a name="2.11.1"></a>
+		<a name="2.11" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.11" >version 2.11 - 18/04/2012</a>
+		<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+			<ul>
+				<li>resized toolbar icon to 16*16</li>
+				<li>added tooltip to button</li>
+				<li>added support of subscript + superscript numbers to underdot/overdot shortcuts</li>
+				<li>fixed list of characters in overdot menu</li>
+				<li>added donation menu item</li>
+				<li>added support for message filters dialog ('find filters' box in QuickFolders)</li>
+				<li>bumped up compatibility to Fx12 / Tb12</li>
+			</ul>
+		</li>
+
+		<li><a name="2.10" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.10" >version 2.10 - 17/02/2012</a>
+		<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+			<ul>
+				<li>fixed <a href="https://www.mozdev.org/bugs/show_bug.cgi?id=24735">[bug 24735]</a>: In Gmail Compose Mail window shortcuts do not work, this affects Fx10+.
+				This bugfix apparently also works for Thunderbird 10's compose window, which was affected by the same bug.</li>
+				<li>overwrote global shortcut for Tab Group switching (CTRL+' becomes ALT+') thanks to Kent E. Soule</li>
+				<li>stability fixes for inserting into nodes that have no selectionStart etc.</li>
+				<li>fixed faulty duplication of aliveKeys (removes superfluous up event)</li>
+				<li>added &sect; sign (use same dead key shortcut as for sharp s)</li>
+			</ul>
+		</li>
+
+		<li>
+			<a name="2.9"></a>
+			<a name="2.9.1" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.9.1">version 2.9.1 - 25/12/2011</a>
+			<br>
+			<h4>2.9.0 (this version was overwritten before it could be reviewed)</h4>
+			<ul>
+				<li>Added Firefox Scratchpad support</li>
+				<li>Added smart quotes shortcut - use the keys 9 and 0 to insert &ldquo; and &rdquo; or &lsquo; and &rsquo;</li>
+				<li>Added <a href="layouts.html#ru" target="_blank">Russian</a> keyboard layout (fully supported only in English Mode)</li>
+				<li>Added <a href="layouts.html#sv" target="_blank">Swedish</a> keyboard layout: thanks to Mikael Hiort af Ornäs for collaboration</li>
+				<li>Added experimental Russian keys support (incomplete): thanks to Anton Pinsky for collaboration</li>
+				<li>also display mapping when waking zombies from menu</li>
+				<li>tidied console output</li>
+				<li>raised Tb+Fx minVer to 3.5</li>
+				<li>removed jar file</li>
+				<li>added greek letters</li>
+			</ul>
+			<h4>2.9.1</h4>
+			<ul>
+				<li>fixed <a href="layouts.html#uk" target="_blank">UK</a> and <a href="layouts.html#irl" target="_blank">IRL</a> layouts (tilde) and FR (circumflex) as they ignored the altKey due to a typo in the code</li>
+				<li>bumped maxVer of Fx/Tb to 11.* for Aurora users</li>
+				<li>Fixed error with empty tabs on update / firstRun</li>
+				<li>added thunderbrowse support</li>
+			</ul>
+		</li>
+
+		
+		<li>
+		<a name="2.7"></a>
+		<a name="2.7.2"></a>
+		<a name="2.8" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.8">version 2.8 - 07/11/2011</a>
+		<a href="donate.html"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" alt="Support Zombie Keys" class="inline-donate"></a>
+			<ul>
+					<li> added <a href="layouts.html#it" target="_blank">Italian</a> keyboard layout - thanks for help & testing by Manlio Fierro</li>
+					<li> added Italian locale: (Manlio Fierro)</li>
+					<li> added Brazilian locale: Mauro José da Silva</li>
+					<li> added "display map option"</li>
+					<li> added localization remaining options in settings dialog</li>
+					<li> Postbox 3.x compatible</li>
+					<li> added <a href="layouts.html#de" target="_blank">German</a> keyboard layout - thanks for help & testing by Anton Pinsky</li>
+			</ul>
+		</li>
+
+		<li><a name="2.5.1"></a>
+			<a name="2.6" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.6">
+			Version 2.6 - (18/10/2011)</a>
+			<ul>
+				<li> Added <a href="layouts.html#fr" target="_blank">French</a> Layout: by Philoux</li>
+				<li> Fixed broken &lt;ctrl&lt;-, + c</li>
+				<li> added overlay to following XUL windows: Search/Replace, common Dialog (Rename), Password Manager</li>
+				<li> added overlay to mail specific windows: Message Filter Editor, Edit Task/Event, Identity Settings, Folder Properties,
+								Mail Account Setup, Other Account Wizard, SMTP Server Settings, License Code (Postbox), Subscribe</li>
+				<li> added overlay to browser specific windows: Preferences (Options), All  Histor, All Bookmarks, New Bookmark + Folder Properties</li>
+				<li> added support for some Add-Ons: Console2, QuickFolders, Save Password Editor, DOM inspector</li>
+				<li> Added icelandic thorn and eth characters</li>
+				<li> Added "circled" letters</li>
+				<li> Improved display of shortcuts on menu</li>
+				<li> Improved shortcuts for additional diacritics</li>
+				<li> added option to display key mappings in javascript console (not yet localized)</li>
+				<li> Support for new Postbox 3.0 beta</li>
+			</ul>
+			<h4>Known Issues</h4>
+			<ul>
+				<li> In the search box (only), Zombiekey letters are put in the wrong position. So far no idea why?</li>
+				<li> On clicking the Zombiekeys toolbar button the first time in a session, there is a noticable delay (3secs)</li>
+			</ul>
+		</li>
+
+		<li><a name="2.5" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.5">
+				Version 2.5 - 23/09/2011</a>
+			<ul>
+				<li> Bumped up max Compatibility for Thunderbird and Firefox to 6.* to better align with Mozilla's new rapid release cycle</li>
+				<li> Added Zombiekeys Toolbar button</li>
+				<li> Added multiple keyboard layout support</li>
+				<li> Added Configuration dialog</li>
+				<li> Added Version Check and Debug logging</li>
+				<li> Added Working jump to Mozdev support page</li>
+				<li> Hiding debug output in private browsing mode</li>
+				<li> Added dynamic layout shortcuts that describe shortcuts accurately depending on selected keyboard layout (locale)</li>
+			</ul>
+		</li>
+
+		<li><a name="2.1" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.1">
+				 Version 2.1 - Released: 05/07/2011</a>
+			<ul>
+				<li> Compatibility Update for Fx version 5</li>
+			</ul>
+		</li>
+
+		<li><a name="2.0" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/2.0">
+		Version 2.0 - Released: 20/01/2011</a>
+			<ul>
+				<li>Adds compatibility to Firefox 4 and Postbox 2.1.</li>
+				<li>I also redesigned the icon, and a 64 pixel version for the new detail view in Firefox 4</li>
+				<li>Added lightning support for new event window</li>
+			</ul>
+		</li>
+
+		<li><a name="1.3" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/1.3">
+		Version 1.3 - Released: 20/10/2010</a>
+			<ul>
+				<li>bumped compatibility to TB 3.1.*, FX 3.6 (27/06/2010)</li>
+				<li>Added Postbox 1.1 support</li>
+				<li>New Addon Icon.</li>
+			</ul>
+		</li>
+
+		<hr />
+		<p>I (Axel Grude) joined the  development team and started to take over administration for the ZombieKeys project which was handled by Kai Bolay up to this date.</p>
+		<hr />
+
+		<li><a name="1.1.4" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/1.1.4">
+		Version 1.1.4 - Released: 08/05/2007</a>
+			<ul>
+				<li>Support Thunderbird 2.0</li>
+				<li>Support SeaMonkey 1.1 / SuiteRunner 1.5a - thanks to Philip Chee</li>
+				<li>added XBL binding to operate on chrome://global/content/platformHTMLBindings.xml#inputFields and derived elements - thanks to Arno Renevier and Philip Chee</li>
+				<li>French localization - thanks to Arno Renevier</li>
+			</ul>
+		</li>
+
+		<li><a name="1.1.3" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/1.1.3">
+		Version 1.1.3 - Released: 03/05/2007</a>
+			<ul>
+				<li>support Thunderbird 2.0</li>
+				<li>support SeaMonkey 1.1 / SuiteRunner 1.5a - thanks to Philip Chee</li>
+				<li>added XBL binding to operate on html::input and derived elements - thanks to Arno Renevier</li>
+				<li>French localization - thanks to Arno Renevie</li>
+			</ul>
+		</li>
+
+		<li><a name="1.0.1" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/1.0.1">
+		Version 1.0.1 - Released: 06/11/2006</a>
+			<ul>
+				<li>Marked as compatible with Firefox 2.0</li>
+			</ul>
+		</li>
+
+		<li><a name="1.0" href="https://addons.thunderbird.net/thunderbird/addon/zombie-keys/versions/1.0">
+		Version 1.0 - Released: 03/04/2006</a>
+			<ul>
+				<li>First Official Release, compatible with Firefox 1.5.* and Thunderbird 1.5.*</li>
+			</ul>
+		</li>
+	</ul>
+
+
+	<h3><a name="other">Other recommended Extensions</a></h3>
+	<div id='myProjects'>
+		<h4 class="QuickFolders">QuickFolders</h4>
+		<p><a href="https://addons.thunderbird.net/thunderbird/addon/quickfolders-tabbed-folders/">QuickFolders</a>
+		(Thunderbird / Postbox) takes the pain out of working with many mail folders; has currently 22,000 daily users and is the top rated message reading extension.<br>
+		</p>
+		
+		<h4 class="SmartTemplate">SmartTemplate<sup>4</sup></h4>
+		<p>
+		<a href="https://addons.thunderbird.net/thunderbird/addon/smarttemplate4">SmartTemplate<sup>4</sup></a>
+		(Thunderbird) SmartTemplate<sup>4</sup> offers an easy way to customize Thunderbirds default quote header by using templates. Templates can be created for every account as well as for global settings.<br>
+		</p>
+		
+		
+		<h4 class="QuickPasswords">QuickPasswords</h4>
+		<p>
+		<a href="https://addons.thunderbird.net/thunderbird/addon/75777">QuickPasswords</a>;
+		this is a very neat and quick way to retrieve and use a growing number
+		of passwords, without displaying them on screen or having to re-type them.
+		</p>
+		
+		
+		<h4 class="QuickFilters">quickFilters</h4>
+		<p>
+		<a href="https://addons.thunderbird.net/thunderbird/addon/quickfilters/">quickFilters</a>
+		(Thunderbird) Quickly generate mail filters on the fly, by dragging and dropping mails and analyzing their attributes.
+		</p>
+	</div>
+
