@@ -1,0 +1,61 @@
+@import url("/css/infoBox.css") screen;
+
+td.navigation-list a[href$='bugs.html'],td.navigation-list a[href$='bugs.html']:visited {
+	background: rgb(194,220,26) !important; 
+	background-image: -moz-linear-gradient(center top , rgb(194, 220, 26) 0%, rgb(142, 159, 15) 45%, rgb(123, 137, 17) 68%, rgb(158, 178, 10) 100%) !important;
+	border-bottom-color:  #7F8D10 !important;
+	color: #FFF !important;
+	height: 27px !important;
+	font-weight: bold;
+}
+
+/**  Bugs Table **/
+table.BZ-table {
+	background: rgb(230,240,163);
+	background: linear-gradient(to bottom,  rgba(230,240,163,1) 0%, rgba(210,230,56,1) 28%, rgba(195,216,37,1) 51%, rgba(219,240,67,1) 100%);
+	background: -moz-linear-gradient(top,  rgba(230,240,163,1) 0%, rgba(210,230,56,1) 28%, rgba(195,216,37,1) 51%, rgba(219,240,67,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(230,240,163,1)), color-stop(28%,rgba(210,230,56,1)), color-stop(51%,rgba(195,216,37,1)), color-stop(100%,rgba(219,240,67,1)));
+	background: -webkit-linear-gradient(top,  rgba(230,240,163,1) 0%,rgba(210,230,56,1) 28%,rgba(195,216,37,1) 51%,rgba(219,240,67,1) 100%);
+	background: -o-linear-gradient(top,  rgba(230,240,163,1) 0%,rgba(210,230,56,1) 28%,rgba(195,216,37,1) 51%,rgba(219,240,67,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(230,240,163,1) 0%,rgba(210,230,56,1) 28%,rgba(195,216,37,1) 51%,rgba(219,240,67,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f0a3', endColorstr='#dbf043',GradientType=0 );
+	border: 2px solid rgba(80,80,80,0.8);
+	box-shadow: 5px 5px 6px -1px rgba(0,0,0,0.7); /* CSS3= IE9 / Firefox 4+ */ 
+	-webkit-box-shadow: 5px 5px 6px -1px rgba(0,0,0,0.7); /* Safari / Chrome (Webkit) */
+	-khtml-box-shadow: 5px 5px 6px -1px rgba(0,0,0,0.7); /* KHTML */
+}
+
+table.BZ-table td:first-child {
+	text-align: center;
+}
+
+table.BZ-table tr:nth-child(even) {
+	background: rgba(100, 100, 100, 0.2);
+}
+
+table.BZ-table td {
+	border: 1px solid rgba(80,80,80,0.3) !important;
+	font-size: 10pt;
+	font-family: Calibri, Arial, Sans-Serif;
+	padding: 0.3em;
+}
+
+.BZ-th-bug {
+	text-align: center
+}
+
+.BZ-th-bug, .BZ-th-desc {
+	background-color: rgb(194,220,26);
+	background: linear-gradient(to bottom,  rgba(194,220,26,1) 0%, rgba(142,159,15,1) 45%, rgba(123,137,17,1) 68%, rgba(158,178,10,1) 100%);
+	background: -moz-linear-gradient(top,  rgba(194,220,26,1) 0%, rgba(142,159,15,1) 45%, rgba(123,137,17,1) 68%, rgba(158,178,10,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(194,220,26,1)), color-stop(45%,rgba(142,159,15,1)), color-stop(68%,rgba(123,137,17,1)), color-stop(100%,rgba(158,178,10,1)));
+	background: -webkit-linear-gradient(top,  rgba(194,220,26,1) 0%,rgba(142,159,15,1) 45%,rgba(123,137,17,1) 68%,rgba(158,178,10,1) 100%);
+	background: -o-linear-gradient(top,  rgba(194,220,26,1) 0%,rgba(142,159,15,1) 45%,rgba(123,137,17,1) 68%,rgba(158,178,10,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(194,220,26,1) 0%,rgba(142,159,15,1) 45%,rgba(123,137,17,1) 68%,rgba(158,178,10,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2dc1a', endColorstr='#9eb20a',GradientType=0 );
+	color: #ffffff !important;
+	text-shadow: #C0C0C0 0px 0px 1px;
+	font-weight:normal;
+	font-size: 10pt;
+	padding: 0.5em 1em;
+}

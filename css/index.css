@@ -1,0 +1,21 @@
+td.navigation-list a[href$='index.html'], td.navigation-list a[href$='index.html']:visited {
+	background: rgb(194,220,26) !important;
+	background-image: -moz-linear-gradient(center top , rgb(194, 220, 26) 0%, rgb(142, 159, 15) 45%, rgb(123, 137, 17) 68%, rgb(158, 178, 10) 100%) !important;
+	border-bottom-color:  #7F8D10 !important;
+	color: #FFF !important;
+	font-weight: bold;
+	height: 27px !important;
+	text-shadow: 1px 1px 1px black;
+}
+
+h4 {font-weight:normal; }
+
+.infoTab ul li a { 
+	margin-left: 0.5em; 
+}
+
+#whatsNew ul li a:before {
+	content: url('/img/arrowRight.png');
+	margin: 0.2em 0.5em 0em 1em;
+	vertical-align: top;
+}
