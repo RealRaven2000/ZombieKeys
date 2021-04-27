@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://zombiekeys/content/zombiekeys.css" type="text/css"?>
+<?xml-stylesheet href="chrome://zombieKeyShims/content/zombiekeys.css" type="text/css"?>
+<?xml-stylesheet href="chrome://zombiekeys/content/zombiekeys-toolbar.css" type="text/css"?>
 
 <!DOCTYPE overlay [
    <!ENTITY % localeDTD SYSTEM "chrome://zombiekeys/locale/menu.dtd">  %localeDTD;
@@ -9,9 +10,9 @@
 <overlay id="zombiekeys-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-	<script type="application/x-javascript" src="chrome://zombiekeys/content/zombiekeys-overlay.js"/>
-	<script type="application/x-javascript" src="chrome://zombiekeys/content/zombiekeys-prefs.js"/>
-	<script type="application/x-javascript" src="chrome://zombiekeys/content/zombiekeys-util.js"/>
+	<script type="application/javascript" src="chrome://zombiekeys/content/zombiekeys-overlay.js"/>
+	<script type="application/javascript" src="chrome://zombiekeys/content/zombiekeys-prefs.js"/>
+	<script type="application/javascript" src="chrome://zombiekeys/content/zombiekeys-util.js"/>
 
 	<stringbundleset id="stringbundleset">
 		<stringbundle id="zombiekeys-strings" src="chrome://zombiekeys/locale/zombiekeys.properties"/>

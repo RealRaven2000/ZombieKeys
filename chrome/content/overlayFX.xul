@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://zombiekeys/content/zombiekeys.css" type="text/css"?>
+<?xml-stylesheet href="chrome://zombieKeyShims/content/zombiekeys.css" type="text/css"?>
+<?xml-stylesheet href="chrome://zombiekeys/content/zombiekeys-toolbar.css" type="text/css"?>
 
 <!DOCTYPE overlay [
    <!ENTITY % localeDTD SYSTEM "chrome://zombiekeys/locale/menu.dtd">  %localeDTD;

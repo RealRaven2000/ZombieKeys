@@ -24,8 +24,35 @@ ZombieKeys.Options = {
 	} ,
 		
 	load : function() {
+		debugger;
 		ZombieKeys.Options.selectItem(ZombieKeys.getCurrentLocale());
     document.getElementById('btnCustomize').collapsed = !ZombieKeys.Preferences.isDebug;
+		
+		window.addEventListener('dialogaccept', 
+			function () { 
+				ZombieKeys.Options.accept(); 
+			}
+		);
+		window.addEventListener('dialogcancel', 
+			function () { 
+				ZombieKeys.Options.close(); 
+			}
+		);
+		setTimeout( 
+			function() { 
+				window.sizeToContent();
+				let prefPane = document.getElementById('zombiePrefs'),
+				    prefHeight = Math.floor(prefPane.getBoundingClientRect().height),
+						dlgButtonHeight = 55;
+						
+				if (window.innerHeight < prefHeight + dlgButtonHeight) {
+					let deltaHeight = prefHeight + dlgButtonHeight - window.innerHeight;
+					window.resizeBy(deltaHeight, 0);
+				}
+			}, 200
+		);
+		
+		
 	} ,
 	
   setDebug : function(cb) {
@@ -35,7 +62,11 @@ ZombieKeys.Options = {
 	get selectedLocale() {
 		let lst = document.getElementById('Layouts');
 		if (lst) {
-			return lst.selectedItem.value;
+			for (let i=0; i<lst.childNodes.length; i++) {
+				if (lst.childNodes[i].selected) {
+					return lst.getItemAtIndex(i).value;
+				}
+			}
 		}
 		return null;
 	} ,
@@ -46,7 +77,9 @@ ZombieKeys.Options = {
 	} ,
 
 	accept : function () {
+		const util = ZombieKeys.Util;
 		let val = this.selectedLocale;
+		util.logDebug("Options.accept()\nSelected Locale = " + val);
 		if (val) {
 			Components.classes["@mozilla.org/preferences-service;1"]
 				.getService(Components.interfaces.nsIPrefBranch)
@@ -55,6 +88,8 @@ ZombieKeys.Options = {
 	} ,
 
 	close : function () {
+		const util = ZombieKeys.Util;
+		util.logDebug("Options.close()")
 		ZombieKeys.Util.logDebug("Current locale remains=" + ZombieKeys.getCurrentLocale());
 		ZombieKeys.DisableListeners = false;
 	} , 

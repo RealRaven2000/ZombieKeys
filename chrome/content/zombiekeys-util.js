@@ -282,18 +282,36 @@ if (!ZombieKeys.Util)
 	checkVersionFirstRun: function checkVersionFirstRun() {
 		let aId = "zombiekeys@bolay.de",
         util = ZombieKeys.Util;
-		Components.utils.import("resource://gre/modules/AddonManager.jsm");
-		setTimeout (function () {
-				AddonManager.getAddonByID(aId,
-					function(addon) {
-						// Asynchronous callback function 
-						const util1 = window.ZombieKeys.Util;
-						util1.myVersion = addon.version;
-						util1.logDebug("AddonManager retrieved Version number: " + addon.version);
-						util1.checkFirstRun();
-					}
-				);
-			}, 0);
+		var { AddonManager } = 
+		  ChromeUtils.import ?
+			ChromeUtils.import("resource://gre/modules/AddonManager.jsm") :
+			Components.utils.import("resource://gre/modules/AddonManager.jsm");
+		let versionCallback = 
+			function(addon) {
+				// Asynchronous callback function 
+				const util1 = window.ZombieKeys.Util;
+				util1.myVersion = addon.version;
+				util1.logDebug("AddonManager retrieved Version number: " + addon.version);
+				util1.checkFirstRun();
+			}
+			
+		if (util.versionGreaterOrEqual(util.AppVersionFull, "61")) 
+			AddonManager.getAddonByID(aId).then(versionCallback); // this function is now a promise
+		else
+			AddonManager.getAddonByID(aId, versionCallback);
+	} ,
+	
+	versionGreaterOrEqual: function(a, b) {
+		/*
+			Compares Application Versions
+			returns
+			- is smaller than 0, then A < B
+			-  equals 0 then Version, then A==B
+			- is bigger than 0, then A > B
+		*/
+		let versionComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+														.getService(Components.interfaces.nsIVersionComparator);
+		return (versionComparator.compare(a, b) >= 0);
 	} ,
 
 	get AppVersionFull() {
@@ -419,7 +437,7 @@ if (!ZombieKeys.Util)
 	
 	// disable debug log output in private browsing mode to prevent key snooping
 	logDebug: function logDebug(msg) {
-	  if (!ZombieKeys.Preferences.isDebug) return;
+	  // if (!ZombieKeys.Preferences.isDebug) return;
 		if (this.isPrivateBrowsing) return;
 		if (!ZombieKeys.Preferences.isDebugOption('default')) return;
 		this.logToConsole(msg);

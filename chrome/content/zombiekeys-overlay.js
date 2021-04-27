@@ -192,6 +192,10 @@
 	AG Removed donation tab when updating ZombieKeys.
 	AG Removed obsolete Addon Manager interface.
 	
+	Version 2.22 - 07/08/2019
+	AG make version that is compatible with Thunderbird 68 (wrapped as web extension)
+	
+	
   === 
 	
 	 /mail/components/compose/content/messengercompose.xul overlays editorOverlay.xul
@@ -1061,63 +1065,74 @@ var ZombieKeys = new function() {
 	// modify the key mappings according to the selected locale
 	this.initLocale = function(locale) {
 		const util = ZombieKeys.Util;
-		util.logDebug("Initialize key locale: " + locale + " ...");
+		util.logDebug("Initialize key locale: " + locale + " ...\nsearching through " + typeof layouts);
 		let theLayout; // determine locale
-		Array.forEach(layouts, function(layout) {
-			if (layout.locale==locale) {
-				theLayout = layout;
-			}
-		});
-
-		for (let k=0; k<deadKeys.length; k++) {
-			let deadKey = deadKeys[k];
-			Array.forEach(theLayout.map_deadKeys, function(Map) {
-				if (Map.id == deadKey.id) {
-					deadKey.keyCode = theLayout.map_deadKeys[k].keyCode;
+		theLayout = layouts.find(el => el.locale==locale); // replace Array.forEach
+		if (theLayout) {
+			util.logDebug("found match: " + theLayout.locale);
+		}
+		else return;
+		
+		try {
+			for (let k=0; k<deadKeys.length; k++) {
+				let deadKey = deadKeys[k],
+						foundMap = theLayout.map_deadKeys.find(map => map.id == deadKey.id) || null;
+						
+				if (foundMap) {
+					// replace deadKey array element
+					deadKey.keyCode = foundMap.keyCode;
 					// Special mods
-					if (typeof theLayout.map_deadKeys[k].charCode !== "undefined") {
-						deadKey.charCode = theLayout.map_deadKeys[k].charCode;
+					if (typeof foundMap.charCode !== "undefined") {
+						deadKey.charCode = foundMap.charCode;
 						util.logDebug('Overwrite deadKey[' + (k+1) + '].charCode = ' + deadKey.charCode);
 					}
 					else
 						if (layouts[0].map_deadKeys[k].charCode)
 							deadKey.charCode = layouts[0].map_deadKeys[k].charCode; // us_int as default
 
-					if (typeof theLayout.map_deadKeys[k].shiftKey !== "undefined")
-						deadKey.modifiers.shiftKey = theLayout.map_deadKeys[k].shiftKey;
+					if (typeof foundMap.shiftKey !== "undefined")
+						deadKey.modifiers.shiftKey = foundMap.shiftKey;
 					else
 						deadKey.modifiers.shiftKey = deadKey.defaultmods.shiftKey;
 
-					if (typeof theLayout.map_deadKeys[k].altKey !== "undefined")
-						deadKey.modifiers.altKey = theLayout.map_deadKeys[k].altKey;
+					if (typeof foundMap.altKey !== "undefined")
+						deadKey.modifiers.altKey = foundMap.altKey;
 					else
-						deadKey.modifiers.altKey = deadKeys[k].defaultmods.altKey;
+						deadKey.modifiers.altKey = deadKey.defaultmods.altKey;
 				}
-			});
+			}
 		}
-
-		for (let k=0; k<aliveKeys.length; k++) {
-			Array.forEach(theLayout.map_liveKeys, function(Map) {
-				if(Map.id == aliveKeys[k].id) {
-					aliveKeys[k].keyCode = Map.keyCode;
-					aliveKeys[k].charCode = Map.charCode;
+		catch(ex) {
+			util.logException('error during deadKeys initialisation', ex);
+		}
+		
+		try {
+			for (let k=0; k<aliveKeys.length; k++) {
+				let foundMap = theLayout.map_liveKeys.find(map => map.id == aliveKeys[k].id) || null;
+				if (foundMap) {
+					let liveKey = aliveKeys[k];
+					liveKey.keyCode = Map.keyCode;
+					liveKey.charCode = Map.charCode;
 
 					if (typeof Map.ctrlKey !== "undefined" )
-						aliveKeys[k].modifiers.ctrlKey = Map.ctrlKey;
+						liveKey.modifiers.ctrlKey = Map.ctrlKey;
 					else
-						aliveKeys[k].modifiers.ctrlKey = aliveKeys[k].defaultmods.ctrlKey;
+						liveKey.modifiers.ctrlKey = liveKey.defaultmods.ctrlKey;
 
 					if (typeof Map.shiftKey !== "undefined" )
-						aliveKeys[k].modifiers.shiftKey = Map.shiftKey;
+						liveKey.modifiers.shiftKey = Map.shiftKey;
 					else
-						aliveKeys[k].modifiers.shiftKey = aliveKeys[k].defaultmods.shiftKey;
+						liveKey.modifiers.shiftKey = liveKey.defaultmods.shiftKey;
 
 					if (typeof Map.altKey !== "undefined" )
-						aliveKeys[k].modifiers.altKey = Map.altKey;
+						liveKey.modifiers.altKey = Map.altKey;
 					else
-						aliveKeys[k].modifiers.altKey = aliveKeys[k].defaultmods.altKey;
-				}
-			});
+						liveKey.modifiers.altKey = liveKey.defaultmods.altKey;
+				};
+			}
+		}
+		catch(ex) {
+			util.logException('error during aliveKeys initialisation', ex);
 		}
 		
 		// publish current Layout
@@ -1325,10 +1340,12 @@ var ZombieKeys = new function() {
 		let oldLocale = this.getCurrentLocale();
 		window.openDialog('chrome://zombiekeys/content/zombiekeys-options.xul',
 			'zombiekeys-options','dialog,chrome,titlebar,centerscreen,innerWidth=500,innerHeight=450',ZombieKeys).focus();
+		/*
 		let newLocale = this.getCurrentLocale();
 		// for safety, force to initialize locale after options are closed
 		ZombieKeys.Util.logDebug("old locale=" + oldLocale + " - initialize new locale=" + newLocale + "...");
 		this.initLocale(newLocale);
+		*/
 	}
 
 	this.getStringBundle = function() {
@@ -1382,8 +1399,6 @@ var ZombieKeys = new function() {
 			window.addEventListener('keypress', keyPressHandler, true);
 			window.addEventListener('keyup',	keyUpHandler,	 true);
 		}
-
-
 	}
 
 	this.showPopup = function(button, popupId) {

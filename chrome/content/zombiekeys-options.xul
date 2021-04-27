@@ -1,30 +1,36 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 
-<?xml-stylesheet href = "chrome://global/skin/" type = "text/css"?>
-<!--  tb 59 -->
-<?xml-stylesheet href="chrome://messenger/skin/preferences/preferences.css" type="text/css" ?>
-<?xml-stylesheet href = "chrome://zombiekeys/content/zombiekeys.css" type = "text/css"?>
-<?xml-stylesheet href = "chrome://zombiekeys/content/zombiekeys-options.css" title = "zkOptionsStyles2" type = "text/css"?>
-
 <!DOCTYPE prefwindow SYSTEM "chrome://zombiekeys/locale/options.dtd" >
 
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<!--  tb 59 -->
+<?xml-stylesheet type="text/css" href="chrome://messenger/skin/preferences/preferences.css" ?>
+<!--  tb 68, for groupbox -->
+<?xml-stylesheet type="text/css" href="chrome://messenger/skin/messenger.css" ?>
 
-<prefwindow title = "&zk.prefwindow.options;"
+<?xml-stylesheet href="chrome://zombieKeyShims/content/zombiekeys.css" type="text/css"?>
+<?xml-stylesheet href = "chrome://zombiekeys/content/zombiekeys-options.css" title = "zkOptionsStyles2" type = "text/css"?>
+
+
+<dialog 
 	id = "zk-options"
-	buttons = "accept,cancel"
 	xmlns = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	ondialogaccept = "ZombieKeys.Options.accept();"
-	ondialogcancel = "ZombieKeys.Options.close();"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	title = "&zk.prefwindow.options;"
+	buttons = "accept,cancel"
 	onload = "ZombieKeys.Options.load();"
 >
-
-<script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-overlay.js" />
-<script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-prefs.js"/>
-<script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-util.js"/>
-<script type = "application/x-javascript" src = "chrome://zombiekeys/content/zombiekeys-options.js"/>
+<!--	ondialogaccept = "ZombieKeys.Options.accept();"
+	ondialogcancel = "ZombieKeys.Options.close();" -->
 
 
-  <prefpane>
+<script type = "application/javascript" src = "chrome://zombiekeys/content/zombiekeys-overlay.js" />
+<script type = "application/javascript" src = "chrome://zombiekeys/content/zombiekeys-prefs.js"/>
+<script type = "application/javascript" src = "chrome://zombiekeys/content/zombiekeys-util.js"/>
+<script type = "application/javascript" src = "chrome://zombiekeys/content/zombiekeys-options.js"/>
+
+
+  <prefpane id="zombiePrefs">
 	<preferences>
 		<preference id = "boolMapping" name = "extensions.zombiekeys.showMapping" type = "bool"/>
 		<preference id = "boolDebug" name = "extensions.zombiekeys.debug" type = "bool"/>
@@ -35,19 +41,45 @@
 		<caption label = "&zk.prefwindow.keyboardLayout;"/>
 		<vbox>
 			<label value = "&zk.prefwindow.keyboardLayout.instructions;" />
-			<listbox id = "Layouts" seltype = "single" onselect = "ZombieKeys.Options.selectLayout(this.selectedItem.value, window);" rows = "6">
-			  <listitem value = "us_int" label = "&zk.prefwindow.layout.US;" />
-			  <listitem value = "us_dvorak" label = "&zk.prefwindow.layout.US_Dvorak;"/>
-			  <listitem value = "uk" label = "&zk.prefwindow.layout.UK;"/>
-			  <listitem value = "irl" label = "&zk.prefwindow.layout.IRL;"/>
-			  <listitem value = "es" label = "&zk.prefwindow.layout.ES;"/>
-			  <listitem value = "fr" label = "&zk.prefwindow.layout.FR;"/>
-			  <listitem value = "it" label = "&zk.prefwindow.layout.IT;"/>
-			  <listitem value = "de" label = "&zk.prefwindow.layout.DE;"/>
-			  <listitem value = "sv" label = "&zk.prefwindow.layout.SV;"/>
-			  <listitem value = "ru" label = "&zk.prefwindow.layout.RU;"/>
-			  <listitem value = "hu" label = "&zk.prefwindow.layout.HU;"/>
-			</listbox>
+			<!-- onselect appears to get triggered in Tb68 by something before the load event -->
+			<richlistbox 
+				id = "Layouts" 
+				seltype = "single" 
+				onchange = "ZombieKeys.Options.selectLayout(this.selectedItem.value, window);" >
+			  <richlistitem value = "us_int">
+					<description>&zk.prefwindow.layout.US;</description>
+				</richlistitem>
+			  <richlistitem value = "us_dvorak" label = "&zk.prefwindow.layout.US_Dvorak;">
+					<description>&zk.prefwindow.layout.US_Dvorak;</description>
+				</richlistitem>
+			  <richlistitem value = "uk" label = "&zk.prefwindow.layout.UK;">
+					<description>&zk.prefwindow.layout.UK;</description>
+				</richlistitem>
+			  <richlistitem value = "irl" label = "&zk.prefwindow.layout.IRL;">
+					<description>&zk.prefwindow.layout.IRL;</description>
+				</richlistitem>
+			  <richlistitem value = "es" label = "&zk.prefwindow.layout.ES;">
+					<description>&zk.prefwindow.layout.ES;</description>
+				</richlistitem>
+			  <richlistitem value = "fr" label = "&zk.prefwindow.layout.FR;">
+					<description>&zk.prefwindow.layout.FR;</description>
+				</richlistitem>
+			  <richlistitem value = "it" label = "&zk.prefwindow.layout.IT;">
+					<description>&zk.prefwindow.layout.IT;</description>
+				</richlistitem>
+			  <richlistitem value = "de" label = "&zk.prefwindow.layout.DE;">
+					<description>&zk.prefwindow.layout.DE;</description>
+				</richlistitem>
+			  <richlistitem value = "sv" label = "&zk.prefwindow.layout.SV;">
+					<description>&zk.prefwindow.layout.SV;</description>
+				</richlistitem>
+			  <richlistitem value = "ru" label = "&zk.prefwindow.layout.RU;">
+					<description>&zk.prefwindow.layout.RU;</description>
+				</richlistitem>
+			  <richlistitem value = "hu" label = "&zk.prefwindow.layout.HU;">
+					<description>&zk.prefwindow.layout.HU;</description>
+				</richlistitem>
+			</richlistbox>
 			<div id = "layoutImage" class = "layout-us_int" >
 			</div>
 			<hbox>
@@ -151,5 +183,11 @@
 		
 	</groupbox>
   </prefpane>
+	
+	<script type="application/javascript" src="chrome://global/content/preferencesBindings.js" />
+	<script>
+	  ZombieKeys.Preferences.loadPreferences(); /* Tb 66 compatibility. Should be called _before_ DOMcontent Loaded event */
+	</script>
+	
   
-</prefwindow>
+</dialog>

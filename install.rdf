@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="zombiekeys@bolay.de"
                    em:name="Zombie Keys"
-                   em:version="2.21.1"
+                   em:version="2.23pre2"
 									 em:creator="Axel Grude"
                    em:description="Bring dead keys to life: accented letters made easy!"
                    em:homepageURL="http://zombiekeys.bolay.us/"

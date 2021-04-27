@@ -12,12 +12,18 @@ locale	zombiekeys	pt-BR   	chrome/locale/pt-BR/
 locale	zombiekeys	zh-CN   	chrome/locale/zh-CN/
 
 skin zombiekeys classic/1.0  chrome/skin/
-style   chrome://global/content/customizeToolbar.xul    chrome://zombiekeys/content/zombiekeys.css appversion<59.0a1
-style   chrome://messenger/content/customizeToolbar.xul chrome://zombiekeys/content/zombiekeys.css appversion>=59.0a1
+style   chrome://global/content/customizeToolbar.xul    chrome://zombiekeys/content/zombiekeys-toolbar.css appversion<59.0a1
+style   chrome://messenger/content/customizeToolbar.xul chrome://zombiekeys/content/zombiekeys-toolbar.css appversion>=59.0a1
+
+
+content zombieKeyShims  chrome://zombiekeys/content/shim/ platformversion<61
+content zombieKeyShims  chrome://zombiekeys/content/shim61/ platformversion>=61
 
 
 # main overlays
 overlay about:addons													chrome://zombiekeys/content/overlayTB.xul
+
+#firefox
 overlay chrome://browser/content/bookmarks/addBookmark2.xul				chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://browser/content/bookmarks/bookmarksManager.xul			chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://browser/content/bookmarks/bookmarksProperties.xul		chrome://zombiekeys/content/overlayFX.xul
@@ -32,6 +38,8 @@ overlay chrome://communicator/content/bookmarks/addBookmark.xul			chrome://zombi
 overlay chrome://communicator/content/bookmarks/bm-props.xul			chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://communicator/content/bookmarks/bookmarksManager.xul	chrome://zombiekeys/content/overlayFX.xul
 overlay chrome://global/content/commonDialog.xul						chrome://zombiekeys/content/overlayTB.xul
+
+# thunderbird
 overlay chrome://global/content/config.xul                              chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/AccountManager.xul					chrome://zombiekeys/content/overlayTB.xul
 overlay chrome://messenger/content/AccountWizard.xul					chrome://zombiekeys/content/overlayTB.xul
