@@ -9,16 +9,6 @@
 	margin-right: 3px;
 }
 
-/* h1#content, */
-.project-name {
-	/* background: inherit;
-	color: #900; */
-	padding: 0;
-}
-.project-name:after {
-	content: url(http://www.mozdev.org/sharedimages/boxes.gif);
-	padding-left: 1.1em;
-}
 
 .project-navigations {
 	border: none; /* work around weird ns4 bug */
@@ -27,7 +17,6 @@
 
 #project-navigation th {
 	background-color: inherit;
-	background-image: url(http://www.mozdev.org/sharedimages/nav-icon.png);
 	background-repeat: no-repeat;
 	color: #900;
 	padding-left: 18px;
@@ -141,7 +130,7 @@ td.navigation-list a:selected {
 }
 .censorship div {
   height: 100%;
-  background-image:url(http://americancensorship.org/images/stop-censorship-small.png);
+  background-image:url(https://americancensorship.org/images/stop-censorship-small.png);
   background-position:center center;
   background-repeat:no-repeat;
   text-align: center;
