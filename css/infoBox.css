@@ -1,0 +1,106 @@
+#infoTabs, #infoTabs2 {
+	margin-top: 60px;
+	margin-bottom: 20px;
+	min-width: 250px;
+	max-width: 40%;
+	position: relative; /* IE8 crop fix */
+	vertical-align:top;
+	width: auto;
+}
+
+#infoTabs {
+	float: right;
+	margin-right:-100px;  
+}
+
+#infoTabs2 {
+	float: left;
+	margin-left:-100px;  
+}
+
+
+#infoTabs div, #infoTabs2 div {
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+}
+
+.infoTab {
+  background: #F0F0F0;
+  border-right: 1px solid #7B8911;
+  border-left: 1px solid #7B8911;
+  border-bottom: 1px solid #7B8911;
+  margin: 0px 10px 10px 25px;
+  padding: 0px 10px 5px 10px;
+  -webkit-border-radius: 6px 6px 0px 0px; /* Safari / Chrome (Webkit) */
+  border-radius: 6px 6px 0px 0px; /* CSS3 = IE9 / Firefox 4+ */
+  -khtml-border-radius: 6px 6px 0px 0px; /* KHTML */
+  -moz-box-shadow: 5px 5px 6px -1px rgba(0,0,0,0.7); /* Firefox 1-4 */
+  -webkit-box-shadow: 5px 5px 6px -1px rgba(0,0,0,0.7); /* Safari / Chrome (Webkit) */
+  box-shadow: 5px 5px 6px -1px rgba(0,0,0,0.7); /* CSS3 = IE9 / Firefox 4+ */ 
+  -khtml-box-shadow: 5px 5px 6px -1px rgba(0,0,0,0.7); /* KHTML */
+  -moz-border-radius: 6px 6px 0px 0px; /* Firefox 1-4 */
+}
+
+.infoTab .infoHeader {
+	background-color: rgb(194,220,26);
+	background: linear-gradient(to bottom,  rgba(194,220,26,1) 0%, rgba(142,159,15,1) 45%, rgba(123,137,17,1) 68%, rgba(158,178,10,1) 100%);
+	background: -moz-linear-gradient(top,  rgba(194,220,26,1) 0%, rgba(142,159,15,1) 45%, rgba(123,137,17,1) 68%, rgba(158,178,10,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(194,220,26,1)), color-stop(45%,rgba(142,159,15,1)), color-stop(68%,rgba(123,137,17,1)), color-stop(100%,rgba(158,178,10,1)));
+	background: -webkit-linear-gradient(top,  rgba(194,220,26,1) 0%,rgba(142,159,15,1) 45%,rgba(123,137,17,1) 68%,rgba(158,178,10,1) 100%);
+	background: -o-linear-gradient(top,  rgba(194,220,26,1) 0%,rgba(142,159,15,1) 45%,rgba(123,137,17,1) 68%,rgba(158,178,10,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(194,220,26,1) 0%,rgba(142,159,15,1) 45%,rgba(123,137,17,1) 68%,rgba(158,178,10,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2dc1a', endColorstr='#9eb20a',GradientType=0 );
+	-webkit-border-radius: 6px 6px 0px 0px; /* Safari / Chrome (Webkit) */
+	border-radius: 6px 6px 0px 0px; /* CSS3 = IE9 / Firefox 4+ */
+	-khtml-border-radius: 6px 6px 0px 0px; /* KHTML */
+	border-top: 1px solid #7B8911;
+	color: #fff;
+	font: 9pt Segue,Calibri,Sans-Serif;
+	height: 1.5em;
+	margin: 0 -10px 0 -10px;
+	padding: 5px 0px 5px 0px;
+	text-align: center;
+}
+
+.infoTab ul {
+	padding-left: 0;
+	font-size: 0.85em;  
+}
+
+.infoTab ul li {
+  list-style-image: url('/img/checkMark.png') !important;
+  list-style-type: square; /* fallback */
+  color: inherit;
+  padding-left: 0;
+  padding-bottom: 5px;
+  padding-top: 0px;
+  margin-top: 5px;
+  text-align: left !important;
+  vertical-align: top;
+  font-size: 10pt;
+  color: #777;
+}
+
+.infoTab .infoItems ul li {
+	background: #fff no-repeat url('img/Zombie-16.png');
+	color: inherit;
+	list-style: outside;
+	padding-left: 3em;
+	padding-bottom: 5px;
+	padding-top: 0px;
+	margin-top: 5px;
+	text-align: left !important;
+}
+
+
+/* modernizr */
+/*  js no-rgba no-hsla no-borderradius no-boxshadow no-textshadow no-cssgradients fontface */
+.no-borderradius .infoTab {
+  border-radius: 6px 6px 0px 0px; 
+}
+
+
+.no-boxshadow .infoTab {
+ border-bottom: solid 5px #B0B0B0;
+ border-right: solid 5px #B0B0B0;
+}

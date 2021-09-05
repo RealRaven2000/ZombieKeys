@@ -1,0 +1,56 @@
+/*** screen size support ***/
+#main-content-no-nav {
+  transition: margin 0.5s, border-radius  0.5s;
+}
+#infoTabs {
+  transition: margin 0.5s;
+}
+
+media only screen and (max-width: 450px) {
+  h3 { font-size: 1em; }
+  h2.page-header {
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #infoTabs { display: none; }
+  #main-content-no-nav {
+    border-radius: 0;
+    font-size: 0.85em;
+    margin: 0  !important;
+  }
+  h3 { font-size: 1.2em; }
+  h2.page-header {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 850px) {
+  #infoTabs {
+    margin-right: -8% !important; 
+  }
+  #main-content-no-nav {
+    margin-left: 5%  !important;
+    margin-right: 5% !important;
+  }
+  .infoTab {
+    margin-left: 10px;  
+  }
+}
+
+@media only screen and (min-width: 850px) and (max-width: 1200px) {
+  #infoTabs {
+    margin-right: -12% !important; 
+    max-block-size: 50% !important; 
+  }
+  #main-content-no-nav {
+    margin-left: 10%  !important;
+    margin-right: 10% !important;
+  }
+  .infoTab {
+    margin-left: 30px;  
+    margin-right: 10px;
+  }
+}
+
