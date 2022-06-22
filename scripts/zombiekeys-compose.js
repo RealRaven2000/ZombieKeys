@@ -26,6 +26,7 @@
 
 
 	async function keyPressHandler(event) {
+    let defaultAction = false;
     // if we do not prevent it here, then the character will always be inserted!!
     switch (event.key) {
       case "Enter":
@@ -39,29 +40,27 @@
     let result = await browser.runtime.sendMessage({command:"keyPress", event: serializeKeyEvent(event)});
     if (result) {
       if (result.isHandled) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      else {
-        if (result.text) {
-          event.preventDefault();
-          event.stopPropagation();
-          if (result.text == "Enter") {
-            // document.execCommand("insertText", false, "\n");
-            console.log("special - Enter");
-          }
-          else {
-            document.execCommand("insertText", false, result.text);
-            console.log("composeScript keyPress inserted "+ result.text);
-          }
-        }
-        else if (result.charCode) {
-          debugger;
-        }
+        ;
+      } else if (result.text) {
+        document.execCommand("insertText", false, result.text);
+        console.log("composeScript keyPress inserted "+ result.text);
+      } else {
+        defaultAction = true;
       }
     }
+    else {
+      defaultAction = true;
+    }
+    // nobody executed this:
+    if (defaultAction) {
+      let keypress_event = document.createEvent("KeyboardEvent"), // KeyEvents
+          eventView = event.view || keypress_event.view; // make xbl compatible (?)
+      keypress_event.initKeyEvent("keypress", true, true, eventView,
+               event.ctrlKey, event.altKey, event.shiftKey, evt.metaKey,    
+               event.keyCode, event.charCode);
+      tevent.target.dispatchEvent(keypress_event);
+    }
     console.log("End composeScript keyPress:", event);
-    
 	};
 
 	async function keyUpHandler(event) {
