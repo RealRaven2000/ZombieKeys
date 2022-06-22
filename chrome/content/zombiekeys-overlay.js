@@ -1111,21 +1111,21 @@ var ZombieKeys = new function() {
 				let foundMap = theLayout.map_liveKeys.find(map => map.id == aliveKeys[k].id) || null;
 				if (foundMap) {
 					let liveKey = aliveKeys[k];
-					liveKey.keyCode = Map.keyCode;
-					liveKey.charCode = Map.charCode;
+					liveKey.keyCode = foundMap.keyCode;
+					liveKey.charCode = foundMap.charCode;
 
-					if (typeof Map.ctrlKey !== "undefined" )
-						liveKey.modifiers.ctrlKey = Map.ctrlKey;
+					if (typeof foundMap.ctrlKey !== "undefined" )
+						liveKey.modifiers.ctrlKey = foundMap.ctrlKey;
 					else
 						liveKey.modifiers.ctrlKey = liveKey.defaultmods.ctrlKey;
 
-					if (typeof Map.shiftKey !== "undefined" )
-						liveKey.modifiers.shiftKey = Map.shiftKey;
+					if (typeof foundMap.shiftKey !== "undefined" )
+						liveKey.modifiers.shiftKey = foundMap.shiftKey;
 					else
 						liveKey.modifiers.shiftKey = liveKey.defaultmods.shiftKey;
 
-					if (typeof Map.altKey !== "undefined" )
-						liveKey.modifiers.altKey = Map.altKey;
+					if (typeof foundMap.altKey !== "undefined" )
+						liveKey.modifiers.altKey = foundMap.altKey;
 					else
 						liveKey.modifiers.altKey = liveKey.defaultmods.altKey;
 				};

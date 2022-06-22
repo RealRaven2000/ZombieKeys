@@ -1,8 +1,19 @@
+import {ClassZombieKeys} from "./scripts/Zombiekeys.mjs.js";
+//import("./scripts/Zombiekeys.mjs.js").then(module => {
+ // use module.ClassZombieKeys 
+//});
+
 messenger.composeScripts.register({
     js: [
       { file: "scripts/zombiekeys-compose.js"}
     ]
 });
+
+  const msg_commands = [
+    "keyPress",
+    "keyUp"
+  ]  
+  
 
 	// modifiers: [ctrl, shift, alt]
 	// make deadKeys accessible from outside (this. instead of var)
@@ -682,14 +693,10 @@ messenger.composeScripts.register({
 					}
 				 ];
   
-	let currentLayout = null,
-	    decUnicode = "";
+	let decUnicode = "";
   
+  let zombieKeys = new ClassZombieKeys("irl"); // hard code it for now...
   
-  const msg_commands = [
-    "keyPress",
-    "keyUp"
-  ]  
   
   ZombieKeys = {
     DisableListeners: false,
@@ -716,6 +723,84 @@ messenger.composeScripts.register({
 			ZombieKeys.Util.logToConsole("created zombie id "+ (k+1) +" you can now press: \n" + ZombieKeys.logMappingString(map));
 		}
 	};
+
+	// modify the key mappings according to the selected locale
+  // 1066
+	ZombieKeys.initLocale = function(locale) {
+		const util = ZombieKeys.Util;
+		ZombieKeys.Util.logDebug("Initialize key locale: " + locale + " ...\nsearching through " + typeof layouts);
+		let theLayout = layouts.find(el => el.locale==locale); 
+		if (theLayout) {
+			ZombieKeys.Util.logDebug("found match: " + theLayout.locale);
+		}
+		else return;
+		
+		try {
+			for (let k=0; k<deadKeys.length; k++) {
+				let deadKey = deadKeys[k],
+						foundMap = theLayout.map_deadKeys.find(map => map.id == deadKey.id) || null;
+						
+				if (foundMap) {
+					// replace deadKey array element
+					deadKey.keyCode = foundMap.keyCode;
+					// Special mods
+					if (typeof foundMap.charCode !== "undefined") {
+						deadKey.charCode = foundMap.charCode;
+						ZombieKeys.Util.logDebug('Overwrite deadKey[' + (k+1) + '].charCode = ' + deadKey.charCode);
+					}
+					else
+						if (layouts[0].map_deadKeys[k].charCode)
+							deadKey.charCode = layouts[0].map_deadKeys[k].charCode; // us_int as default
+
+					if (typeof foundMap.shiftKey !== "undefined")
+						deadKey.modifiers.shiftKey = foundMap.shiftKey;
+					else
+						deadKey.modifiers.shiftKey = deadKey.defaultmods.shiftKey;
+
+					if (typeof foundMap.altKey !== "undefined")
+						deadKey.modifiers.altKey = foundMap.altKey;
+					else
+						deadKey.modifiers.altKey = deadKey.defaultmods.altKey;
+				}
+			}
+		}
+		catch(ex) {
+			ZombieKeys.Util.logException('error during deadKeys initialisation', ex);
+		}
+		
+		try {
+			for (let k=0; k<aliveKeys.length; k++) {
+				let foundMap = theLayout.map_liveKeys.find(map => map.id == aliveKeys[k].id) || null;
+				if (foundMap) {
+					let liveKey = aliveKeys[k];
+					liveKey.keyCode = foundMap.keyCode;
+					liveKey.charCode = foundMap.charCode;
+
+					if (typeof foundMap.ctrlKey !== "undefined" )
+						liveKey.modifiers.ctrlKey = foundMap.ctrlKey;
+					else
+						liveKey.modifiers.ctrlKey = liveKey.defaultmods.ctrlKey;
+
+					if (typeof foundMap.shiftKey !== "undefined" )
+						liveKey.modifiers.shiftKey = foundMap.shiftKey;
+					else
+						liveKey.modifiers.shiftKey = liveKey.defaultmods.shiftKey;
+
+					if (typeof foundMap.altKey !== "undefined" )
+						liveKey.modifiers.altKey = foundMap.altKey;
+					else
+						liveKey.modifiers.altKey = liveKey.defaultmods.altKey;
+				};
+			}
+		}
+		catch(ex) {
+			ZombieKeys.Util.logException('error during aliveKeys initialisation', ex);
+		}
+		
+		// publish current Layout
+		ZombieKeys.currentLayout = theLayout;	
+	}
+
 
   ZombieKeys.Util = {
     // 367
@@ -855,7 +940,6 @@ messenger.composeScripts.register({
 		return true;
 	}
 
-
   // 954
 	// THIS INSERTS THE ZOMBIEFIED CHARACTER
 	async function fakeKey(event, chr, createKeyUp) {
@@ -936,7 +1020,7 @@ messenger.composeScripts.register({
 
   // 1143
 	async function keyPressHandler(event) {
-	  if (ZombieKeys.DisableListeners) return;
+	  if (zombieKeys.DisableListeners) return;
 		const util = ZombieKeys.Util;
 		let isDebug = await ZombieKeys.Preferences.isDebugOption('keyPressHandler');
 		if (isDebug) { ZombieKeys.logKey("press: ", event); }
