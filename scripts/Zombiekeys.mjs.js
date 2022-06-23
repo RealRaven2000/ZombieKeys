@@ -12,9 +12,16 @@ const ADDON_NAME = "ZombieKeys";
 
 export class ClassZombieKeys {
   PrivateBrowsing; // needs to be set by an event
-  constructor(locale, isPrivate = false) {
-    this.PrivateBrowsing = isPrivate;
+  constructor(locale, util) {
+    this.PrivateBrowsing = util.isPrivateBrowsing;
+    this.LastAliveKeyDown = null;
+    this.Util = util;
   
+    // modifiers: [ctrl, shift, alt]
+    // make deadKeys accessible from outside (this. instead of var)
+    // additional unicode keys from http://www.fileformat.info/info/unicode/
+    // ideas for additional diacritics support from http://dry.sailingissues.com/us-international-keyboard-layout.html
+    // create a floating panel with a "cheat sheet" which shows the screenshot of the configured locale. best make it resizable.
     let deadKeys= [
           {	"modifiers": {"ctrlKey": true, "shiftKey": false, "altKey": false},
             "defaultmods": {"ctrlKey": true, "shiftKey": false, "altKey": false},
@@ -350,6 +357,7 @@ export class ClassZombieKeys {
 
 
             ];
+    this.DeadKeys = deadKeys;
 
     let aliveKeys = [
             { "id": 1,
@@ -372,11 +380,12 @@ export class ClassZombieKeys {
               "charCode": 101,  // "E"
               "keyCode": 52,    // us=charCode 101 "e" - not necessary on Irish keyboard - it has Euro symbol on ALT-GR + 4
               "target": "\u20ac"}];  //Euro
+    this.AliveKeys = aliveKeys;
 
     // Locale Specific Layouts
     // we can add optional shiftKey overrides to cater for the locale!
     // add charCode for overriding accelerators during keypress
-    let layouts = [{ "locale" : "us_int",
+    this.layouts = [{ "locale" : "us_int",
              "map_deadKeys" : [
                {"id" : 1, "keyCode": 192, "key": "`", "otherKey":"~"} /* grave */
               ,{"id" : 2, "keyCode": 222, "key": "'"} /* acute */
@@ -686,145 +695,28 @@ export class ClassZombieKeys {
             }
            ];
    
-    /**********   *********/
-    this.Util = {
-      // 367
-      get isPrivateBrowsing() {
-        return PrivateBrowsing; // Thunderbird is never private
-        // if Firefox, check if we are in private mode
-        // used to use nsIPrivateBrowsingService.privateBrowsingEnabled
-      } ,
-
-      // 391
-      logTime: function logTime() {
-        let timePassed = '',
-            end = new Date(),
-            endTime = end.getTime();
-        try { // AG added time logging for test
-          if (this.lastTime==0) {
-            this.lastTime = endTime;
-            return "[logTime init]"
-          }
-          let elapsed = new String(endTime - this.lastTime); // time in milliseconds
-          timePassed = '[' + elapsed + ' ms]   ';
-          this.lastTime = endTime; // remember last time
-        }
-        catch(e) {;}
-        return end.getHours() + ':' + end.getMinutes() + ':' + end.getSeconds() + '.' + end.getMilliseconds() + '  ' + timePassed;
-      } ,
-      
-      // 405
-      // xml - obsolete parameter
-      logToConsole: function logToConsole(msg, xml, optionTag) {
-        let title = "[ZombieKeys]" 
-          + (optionTag ? '{' + optionTag.toUpperCase() + '} ' : '')
-          + ' ' + this.logTime() + "\n";
-        console.log(title + msg);
-      } ,
-
-      logException: function logException(aMessage, ex) {
-        let stack = ''
-        if (typeof ex.stack!='undefined')
-          stack = ex.stack.replace("@","\n  ");
-        // let's display a caught exception as a warning.
-        let fn = ex.fileName || "?";
-        // this.logError(aMessage + "\n" + ex.message, fn, stack, ex.lineNumber, 0, 0x1);
-        console.error(aMessage, ex);
-      },
-      
-      /** 
-      * only logs if debug mode is set and specific debug option are active
-      * 
-      * @optionString {string}: comma delimited options
-      * @msg {string}: text to log 
-      */   
-      logDebugOptional: async function(optionString, msg) {
-        let options = optionString.split(',');
-        for (let i=0; i<options.length; i++) {
-          let option = options[i];
-          if (await ZombieKeys.Preferences.isDebugOption(option)) {
-            this.logWithOption(...arguments);
-            break; // only log once, in case multiple log switches are on
-          }
-        }
-      },
-      
-      // first argument is the option tag
-      logWithOption: function logWithOption(a) {
-        arguments[0] =  "QuickFolders "
-          +  '{' + arguments[0].toUpperCase() + '} ' 
-          + this.logTime() + "\n";
-        console.log(...arguments);
-      },
-      // 438
-      logDebug: function logDebug(msg) {
-        // if (!ZombieKeys.Preferences.isDebug) return;
-        if (this.isPrivateBrowsing) return;
-        if (!ZombieKeys.Preferences.isDebugOption('default')) return;
-        this.logToConsole(msg);
-      } ,
-      
-      
-    }
-
-    this.Preferences = {
-      root: "extensions.zombiekeys.",
-      isDebug: async function() {
-        return await this.getBoolPref("debug");
-      },
-      
-      isPreference: async function(option) {
-        return await this.getBoolPref(option);
-      },    
-      
-      isDebugOption: async function(option) { // granular debugging
-        if(!await this.isDebug()) return false;
-        try { return await this.getBoolPref("debug." + option);}
-        catch(e) { 
-          return true; // more info is probably better in this case - this is an illegal value after all.
-        }
-      }, 
-      
-      getBoolPref: async function getBoolPref(p) {
-        let ans = false,
-            key = p.startsWith(this.root) ? p : this.root + p;
-        
-        try {
-          ans = await browser.LegacyPrefs.getPref(key);
-        }
-        catch(ex) {
-          ZombieKeys.Util.logException("getBoolPref("  + p +") failed\n", ex);
-          throw(ex);
-        }
-        return ans;
-      },
-    }
-
-    this.initLocale(locale);
     this.DisableListeners = false;
     this.HexUnicodeKey = {
       "modifiers": {"ctrlKey": false, "shiftKey": false, "altKey":  true},
       "keyCode": 88
     };
     this.DecUnicodeModifiers =  {"ctrlKey": false, "shiftKey": false, "altKey":  true}
-    this.DeadKeys = deadKeys;
-    this.AliveKeys = aliveKeys;
-    this.fakeKey = fakeKey;
-    this.checkModifiers = checkModifiers;
-    
+    this.initLocale(locale);
   }
  
+	// modify the key mappings according to the selected locale
+  // 1066
 	initLocale(locale) {
-		this.Util.logDebug("Initialize key locale: " + locale + " ...\nsearching through " + typeof layouts);
-		let theLayout = layouts.find(el => el.locale==locale); 
+		this.Util.logDebug("Initialize key locale: " + locale + " ...\nsearching through " + typeof this.layouts);
+		let theLayout = this.layouts.find(el => el.locale==locale); 
 		if (theLayout) {
 			this.Util.logDebug("found match: " + theLayout.locale);
 		}
 		else return;
 		
 		try {
-			for (let k=0; k<deadKeys.length; k++) {
-				let deadKey = deadKeys[k],
+			for (let k=0; k<this.DeadKeys.length; k++) {
+				let deadKey = this.DeadKeys[k],
 						foundMap = theLayout.map_deadKeys.find(map => map.id == deadKey.id) || null;
 						
 				if (foundMap) {
@@ -836,8 +728,8 @@ export class ClassZombieKeys {
 						this.Util.logDebug('Overwrite deadKey[' + (k+1) + '].charCode = ' + deadKey.charCode);
 					}
 					else
-						if (layouts[0].map_deadKeys[k].charCode)
-							deadKey.charCode = layouts[0].map_deadKeys[k].charCode; // us_int as default
+						if (this.layouts[0].map_deadKeys[k].charCode)
+							deadKey.charCode = this.layouts[0].map_deadKeys[k].charCode; // us_int as default
 
 					if (typeof foundMap.shiftKey !== "undefined")
 						deadKey.modifiers.shiftKey = foundMap.shiftKey;
@@ -856,10 +748,10 @@ export class ClassZombieKeys {
 		}
 		
 		try {
-			for (let k=0; k<aliveKeys.length; k++) {
-				let foundMap = theLayout.map_liveKeys.find(map => map.id == aliveKeys[k].id) || null;
+			for (let k=0; k<this.AliveKeys.length; k++) {
+				let foundMap = theLayout.map_liveKeys.find(map => map.id == this.AliveKeys[k].id) || null;
 				if (foundMap) {
-					let liveKey = aliveKeys[k];
+					let liveKey = this.AliveKeys[k];
 					liveKey.keyCode = foundMap.keyCode;
 					liveKey.charCode = foundMap.charCode;
 
@@ -901,16 +793,15 @@ export class ClassZombieKeys {
 	}
   
   async displayMapping(k) {
-    let map = deadKeys[k].mapping;
-		if (await ZombieKeys.Preferences.isPreference('showMapping') && !ZombieKeys.Util.isPrivateBrowsing) {
-			ZombieKeys.Util.logToConsole("created zombie id "+ (k+1) +" you can now press: \n" + ZombieKeys.logMappingString(map));
+    let map = this.DeadKeys[k].mapping;
+		if (await this.Util.isPreference('showMapping') && !this.Util.isPrivateBrowsing) {
+			this.Util.logToConsole("created zombie id "+ (k+1) +" you can now press: \n" + this.logMappingString(map));
 		}
 	}
 
   // 906
  	async logKey(why, event) {
-		const util = ZombieKeys.Util;
-	  if (util.isPrivateBrowsing)
+	  if (this.Util.isPrivateBrowsing)
 			return;
 		let keyEventProps = ['keyCode', 'charCode', 'shiftKey', 'altKey', 'ctrlKey'];
 
@@ -926,7 +817,7 @@ export class ClassZombieKeys {
 
 		}
 		message += key_Pressed;
-		util.logToConsole(message+"\n");
+		this.Util.logToConsole(message+"\n");
 	}
 
   // 944
@@ -942,23 +833,22 @@ export class ClassZombieKeys {
   // 954
 	// THIS INSERTS THE ZOMBIEFIED CHARACTER
 	async fakeKey(event, chr, createKeyUp) {
-		const util = ZombieKeys.Util;
 		try {
-			let isDebug = ZombieKeys.Preferences.isDebugOption('fakeKey');
+			let isDebug = await this.Util.isDebugOption("fakeKey");
 			if (isDebug) {
-				logKey("fakeKey: ('" + chr + "' " + event.type + ")", event);
+				this.logKey("fakeKey: ('" + chr + "' " + event.type + ")", event);
 				if (event.type=='keypress')
-					ZombieKeys.LastAliveKeyDown = chr; // remember keyPress
+					this.LastAliveKeyDown = chr; // remember keyPress
 				else {
-					if (chr==ZombieKeys.LastAliveKeyDown) { // avoid duplication on keyup!
-						ZombieKeys.LastAliveKeyDown = null;
+					if (chr==this.LastAliveKeyDown) { // avoid duplication on keyup!
+						this.LastAliveKeyDown = null;
 						return;
 					}
-					ZombieKeys.LastAliveKeyDown = null;
+					this.LastAliveKeyDown = null;
 				}
 			}
 
-			if (await ZombieKeys.Preferences.isPreference('subComma')) {
+			if (await this.Util.isPreference('cedilla')) {
 				switch (chr) {
 					case "\u015e": // S-cedilla
 						chr = "\u0218";
@@ -984,7 +874,8 @@ export class ClassZombieKeys {
         charCode: chr.charCodeAt(0)
       }
 			
-      
+ /* legacy code - for HTML inputs etc.
+ 
       // we do NOT have target as it cannot be transmitted to the background
 			let target = event.originalTarget ? event.originalTarget : (event.target ? event.target : document.commandDispatcher.focusedElement);
 			// compose window or elements that do not expose selection (e.g. gmail compose area)
@@ -1000,7 +891,7 @@ export class ClassZombieKeys {
                  false, false, false, false,     // ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, 
                  0, chr.charCodeAt(0));
 									 
-				util.logDebugOptional("fakeKey", ("faking '" + chr + "': " + keypress_event.type + " + target: " + target.id + "\n---"));
+				this.Util.logDebugOptional("fakeKey", ("faking '" + chr + "': " + keypress_event.type + " + target: " + target.id + "\n---"));
 				target.dispatchEvent(keypress_event);
 			}
 			else {
@@ -1009,10 +900,11 @@ export class ClassZombieKeys {
 			// "keypress" or "keyup"
 			event.preventDefault();
 			event.stopPropagation();
+      */
 
 		}
 		catch(ex) {
-			util.logToConsole("exception during fakekey: " + ex.toString());
+			this.Util.logToConsole("exception during fakekey: " + ex.toString());
 		}
 
 	}

@@ -23,7 +23,8 @@
     "page": "zk-background.html"
   },
   "permissions": [
-    "compose"
+    "compose",
+    "storage"
   ],
   "experiment_apis": {
     "LegacyPrefs": {
