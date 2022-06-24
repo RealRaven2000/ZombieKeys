@@ -119,6 +119,7 @@ export class ZombieKeysUtil {
     // await browser.storage.local.set ({"currentLayout" : "de" });
     
     // debug
+    await browser.storage.local.set ({"debug.composeScript" : false });
     await browser.storage.local.set ({"debug.default" : false });
     await browser.storage.local.set ({"debug.fakeKey" : false });
     await browser.storage.local.set ({"debug.keyPressHandler" : false });

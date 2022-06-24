@@ -116,7 +116,9 @@ async function main() {
         isHandled: false
       }; // ignore CTRL,SHIFT and ALT
 		let isDebug = await util.isDebugOption("keyUpHandler");
-		if (isDebug) {zombieKeys.logKey("up: ", event);}
+		if (isDebug) {
+      zombieKeys.logKey("up: ", event);
+    }
 
 		// check "alive" keys which only fire on "keyup"
 		for (let k=0; k<aliveKeys.length; k++) {
@@ -196,15 +198,13 @@ async function main() {
     let result;
     switch (data.command) {
       case "keyPress":
-        // console.log("ZK notification handler keyPress", data.event);
         result = await keyPressHandler(data.event);
-        console.log(result);
+        // console.log(result);
         return result;
       
       case "keyUp":
-        // console.log("ZK notification handler Up", data.event);
         result = await keyUpHandler(data.event);
-        console.log(result);
+        // console.log(result);
         return result;
     }
   }

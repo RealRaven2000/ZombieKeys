@@ -1,8 +1,13 @@
+/** TEST : DOESN'T WORK */
+  //import {ClassZombieKeys} from "./Zombiekeys.mjs.js";
+  //import {ZombieKeysUtil} from "./zombiekeys-Util.mjs.js";
 
 // we cannot marshal the parts target / currentTarget / srcElement / explicitOriginalTarget, 
 // so if we do an insert from here
 // then we need to await a reply from the background
 // OTTOH - we can insert from the background code via WL?
+let isComposeLog = false; // will be set from local storage in init() function.
+
   function serializeKeyEvent(event) {
     return {
       altKey: event.altKey,
@@ -43,7 +48,9 @@
         ;
       } else if (result.text) {
         document.execCommand("insertText", false, result.text);
-        console.log("composeScript keyPress inserted "+ result.text);
+        if (isComposeLog) {
+          console.log("composeScript keyPress inserted "+ result.text);  
+        }
       } else {
         defaultAction = true;
       }
@@ -60,7 +67,9 @@
                event.keyCode, event.charCode);
       tevent.target.dispatchEvent(keypress_event);
     }
-    console.log("End composeScript keyPress:", event);
+    if (isComposeLog) {
+      console.log("End composeScript keyPress:", event);
+    }
 	};
 
 	async function keyUpHandler(event) {
@@ -70,7 +79,9 @@
         event.preventDefault();
         event.stopPropagation();
         document.execCommand("insertText", false, result.text);
-        console.log("composeScript keyUp inserted "+ result.text);
+        if (isComposeLog) {
+          console.log("composeScript keyUp inserted "+ result.text);
+        }
       }
       else if (result.isHandled) {
         event.preventDefault();
@@ -80,9 +91,23 @@
         
       }
     }
-    console.log("End composeScript keyUp:", event);
+    if (isComposeLog) {
+      console.log("End composeScript keyUp:", event);
+    }
 	};
 
-window.addEventListener("keypress", keyPressHandler, true);
-window.addEventListener("keyup", keyUpHandler, true);
+
+async function init() {
+  let result = await browser.storage.local.get({"debug.composeScript" : false});
+  isComposeLog = result["debug.composeScript"];
+/* dynamic module loading: doesn't work in ESR102 yet? */
+//  let ClassZombieKeys = await import("./Zombiekeys.mjs.js");
+//  let ZombieKeysUtil= await import("./zombiekeys-Util.mjs.js");
+  
+  window.addEventListener("keypress", keyPressHandler, true);
+  window.addEventListener("keyup", keyUpHandler, true);
+}
+
+init();
+
 
