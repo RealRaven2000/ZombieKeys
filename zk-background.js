@@ -1,8 +1,7 @@
-import {ClassZombieKeys} from "./scripts/Zombiekeys.mjs.js";
-import {ZombieKeysUtil} from "./scripts/zombiekeys-Util.mjs.js";
-//import("./scripts/Zombiekeys.mjs.js").then(module => {
- // use module.ClassZombieKeys 
-//});
+//import {ClassZombieKeys} from "./scripts/Zombiekeys.mjs.js";
+//import {ZombieKeysUtil} from "./scripts/zombiekeys-Util.mjs.js";
+
+
 
 messenger.composeScripts.register({
     js: [
