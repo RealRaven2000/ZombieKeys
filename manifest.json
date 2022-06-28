@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Zombie Keys",
 	"description": "Bring dead keys to life: accented letters made easy!",
-  "version": "3.0pre16",
+  "version": "3.0pre17",
   "developer": {
 	  "name": "Axel Grude",
     "url": "http://zombiekeys.mozdev.org/index.html"

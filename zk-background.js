@@ -1,10 +1,10 @@
-//import {ClassZombieKeys} from "./scripts/Zombiekeys.mjs.js";
-//import {ZombieKeysUtil} from "./scripts/zombiekeys-Util.mjs.js";
 
 
 
 messenger.composeScripts.register({
     js: [
+      { file: "scripts/zombiekeys-util.js"} ,
+      { file: "scripts/zombiekeys-main.js"} ,
       { file: "scripts/zombiekeys-compose.js"}
     ]
 });
@@ -17,6 +17,7 @@ async function main() {
     "keyUp"
   ]  
 
+/*
 	let decUnicode = "";
   let util = new ZombieKeysUtil();
   let loc = await util.readLocale();
@@ -216,7 +217,7 @@ async function main() {
       return p; // the result of this is a Promise
     }
   });
-    
+    */
 }
 
 main();
