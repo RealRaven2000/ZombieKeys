@@ -1,6 +1,7 @@
 
+messenger.WindowListener.registerDefaultPrefs("scripts/zombiekeys-defaults.js");
 
-
+/*
 messenger.composeScripts.register({
     js: [
       { file: "scripts/zombiekeys-util.js"} ,
@@ -8,16 +9,27 @@ messenger.composeScripts.register({
       { file: "scripts/zombiekeys-compose.js"}
     ]
 });
+*/
+messenger.composeScripts.register({
+    js: [
+      { file: "scripts/zombiekeys-compose.js"}
+    ]
+});
 
 
 async function main() {
-  
   const msg_commands = [
     "keyPress",
     "keyUp"
   ]  
 
-/*
+  let  composeScripts = false;
+ /*** if we use composescripts we do not need the next section:  8***/
+   
+  if (composeScripts) 
+    return;
+   
+   
 	let decUnicode = "";
   let util = new ZombieKeysUtil();
   let loc = await util.readLocale();
@@ -217,7 +229,7 @@ async function main() {
       return p; // the result of this is a Promise
     }
   });
-    */
+
 }
 
 main();

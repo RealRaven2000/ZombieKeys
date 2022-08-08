@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Zombie Keys",
 	"description": "Bring dead keys to life: accented letters made easy!",
-  "version": "3.0pre17",
+  "version": "3.0pre21",
   "developer": {
 	  "name": "Axel Grude",
     "url": "http://zombiekeys.mozdev.org/index.html"
@@ -27,6 +27,14 @@
     "storage"
   ],
   "experiment_apis": {
+    "WindowListener": {
+      "schema": "chrome/content/api/WindowListener/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["WindowListener"]],
+        "script": "chrome/content/api/WindowListener/implementation.js"
+      }
+    },  
     "LegacyPrefs": {
       "schema": "chrome/content/api/LegacyPrefs/schema.json",
       "parent": {
